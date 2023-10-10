@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class LoginTextField extends StatelessWidget {
   final String hintText;
   final bool? isEnable;
   final FormFieldValidator? validator;
   // final IconData? prefixIcon;
-
+  final TextInputType? keytype;
   final Widget? prefixIcon;
   final TextInputType? textInputType;
   final bool obscureText;
   final Function? suffixIconClick;
   final TextEditingController? textEditingController;
-
+  final IconData? suffixIcon;
   const LoginTextField(
       {Key? key,
       this.isEnable,
       this.textInputType,
       this.suffixIconClick,
+
       // this.prefixIcon,
       this.prefixIcon,
       required this.hintText,
       this.obscureText = false,
       this.textEditingController,
-      this.validator})
+      this.validator,
+      this.suffixIcon,
+      this.keytype})
       : super(
           key: key,
         );
@@ -38,14 +40,16 @@ class LoginTextField extends StatelessWidget {
         obscureText: obscureText,
         controller: textEditingController,
         enabled: isEnable ?? true,
-        style: const TextStyle(fontSize: 17, letterSpacing: 2.0),
-        keyboardType: TextInputType.number,
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'^[0-9][0-9]*')),
-          LengthLimitingTextInputFormatter(10),
-        ],
+        style: const TextStyle(
+            fontSize: 17, letterSpacing: 1, fontWeight: FontWeight.w500),
+        keyboardType: keytype,
+        // TextInputType.number,
+        // inputFormatters: <TextInputFormatter>[
+        //   FilteringTextInputFormatter.allow(RegExp(r'^[0-9][0-9]*')),
+        //   LengthLimitingTextInputFormatter(10),
+        // ],
         decoration: InputDecoration(
-          fillColor: Colors.white,
+          fillColor: const Color(0xFFF3F3F3),
           // contentPadding: EdgeInsets.symmetric(horizontal: 15),
           hintStyle: const TextStyle(
             color: Color(0xff7b7b7b),
@@ -55,24 +59,42 @@ class LoginTextField extends StatelessWidget {
           ),
           filled: true,
           isDense: true,
+          suffixIcon: suffixIcon == null
+              ? null
+              : IconButton(
+                  onPressed: () => suffixIconClick!(),
+                  icon: Icon(
+                    suffixIcon,
+                    size: 20,
+                    color: Colors.grey.withOpacity(.6),
+                  ),
+                ),
           // border: OutlineInputBorder(
           //   borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
           //   borderRadius: BorderRadius.circular(16.0),
           // ),
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
+            borderSide: const BorderSide(
+              color: Color(0xFFF3F3F3),
+            ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
+            borderSide: const BorderSide(
+              color: Color(0xFFF3F3F3),
+            ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           disabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
+            borderSide: const BorderSide(
+              color: Color(0xFFF3F3F3),
+            ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
+            borderSide: const BorderSide(
+              color: Color(0xFFF3F3F3),
+            ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           prefixIcon: prefixIcon,
