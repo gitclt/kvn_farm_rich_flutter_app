@@ -1,5 +1,5 @@
-import 'package:kvn_farm_rich/app/modules/stocks/views/stock_details_view.dart';
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/modules/stocks/views/stock_details_view.dart';
 
 import '../modules/add_payment/bindings/add_payment_binding.dart';
 import '../modules/add_payment/views/add_payment_view.dart';
@@ -16,9 +16,7 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/dashboard.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/employee_login.dart';
-import '../modules/login/views/login_home_view.dart';
 import '../modules/login/views/otp_view.dart';
-import '../modules/login/views/retailer_login.dart';
 import '../modules/masala/bindings/masala_binding.dart';
 import '../modules/masala/views/masala_view.dart';
 import '../modules/myroute/bindings/myroute_binding.dart';
@@ -103,14 +101,14 @@ class AppPages {
       page: () => const ProductdetailsView(),
       binding: ProductdetailsBinding(),
     ),
-    GetPage(
-      name: _Paths.EMPLOYEE_LOGIN,
-      page: () => const EmployeeLoginView(),
-      binding: LoginBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.EMPLOYEE_LOGIN,
+    //   page: () => const EmployeeLoginView(),
+    //   binding: LoginBinding(),
+    // ),
     GetPage(
       name: _Paths.RETAILER_LOGIN,
-      page: () => const RetailerLoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(

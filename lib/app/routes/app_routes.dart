@@ -8,6 +8,7 @@ abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
   static const LOGIN = _Paths.LOGIN;
   static const HOME = _Paths.HOME;
+  static const APP_VERSION = _Paths.APP_VERSION;
   static const OTP = _Paths.OTP;
   static const SHOPS = _Paths.SHOPS;
   static const MYVISIT = _Paths.MYVISIT;
@@ -42,6 +43,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const HOME = '/home';
   static const OTP = '/otp';
+  static const APP_VERSION = '/app_version';
   static const SHOPS = '/shops';
   static const MYVISIT = '/myvisit';
   static const MYROUTE = '/myroute';
