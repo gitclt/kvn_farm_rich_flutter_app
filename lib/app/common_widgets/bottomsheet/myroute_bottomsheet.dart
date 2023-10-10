@@ -11,8 +11,8 @@ import 'package:kvn_farm_rich/app/modules/myroute/views/custom_switch.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
-import '../../constraints/common_widgets.dart';
-import '../modules/myroute/views/retailer_profile.dart';
+import '../../../constraints/common_widgets.dart';
+import '../../modules/myroute/views/retailer_profile.dart';
 
 class RouteBottomSheet extends GetView<MyrouteController> {
   final String tittle, location;

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
-import 'package:kvn_farm_rich/app/common_widgets/textfeild/search_feild.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/search_feild.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 
 class ProductPopup extends StatefulWidget {

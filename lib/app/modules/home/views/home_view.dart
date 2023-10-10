@@ -1,16 +1,15 @@
-import 'package:kvn_farm_rich/app/common_widgets/app_bar/home_app_bar.dart';
-import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
-import 'package:kvn_farm_rich/app/common_widgets/home_card/home_item_card.dart';
-import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
-import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
-import 'package:kvn_farm_rich/app/modules/home/views/camera_view.dart';
-import 'package:kvn_farm_rich/app/modules/home/views/drawer/drawer_view.dart';
-import 'package:kvn_farm_rich/app/routes/app_pages.dart';
-import 'package:kvn_farm_rich/constraints/pop-up.dart';
-import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/common_widgets/app_bar/home_app_bar.dart';
+import 'package:kvn_farm_rich/app/common_widgets/home_card/home_item_card.dart';
+import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/app/modules/home/views/drawer/drawer_view.dart';
+import 'package:kvn_farm_rich/app/modules/home/widget/emp_checkin_card.dart';
+import 'package:kvn_farm_rich/app/modules/home/widget/emp_checkout_card.dart';
+import 'package:kvn_farm_rich/app/routes/app_pages.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
+import 'package:kvn_farm_rich/constraints/pop-up.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -18,7 +17,6 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    int direction = 0;
     var sizedBox = const SizedBox(
       height: 12,
     );
@@ -37,55 +35,19 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              // const TopWidget(),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          greyText('Hi, Anshad', 14),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          blackText('Welcome', 20, fontWeight: FontWeight.w700),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.23,
-                            height: MediaQuery.of(context).size.height * 0.04,
-                            child: CommonButtonWidget(
-                              label: 'LOGIN',
-                              borderRadius: 15,
-                              fontSize: 12,
-                              onClick: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => CameraView(
-                                            camera: controller
-                                                .cameras[direction])));
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                      svgWidget('assets/svg/profile_circle.svg')
-                    ],
-                  ),
-                ),
+              Obx(
+                () => controller.isLoadingAttendance.value
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: redColor,
+                      ))
+                    : controller.attendance.checkindate == null
+                        ? const EmpCheckInCard()
+                        : const EmpCheckOutCard(),
               ),
+
+              // const TopWidget(),
+
               const SizedBox(
                 height: 25,
               ),

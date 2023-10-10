@@ -1,4 +1,4 @@
-import 'package:kvn_farm_rich/app/common_widgets/textfeild/numbertextfeild.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/numbertextfeild.dart';
 import 'package:kvn_farm_rich/app/modules/productdetails/controllers/productdetails_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

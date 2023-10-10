@@ -1,5 +1,5 @@
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
-import 'package:kvn_farm_rich/app/common_widgets/textfeild/otp_textfeild.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/otp_textfeild.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/login_text.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:flutter/material.dart';

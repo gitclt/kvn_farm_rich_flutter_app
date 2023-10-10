@@ -1,10 +1,12 @@
 import 'dart:io';
 
-import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
-import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
-import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
+import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
+import 'package:kvn_farm_rich/app/modules/home/controllers/home_controller.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class CameraView extends StatefulWidget {
   final CameraDescription camera;
@@ -18,6 +20,7 @@ class _CameraViewState extends State<CameraView> {
   late CameraController cameraController;
   late Future<void> initializeValue;
   String imagePath = "";
+  final HomeController homeController = Get.find();
 
   @override
   void initState() {
@@ -34,10 +37,8 @@ class _CameraViewState extends State<CameraView> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
-            print('Access is denied');
             break;
           default:
-            print(e.description);
             break;
         }
       }
@@ -65,19 +66,23 @@ class _CameraViewState extends State<CameraView> {
                 children: [
                   SizedBox(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      child: CameraPreview(cameraController)),
+                      height: MediaQuery.of(context).size.height * 0.80,
+                      child: Center(
+                          child: Transform(
+                              alignment: Alignment.center,
+                              transform: Matrix4.rotationY(3.14159265),
+                              child: CameraPreview(cameraController)))),
                   if (imagePath != "")
                     SizedBox(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.75,
+                      height: MediaQuery.of(context).size.height * 0.80,
                       child: Image.file(
                         File(imagePath),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   Positioned(
-                    top: 45,
+                    top: 50,
                     right: 10,
                     child: Container(
                       width: 30,
@@ -101,18 +106,6 @@ class _CameraViewState extends State<CameraView> {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                svgWidget('assets/svg/location.svg'),
-                const SizedBox(
-                  width: 2,
-                ),
-                const Text(
-                  'Feroke, Calicut, Kerala',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ],
-            ),
             Visibility(
               visible: imagePath.isEmpty ? true : false,
               child: Align(
@@ -135,13 +128,34 @@ class _CameraViewState extends State<CameraView> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-                child: CommonButtonWidget(
-                    label: 'Submit',
-                    onClick: () {
-                      setState(() {
-                        Navigator.pop(context);
-                      });
-                    }),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        svgWidget('assets/svg/location.svg'),
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        Text(
+                          '${homeController.locality},${homeController.place}',
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Obx(() => CommonButtonWidget(
+                        label: 'Submit',
+                        isLoading: homeController.isLoadingAttendance.value,
+                        onClick: () async {
+                          if (homeController.attendance.checkinLat == null) {
+                            Navigator.pop(context);
+                            homeController.markAttendance(imagePath);
+                          }
+                        })),
+                  ],
+                ),
               ),
             )
           ],

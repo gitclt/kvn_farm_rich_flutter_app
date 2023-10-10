@@ -1,6 +1,6 @@
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
-import 'package:kvn_farm_rich/app/common_widgets/textfeild/logintextfeild.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/logintextfeild.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/login_text.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/retailer_login/retailer_home.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';

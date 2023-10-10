@@ -1,6 +1,8 @@
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/remark_textfield.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +144,96 @@ Future<dynamic> openDialog(
   ));
 }
 
+Future<dynamic> openMsgDialog(String title, String subTitle,
+    {TextEditingController? remark,
+    String? okRemark = 'Ok',
+    String? cancelRemark = 'Cancel'}) {
+  return Get.dialog(
+    AlertDialog(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      title: Text(
+        title,
+        textScaleFactor: .9,
+      ),
+      content: subTitle.isEmpty
+          ? null
+          : Text(
+              subTitle,
+              textScaleFactor: .9,
+            ),
+      actions: [
+        if (remark != null)
+          RemarkTextField(
+            hintText: "Enter Remark",
+            textEditingController: remark,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Enter Remark';
+              }
+              return null;
+            },
+          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OutlinedButton(
+                onPressed: () => Get.back(result: false),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 10)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0))),
+                ),
+                child: Text(
+                  cancelRemark!,
+                  style: const TextStyle(color: Colors.red, fontSize: 15),
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  if (remark == null) {
+                    Get.back(result: true);
+                  } else {
+                    if (remark.text.isEmpty) {
+                      toast(
+                        "Enter Remark",
+                      );
+                    } else {
+                      Get.back(result: true);
+                    }
+                  }
+                },
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 10)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0))),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    okRemark!,
+                    style: const TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+      ],
+    ),
+  );
+}
+
 Future<dynamic> routeDialog() {
   return Get.dialog(AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -203,6 +295,23 @@ Future<dynamic> routeDialog() {
 
     // ],
   ));
+}
+
+void contactAdministrationSnackBar(String msg, String details) {
+  Get.snackbar(
+    msg,
+    details,
+    icon: const Icon(Icons.error, color: Colors.white),
+    snackPosition: SnackPosition.BOTTOM,
+    backgroundColor: redColor,
+    borderRadius: 20,
+    margin: const EdgeInsets.all(15),
+    colorText: Colors.white,
+    duration: const Duration(seconds: 4),
+    isDismissible: true,
+    dismissDirection: DismissDirection.startToEnd,
+    forwardAnimationCurve: Curves.easeOutBack,
+  );
 }
 
 RoundedRectangleBorder bottomSheetShape() {

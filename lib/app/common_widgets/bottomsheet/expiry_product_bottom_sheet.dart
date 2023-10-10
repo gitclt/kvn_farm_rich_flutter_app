@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
-import 'package:kvn_farm_rich/app/common_widgets/textfeild/textfield_with_baorder.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/textfield_with_baorder.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 

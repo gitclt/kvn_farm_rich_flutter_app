@@ -2,7 +2,7 @@ import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/expiry_home_product_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/expiry_product_details_card.dart';
-import 'package:kvn_farm_rich/app/common_widgets/textfeild/textfield_with_baorder.dart';
+import 'package:kvn_farm_rich/app/common_widgets/textfield/textfield_with_baorder.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/modules/expiry_products/controllers/expiry_products_controller.dart';
 import 'package:flutter/material.dart';

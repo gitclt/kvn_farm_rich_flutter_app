@@ -21,6 +21,16 @@ dateToFormattedDate(DateTime dateTime) {
   return DateFormat('dd/MM/yyyy').format(dateTime);
 }
 
+dateToFormattedTime(DateTime dateTime) {
+  return DateFormat('hh:mm a').format(dateTime);
+}
+
+DateTime getFormatedDate6(String date) {
+  var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
+  var inputDate = inputFormat.parse(date);
+  return inputDate;
+}
+
 Future<DateTime?> selectDate(BuildContext context) async {
   final DateTime? pickedDate = await showDatePicker(
     context: context,
