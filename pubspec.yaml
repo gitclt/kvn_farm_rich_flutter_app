@@ -56,10 +56,16 @@ dependencies:
   permission_handler: ^11.0.1
   path: ^1.8.3
   http_parser: ^4.0.2
+  maps_launcher: ^2.2.0
+  bouncing_widget: ^2.0.0
+  google_maps_flutter: ^2.5.0
+  table_calendar: ^3.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+    
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -9,10 +9,8 @@ import 'package:kvn_farm_rich/app/api/api_provider.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/dialog_helper.dart';
 import 'package:kvn_farm_rich/app/models/attendance_report_model.dart';
 import 'package:kvn_farm_rich/app/modules/home/controllers/dashboard_controller.dart';
-import 'package:kvn_farm_rich/app/modules/home/model/drawer_model.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/camera_view.dart';
 import 'package:kvn_farm_rich/app/pref/session.dart';
-import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/date_formats.dart';
 import 'package:kvn_farm_rich/constraints/pop-up.dart';
 import 'package:kvn_farm_rich/constraints/services/location.dart';
@@ -30,7 +28,6 @@ class HomeController extends GetxController {
   late XFile image;
   int direction = 1;
 
-  final menuItems = <DrawerItem>[].obs;
   final label = ''.obs;
   final brands = [
     'assets/image/winheels.png',
@@ -53,36 +50,9 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    menuItems.addAll([
-      DrawerItem('assets/svg/home_shop.svg', 'Shops', () {
-        Get.toNamed(Routes.SHOPS);
-      }),
-      DrawerItem('assets/svg/route.svg', 'My Route', () {
-        Get.toNamed(Routes.MYROUTE);
-      }),
-      DrawerItem('assets/svg/home_user.svg', 'Attendance', () {
-        Get.toNamed(Routes.ATTENDANCE_REPORT);
-      }),
-
-      DrawerItem('assets/svg/home_list.svg', 'My Visit', () {
-        Get.toNamed(Routes.MYVISIT);
-      }),
-      DrawerItem('assets/svg/home_checklist.svg', 'My Orders', () {
-        Get.toNamed(Routes.ORDER_HISTORY);
-      }),
-      DrawerItem('assets/svg/expiryproduct.svg', 'Expiry Products', () {
-        Get.toNamed(Routes.EXPIRY_PRODUCTS);
-      }),
-      // DrawerItem('assets/svg/payments.svg', 'Payments', () {
-      //   Get.bottomSheet(const PaymentBottomSheet(),
-      //       backgroundColor: Colors.white,
-      //       enableDrag: false,
-      //       elevation: 4,
-      //       shape: bottomSheetShape());
-      // }),
-    ]);
 
     startCamera();
+    getAttendance();
   }
 
   void onClickDivision(String value) {

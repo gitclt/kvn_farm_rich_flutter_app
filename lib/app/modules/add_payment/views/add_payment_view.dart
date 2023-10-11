@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/add_payment_card.dart';
-import 'package:kvn_farm_rich/app/common_widgets/card/shop_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
@@ -20,14 +17,15 @@ class AddPaymentView extends GetView<AddPaymentController> {
           visibility: false,
         ),
         body: Column(children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
-            child: ShopCard(
-              shopname: controller.shops,
-              location: "Crystal Building, Malad, Rathodi, Mankavu, Calicut",
-              number: "9856254147",
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
+          //   child:
+          //   ShopCard(
+          //     shopname: controller.shops,
+          //     location: "Crystal Building, Malad, Rathodi, Mankavu, Calicut",
+          //     number: "9856254147",
+          //   ),
+          // ),
           Expanded(
             child: ListView.separated(
               itemCount: 2,

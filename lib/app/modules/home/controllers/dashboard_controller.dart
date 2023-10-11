@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/modules/home/model/drawer_model.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/home_view.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/profile_view.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/search_view.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/pop-up.dart';
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardController extends GetxController {
   RxInt selectedIndex = 0.obs;
@@ -56,6 +57,8 @@ class DashboardController extends GetxController {
     dynamic returnResponse =
         await openDialog('Logout', 'Are you sure you want to Logout ?');
     if (returnResponse == true) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.clear();
       Get.offAllNamed(Routes.SPLASH);
     }
   }

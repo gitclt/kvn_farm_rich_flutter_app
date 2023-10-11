@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
-import 'package:kvn_farm_rich/app/modules/stocks/views/stock_details_view.dart';
+import 'package:kvn_farm_rich/app/modules/place/bindings/place_binding.dart';
+import 'package:kvn_farm_rich/app/modules/place/views/place_view.dart';
 
 import '../modules/add_payment/bindings/add_payment_binding.dart';
 import '../modules/add_payment/views/add_payment_view.dart';
+import '../modules/add_products/bindings/add_products_binding.dart';
+import '../modules/add_products/views/add_products_view.dart';
 import '../modules/attendance_report/bindings/attendance_report_binding.dart';
 import '../modules/attendance_report/views/attendance_report_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
@@ -12,6 +15,8 @@ import '../modules/expiry_products/views/expiry_products_view.dart';
 import '../modules/expiry_products/views/product_details_page.dart';
 import '../modules/expiry_products/views/product_transfer_view.dart';
 import '../modules/expiry_products/views/shop_details_page.dart';
+import '../modules/google_map/bindings/google_map_binding.dart';
+import '../modules/google_map/views/google_map_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/dashboard.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -33,10 +38,14 @@ import '../modules/pending_collection/views/pending_collection_view.dart';
 import '../modules/productdetails/bindings/productdetails_binding.dart';
 import '../modules/productdetails/views/productdetails_view.dart';
 import '../modules/shops/bindings/shops_binding.dart';
+import '../modules/shops/views/add_lead1.dart';
 import '../modules/shops/views/shops_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/state/bindings/state_binding.dart';
+import '../modules/state/views/state_view.dart';
 import '../modules/stocks/bindings/stocks_binding.dart';
+import '../modules/stocks/views/stock_details_view.dart';
 import '../modules/stocks/views/stocks_view.dart';
 import '../modules/support/bindings/support_binding.dart';
 import '../modules/support/views/support_view.dart';
@@ -175,6 +184,38 @@ class AppPages {
       name: _Paths.STOCKS_DETAILS,
       page: () => const StockDetailsView(),
       binding: StocksBinding(),
+    ),
+    GetPage(
+      name: _Paths.GOOGLE_MAP,
+      page: () => const GoogleMapView(),
+      binding: GoogleMapBinding(),
+      children: [
+        GetPage(
+          name: _Paths.GOOGLE_MAP,
+          page: () => const GoogleMapView(),
+          binding: GoogleMapBinding(),
+        ),
+      ],
+    ),
+    GetPage(
+      name: _Paths.ADD_PRODUCTS,
+      page: () => const AddProductsView(),
+      binding: AddProductsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_LEADS,
+      page: () => const AddLeads1(),
+      binding: ShopsBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATE,
+      page: () => const StateView(),
+      binding: StateBinding(),
+    ),
+     GetPage(
+      name: _Paths.PLACE,
+      page: () => const PlaceView(),
+      binding: PlaceBinding(),
     ),
   ];
 }

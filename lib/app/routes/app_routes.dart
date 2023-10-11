@@ -35,6 +35,12 @@ abstract class Routes {
       _Paths.EXPIRY_PRODUCT_TRANSFER_VIEW;
   static const STOCKS = _Paths.STOCKS;
   static const STOCK_DETAILS = _Paths.STOCKS_DETAILS;
+  static const GOOGLE_MAP = _Paths.GOOGLE_MAP;
+  static const ADD_PRODUCTS = _Paths.ADD_PRODUCTS;
+  static const SHOP_PROFILE = _Paths.SHOP_PROFILE;
+  static const ADD_LEADS = _Paths.ADD_LEADS;
+  static const STATE = _Paths.STATE;
+  static const PLACE = _Paths.PLACE;
 }
 
 abstract class _Paths {
@@ -67,4 +73,10 @@ abstract class _Paths {
   static const EXPIRY_PRODUCT_TRANSFER_VIEW = '/expiry-product_transfer_view';
   static const STOCKS = '/stocks';
   static const STOCKS_DETAILS = '/stock-details';
+  static const GOOGLE_MAP = '/google-map';
+  static const ADD_PRODUCTS = '/add-products';
+  static const SHOP_PROFILE = '/shop-profile';
+  static const ADD_LEADS = '/add-leads';
+  static const STATE = '/state';
+  static const PLACE = '/place';
 }

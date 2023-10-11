@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/home_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/home_card/home_item_card.dart';
@@ -31,109 +30,87 @@ class HomeView extends GetView<HomeController> {
         ),
         backgroundColor: scaffoldBgColor,
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Obx(
-                () => controller.isLoadingAttendance.value
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                        color: redColor,
-                      ))
-                    : controller.attendance.checkindate == null
-                        ? const EmpCheckInCard()
-                        : const EmpCheckOutCard(),
-              ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Obx(
+                        () => controller.isLoadingAttendance.value
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                color: redColor,
+                              ))
+                            : controller.attendance.checkindate == null
+                                ? const EmpCheckInCard()
+                                : const EmpCheckOutCard(),
+                      ),
 
-              // const TopWidget(),
+                      // const TopWidget(),
 
-              const SizedBox(
-                height: 25,
-              ),
-              blackText(
-                'Menu',
-                22,
-                fontWeight: FontWeight.w700,
-              ),
-              sizedBox,
-              AnimationLimiter(
-                child: GridView.builder(
-                    //  padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 10.0,
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      blackText(
+                        'Menu',
+                        22,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      sizedBox,
+                      const MenuItems(),
 
-                      childAspectRatio: MediaQuery.of(context).size.width /
-                          (MediaQuery.of(context).size.height / 1.4),
-
-                      // number of columns in the grid
-                    ),
-                    itemCount: controller.menuItems.length,
-                    itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                          position: index,
-                          child: FlipAnimation(
-                            duration: const Duration(milliseconds: 400),
-                            // horizontalOffset: 50.0,
-                            // verticalOffset: 50.0,
-                            child: HomeCardItem(
-                              path: controller.menuItems[index].image,
-                              label: controller.menuItems[index].label,
-                              ontap: controller.menuItems[index].onClick,
-                            ),
-                          ));
-                    }),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      blackText('Categories', 22, fontWeight: FontWeight.w700),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          HomeCategories(
+                            path: 'assets/image/blend_masala.png',
+                            label: 'BLENDED \nMASALA',
+                            onClick: () {
+                              Get.toNamed(Routes.PRODUCT);
+                            },
+                          ),
+                          HomeCategories(
+                            path: 'assets/image/spice_powder.png',
+                            label: 'SPICES \nPOWDER',
+                            onClick: () {
+                              Get.toNamed(Routes.PRODUCT);
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // blackText('Explore Brands', 22, fontWeight: FontWeight.w700),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.10,
+                      //   child: ListView.builder(
+                      //       itemCount: 3,
+                      //       scrollDirection: Axis.horizontal,
+                      //       itemBuilder: (context, index) {
+                      //         return BrandCard(
+                      //           path: controller.brands[index],
+                      //         );
+                      //       }),
+                      // )
+                    ]),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              blackText('Categories', 22, fontWeight: FontWeight.w700),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HomeCategories(
-                    path: 'assets/image/blend_masala.png',
-                    label: 'BLENDED \nMASALA',
-                    onClick: () {
-                      Get.toNamed(Routes.PRODUCT);
-                    },
-                  ),
-                  HomeCategories(
-                    path: 'assets/image/spice_powder.png',
-                    label: 'SPICES \nPOWDER',
-                    onClick: () {
-                      Get.toNamed(Routes.PRODUCT);
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              // blackText('Explore Brands', 22, fontWeight: FontWeight.w700),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // SizedBox(
-              //   height: MediaQuery.of(context).size.height * 0.10,
-              //   child: ListView.builder(
-              //       itemCount: 3,
-              //       scrollDirection: Axis.horizontal,
-              //       itemBuilder: (context, index) {
-              //         return BrandCard(
-              //           path: controller.brands[index],
-              //         );
-              //       }),
-              // )
-            ]),
+            ],
           ),
         ));
   }
@@ -185,7 +162,61 @@ class TopWidget extends GetView<HomeController> {
   }
 }
 
+class MenuItems extends GetView<HomeController> {
+  const MenuItems({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 10,
+      runSpacing: 15,
+      children: [
+        HomeCardItem(
+          path: 'assets/svg/home_shop.svg',
+          label: 'Shops',
+          ontap: () {
+            Get.toNamed(Routes.SHOPS);
+          },
+        ),
+        HomeCardItem(
+          path: 'assets/svg/route.svg',
+          label: 'My Route',
+          ontap: () {
+            Get.toNamed(Routes.MYROUTE);
+          },
+        ),
+        HomeCardItem(
+          path: 'assets/svg/home_user.svg',
+          label: 'Attendance',
+          ontap: () {
+            Get.toNamed(Routes.ATTENDANCE_REPORT,arguments: "");
+          },
+        ),
+        HomeCardItem(
+          path: 'assets/svg/home_list.svg',
+          label: 'My Visit',
+          ontap: () {
+            Get.toNamed(Routes.MYVISIT);
+          },
+        ),
+        HomeCardItem(
+          path: 'assets/svg/home_checklist.svg',
+          label: 'My Orders',
+          ontap: () {
+            Get.toNamed(Routes.ORDER_HISTORY);
+          },
+        ),
+        HomeCardItem(
+          path: 'assets/svg/expiryproduct.svg',
+          label: 'Expiry Products',
+          ontap: () {
+            Get.toNamed(Routes.EXPIRY_PRODUCTS);
+          },
+        ),
+      ],
+    );
+  }
+}
 
 
 // SizedBox(

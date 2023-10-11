@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/date_picker/attendance_date_picker.dart';
+import 'package:kvn_farm_rich/app/modules/attendance_report/views/image_view.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
+import 'package:kvn_farm_rich/constraints/common_widgets.dart';
+import 'package:kvn_farm_rich/constraints/date_formats.dart';
 
 import '../controllers/attendance_report_controller.dart';
 
@@ -77,6 +78,151 @@ class AttendanceReportView extends GetView<AttendanceReportController> {
                     header(context, 'Photo'),
                   ]),
             ),
+            Obx(() => controller.isLoading.value
+                ? const CircularProgressIndicator().paddingOnly(top: 200)
+                : Expanded(
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 5),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  formatDateStringDates(controller
+                                              .monthattendenceList[index]
+                                              .checkindate
+                                              .toString()) ==
+                                          "Sunday"
+                                      ? redfooter(
+                                          context,
+                                          formatDateStringDates(controller
+                                              .monthattendenceList[index]
+                                              .checkindate
+                                              .toString()))
+                                      : footer(
+                                          context,
+                                          formatDateString(controller
+                                              .monthattendenceList[index]
+                                              .checkindate
+                                              .toString())),
+                                  footer(
+                                      context,
+                                      controller.monthattendenceList[index]
+                                                  .workhour ==
+                                              '0'
+                                          ? ''
+                                          : controller
+                                              .monthattendenceList[index]
+                                              .workhour
+                                              .toString()),
+                                  Column(
+                                    children: [
+                                      footer(
+                                          context,
+                                          controller.monthattendenceList[index]
+                                                      .checkinLat ==
+                                                  ''
+                                              ? ''
+                                              : formatTimeString(controller
+                                                  .monthattendenceList[index]
+                                                  .checkindate
+                                                  .toString())),
+                                      footer(
+                                          context,
+                                          controller.monthattendenceList[index]
+                                                      .checkinLat ==
+                                                  ''
+                                              ? ''
+                                              : controller
+                                                  .monthattendenceList[index]
+                                                  .checkinLoc!)
+                                    ],
+                                  ),
+                                  controller.monthattendenceList[index]
+                                              .checkoutdate !=
+                                          null
+                                      ? Column(
+                                          children: [
+                                            footer(
+                                                context,
+                                                controller
+                                                            .monthattendenceList[
+                                                                index]
+                                                            .checkinLat ==
+                                                        ''
+                                                    ? ''
+                                                    : formatTimeString(controller
+                                                        .monthattendenceList[
+                                                            index]
+                                                        .checkoutdate
+                                                        .toString())),
+                                            footer(
+                                                context,
+                                                controller
+                                                            .monthattendenceList[
+                                                                index]
+                                                            .checkinLat ==
+                                                        ''
+                                                    ? ''
+                                                    : controller
+                                                        .monthattendenceList[
+                                                            index]
+                                                        .checkoutLoc
+                                                        .toString())
+                                          ],
+                                        )
+                                      : const SizedBox(
+                                          width: 80,
+                                        ),
+                                  controller.monthattendenceList[index].photo ==
+                                          ''
+                                      ? const SizedBox()
+                                      : InkWell(
+                                          onTap: () {
+                                            if (controller
+                                                    .monthattendenceList[index]
+                                                    .photo ==
+                                                "") return;
+
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return CustomImageAlertBox(
+                                                      image: controller
+                                                          .monthattendenceList[
+                                                              index]
+                                                          .photo!);
+                                                });
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5, horizontal: 5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: const Color.fromRGBO(
+                                                    255, 241, 207, 1)),
+                                            child: const Text(
+                                              'VIEW',
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    199, 155, 36, 1),
+                                                fontFamily: 'Roboto',
+                                                fontSize: 8,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                ]),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return divider1();
+                        },
+                        itemCount: controller.monthattendenceList.length)))
           ],
         ));
   }
@@ -95,6 +241,15 @@ class AttendanceReportView extends GetView<AttendanceReportController> {
         child: Text(
           label,
           style: const TextStyle(fontSize: 12),
+        ));
+  }
+
+  SizedBox redfooter(BuildContext context, String label) {
+    return SizedBox(
+        width: MediaQuery.of(context).size.width * .20,
+        child: Text(
+          label,
+          style: const TextStyle(fontSize: 12, color: redColor),
         ));
   }
 }

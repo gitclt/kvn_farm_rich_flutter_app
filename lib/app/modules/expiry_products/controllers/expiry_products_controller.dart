@@ -8,19 +8,19 @@ class ExpiryProductsController extends GetxController {
 
   @override
   void onInit() {
-    date.value = dateToFormattedDate(selectedDate);
+    date.value = dateFormat2(selectedDate);
     super.onInit();
   }
 
   incrementDay() {
     selectedDate =
         DateTime(selectedDate.year, selectedDate.month, selectedDate.day + 1);
-    date.value = dateToFormattedDate(selectedDate);
+    date.value = dateFormat2(selectedDate);
   }
 
   decrementDay() {
     selectedDate =
         DateTime(selectedDate.year, selectedDate.month, selectedDate.day - 1);
-    date.value = dateToFormattedDate(selectedDate);
+    date.value = dateFormat2(selectedDate);
   }
 }

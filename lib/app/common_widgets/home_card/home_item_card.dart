@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
@@ -17,29 +16,32 @@ class HomeCardItem extends StatelessWidget {
       onTap: () {
         ontap!();
       },
-      child: Center(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: homeMenuColor.withOpacity(0.50)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 18.0, vertical: 18),
-                  child: svgWidget(
-                    path,
-                    color: redColor,
-                    blendMode: BlendMode.srcIn,
-                  ),
-                )),
-            const SizedBox(
-              height: 5,
-            ),
-            blackText(label, 13,
-                textAlign: TextAlign.center, fontWeight: FontWeight.w500)
-          ],
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.2,
+        child: Center(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: homeMenuColor.withOpacity(0.50)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18.0, vertical: 18),
+                    child: svgWidget(
+                      path,
+                      color: redColor,
+                      blendMode: BlendMode.srcIn,
+                    ),
+                  )),
+              const SizedBox(
+                height: 5,
+              ),
+              blackText(label, 13,
+                  textAlign: TextAlign.center, fontWeight: FontWeight.w500)
+            ],
+          ),
         ),
       ),
     );

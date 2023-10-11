@@ -22,19 +22,20 @@ class CollectPaymentView extends GetView {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: size.height * 0.019850,
-                  left: size.width * 0.0650,
-                  right: size.width * 0.0650,
-                ),
-                child: const ShopCard(
-                  shopname: "PRINCE FOOTWEAR BANDBAHAL",
-                  location:
-                      "Crystal Building, Malad, Rathodi, Mankavu, Calicut",
-                  number: "9856254147",
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(
+              //     top: size.height * 0.019850,
+              //     left: size.width * 0.0650,
+              //     right: size.width * 0.0650,
+              //   ),
+              //   child: 
+                // const ShopCard(
+                //   shopname: "PRINCE FOOTWEAR BANDBAHAL",
+                //   location:
+                //       "Crystal Building, Malad, Rathodi, Mankavu, Calicut",
+                //   number: "9856254147",
+                // ),
+             // ),
               SizedBox(
                 height: size.height * 0.045,
               ),

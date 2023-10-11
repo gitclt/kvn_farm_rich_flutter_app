@@ -8,6 +8,9 @@ import 'package:kvn_farm_rich/app/api/http_provider.dart';
 import 'package:kvn_farm_rich/app/models/api_model.dart';
 import 'package:kvn_farm_rich/app/models/attendance_report_model.dart';
 import 'package:kvn_farm_rich/app/models/auth_model.dart';
+import 'package:kvn_farm_rich/app/models/branch_model.dart';
+import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
+import 'package:kvn_farm_rich/app/models/location_update_model.dart';
 import 'package:kvn_farm_rich/app/models/login_response.dart';
 import 'package:kvn_farm_rich/app/models/signout_response.dart';
 import 'package:kvn_farm_rich/app/models/version_response.dart';
@@ -169,6 +172,82 @@ class ApiProvider {
       if (response.statusCode == 200) {
         var data = response.body;
         return SignOutResponse.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<AttendaceModel?> getAttendence(
+    String month,
+    String year,
+    String id,
+  ) async {
+    final response = await HttpApiConnect()
+        .get('Employee/attendance_view?month=$month&year=$year&empid=$id');
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return AttendaceModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<GetLeadListModel?> fetchLeads(
+    String place,
+    String roleid,
+    String keyword,
+    String empid,
+    String? todaylead,
+    String flag,
+  ) async {
+    var response = await HttpApiConnect().get(
+        "Lead/lead_view?place=$place&role_id=$roleid&keyword=$keyword&empid=$empid&todaylead=$todaylead&flag=$flag");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return GetLeadListModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<UserUpdateModel?> updatelocation(
+      {required String id, double? lat, double? log, String? location}) async {
+    var add = {
+      "id": id,
+      "lat": lat,
+      "longi": log,
+      "gps_loc": location,
+    };
+    var response = await HttpApiConnect().post("Lead/lead_update", add);
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return UserUpdateModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<BranchModel?> getBranchTypes() async {
+    var response = await HttpApiConnect().get("Master/branchList");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return BranchModel.fromJson(json.decode(data));
       } else {
         return null;
       }
