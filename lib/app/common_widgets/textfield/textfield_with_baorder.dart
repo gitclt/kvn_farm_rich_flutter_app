@@ -5,9 +5,11 @@ class BoarderTextField extends StatelessWidget {
   final Function? onChanged;
   final Function? onPressed;
   final bool autofocus;
+  final Widget? suffixIcon;
   final bool enabled;
   final TextEditingController? textEditingController;
   final bool? visible;
+   final FocusNode? focusNode;
   const BoarderTextField({
     Key? key,
     this.onChanged,
@@ -17,6 +19,7 @@ class BoarderTextField extends StatelessWidget {
     this.visible = true,
     this.textEditingController,
     required this.hintText,
+    this.suffixIcon, this.focusNode,
   }) : super(key: key);
 
   @override
@@ -26,6 +29,7 @@ class BoarderTextField extends StatelessWidget {
       controller: textEditingController,
       autofocus: autofocus,
       enabled: enabled,
+       focusNode: focusNode,
       onChanged: (String? value) {
         if (value == null) return;
         onChanged!(value);
@@ -33,31 +37,27 @@ class BoarderTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: Colors.grey.shade400),
           borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: Colors.grey.shade400),
           borderRadius: BorderRadius.circular(12.0),
         ),
         disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: Colors.grey.shade400),
           borderRadius: BorderRadius.circular(12.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: Colors.grey.shade400),
           borderRadius: BorderRadius.circular(12.0),
         ),
 
         // filled: true,
         isDense: true,
-        hintStyle: const TextStyle(fontSize: 15, color: Colors.black),
+        hintStyle: TextStyle(fontSize: 15, color: Colors.grey.shade600),
         prefixIcon: IconButton(
-          onPressed: onPressed == null
-              ? null
-              : () {
-                  onPressed!();
-                },
+          onPressed: () {},
           icon: Visibility(
             visible: visible!,
             child: Image.asset(
@@ -68,22 +68,7 @@ class BoarderTextField extends StatelessWidget {
             ),
           ),
         ),
-        // suffixIcon: IconButton(
-        //   onPressed: onPressed == null
-        //       ? null
-        //       : () {
-        //           onPressed!();
-        //         },
-        //   icon: Visibility(
-        //     visible: visible!,
-        //     child: Image.asset(
-        //       "assets/image/search.png",
-        //       width: 20,
-        //       height: 20,
-        //       color: Colors.black,
-        //     ),
-        //   ),
-        // ),
+        suffixIcon: suffixIcon,
       ),
     );
   }

@@ -32,6 +32,11 @@ dateToFormattedDate(DateTime dateTime) {
 dateToFormattedTime(DateTime dateTime) {
   return DateFormat('hh:mm a').format(dateTime);
 }
+
+String dateFormat5(DateTime dateTime) {
+  return DateFormat('yyyy-MM-dd').format(dateTime);
+}
+
 String formatTimeString(String inputTimeString) {
   DateTime dateTime = DateTime.parse(inputTimeString);
   String formattedTime = DateFormat('h:mm a').format(dateTime);
@@ -47,6 +52,12 @@ DateTime getFormatedDate6(String date) {
 String formatDateString5(String inputDateString) {
   DateTime dateTime = DateTime.parse(inputDateString);
   String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(dateTime);
+  return formattedDate;
+}
+
+String formatDateStr(String inputDateString) {
+  DateTime dateTime = DateTime.parse(inputDateString);
+  String formattedDate = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
   return formattedDate;
 }
 

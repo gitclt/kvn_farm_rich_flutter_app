@@ -8,22 +8,33 @@ import 'package:kvn_farm_rich/constraints/app_colors.dart';
 class MyRouteCard extends StatelessWidget {
   final String shopname;
   final String location;
+  final String gps;
   final String number;
+  final String status;
+  final String visitStatus;
+  final Function onTapGps;
+  final Function onTapCall;
   const MyRouteCard({
     super.key,
     required this.shopname,
     required this.location,
     required this.number,
+    required this.status,
+    required this.visitStatus,
+    required this.onTapGps,
+    required this.onTapCall,
+    required this.gps,
   });
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          blackText(shopname, 16, fontWeight: FontWeight.w600),
+          blackText(shopname, 16, fontWeight: FontWeight.w500),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -33,38 +44,99 @@ class MyRouteCard extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              Expanded(child: greyText(location, 12))
+              Row(
+                children: [
+                  greyText(location, 12),
+                  SizedBox(
+                    width: size.width * 0.03,
+                  ),
+                  svgWidget('assets/svg/Call.svg', size: 15),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  greyText(number, 12),
+                ],
+              )
             ],
           ),
           const SizedBox(
-            height: 5,
+            height: 15,
           ),
           Row(children: [
-            svgWidget('assets/svg/Call.svg', size: 15),
-            const SizedBox(
-              width: 5,
-            ),
-            greyText(number, 12),
-            const SizedBox(
-              width: 30,
-            ),
-            svgWidget('assets/svg/pin_drop.svg',
-                color: mapColor, blendMode: BlendMode.srcIn),
-            TextButton(
-                style: TextButton.styleFrom(
-                  minimumSize: Size.zero,
-                  padding: EdgeInsets.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    onTapGps();
+                  },
+                  child: Container(
+                    height: 30,
+                    // width: 60,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffE1F8FF),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        svgWidget('assets/svg/pin_drop.svg',
+                            color: const Color(0xff4F9AB5),
+                            blendMode: BlendMode.srcIn),
+                        Text(
+                          gps,
+                          style: const TextStyle(color: Color(0xff4F9AB5)),
+                        ),
+                        const SizedBox(
+                          width: 2,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  "Google Map",
-                  style: TextStyle(color: mapColor, fontSize: 12),
-                )),
-            const SizedBox(
-              width: 40,
+                SizedBox(
+                  width: size.width * 0.02,
+                ),
+                Container(
+                  height: 30,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    gradient: primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      onTapCall();
+                    },
+                    icon: svgWidget('assets/svg/Call.svg',
+                        color: const Color(0xffffffff),
+                        blendMode: BlendMode.srcIn),
+                  ),
+                )
+              ],
             ),
-            orderButtonFunction('Visited')
+            SizedBox(
+              width: size.width * 0.02,
+            ),
+            Container(
+                height: 10,
+                width: 10,
+                decoration: const BoxDecoration(
+                  gradient: primaryColor,
+                  shape: BoxShape.circle,
+                )),
+            SizedBox(
+              width: size.width * 0.005,
+            ),
+            blackText(status, 12, fontWeight: FontWeight.w500),
+            SizedBox(
+              width: size.width * 0.0185,
+            ),
+            const Spacer(),
+            orderButtonFunction(visitStatus)
           ]),
         ]));
   }

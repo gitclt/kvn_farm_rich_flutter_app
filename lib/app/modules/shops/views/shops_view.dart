@@ -1,14 +1,12 @@
-import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/shop_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/filter_popup.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import 'package:get/get.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 import 'package:kvn_farm_rich/constraints/phone_call_utils.dart';
 import 'package:kvn_farm_rich/constraints/text_fields/common_searchfield.dart';
@@ -21,9 +19,9 @@ class ShopsView extends GetView<ShopsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: scaffoldBgColor,
-        appBar: const CommonAppBar(label: 'Shops'),
-        body: Obx(
+      backgroundColor: scaffoldBgColor,
+      appBar: const CommonAppBar(label: 'Shops'),
+      body: Obx(
         () => Column(
           children: [
             Padding(
@@ -78,8 +76,8 @@ class ShopsView extends GetView<ShopsController> {
                                             const Duration(milliseconds: 350),
                                         verticalOffset: 50.0,
                                         child: ShopCard(
-                                          gps: double.parse(item.lat
-                                                      .toString()) !=
+                                          gps: double.parse(
+                                                      item.lat.toString()) !=
                                                   0
                                               ? false
                                               : double.parse(item.longi
@@ -88,47 +86,44 @@ class ShopsView extends GetView<ShopsController> {
                                                   ? false
                                                   : true,
                                           geoTagClick: () {
-                                            controller.shopid.value = item.id
-                                                .toString();
+                                            controller.shopid.value =
+                                                item.id.toString();
                                             controller.picLocation(
                                                 controller.shopid.value);
                                           },
-                                          shopname:
-                                              item.name,
+                                          shopname: item.name,
                                           location:
                                               "${item.place},${item.gpsLoc}",
-                                          number:
-                                              item.mobile,
+                                          number: item.mobile,
                                           gpsonClick: () async {
                                             await MapsLauncher
                                                 .launchCoordinates(
-                                                    double.parse(item.lat
-                                                        .toString()),
-                                                    double.parse(item.longi
-                                                        .toString()));
+                                                    double.parse(
+                                                        item.lat.toString()),
+                                                    double.parse(
+                                                        item.longi.toString()));
                                           },
                                           callonClick: () {
                                             PhoneCallUtils.callPhoneNumber(
-                                                item.mobile
-                                                    .toString());
+                                                item.mobile.toString());
                                           },
                                           onClick: () {
-                        //                     Get.bottomSheet(
-                        //                       // ignore: prefer_const_constructors
-                        //                       ShopBottomsheet(allLeads: item,
-                        //                       editShopClick: () {
-                        //                                                    controller
-                        //     .viewLeadDetails(item.id.toString());
-                        // // Get.back();
-                        // Get.toNamed(Routes.SHOP_EDIT,
-                        //     );
-                        //                       },
-                        //                       ),
-                        //                       elevation: 20.0,
-                        //                       enableDrag: false,
-                        //                       backgroundColor: Colors.white,
-                        //                       shape: bootomSheetShape(),
-                        //                     );
+                                            //                     Get.bottomSheet(
+                                            //                       // ignore: prefer_const_constructors
+                                            //                       ShopBottomsheet(allLeads: item,
+                                            //                       editShopClick: () {
+                                            //                                                    controller
+                                            //     .viewLeadDetails(item.id.toString());
+                                            // // Get.back();
+                                            // Get.toNamed(Routes.SHOP_EDIT,
+                                            //     );
+                                            //                       },
+                                            //                       ),
+                                            //                       elevation: 20.0,
+                                            //                       enableDrag: false,
+                                            //                       backgroundColor: Colors.white,
+                                            //                       shape: bootomSheetShape(),
+                                            //                     );
                                           },
                                         ),
                                       ));
@@ -141,10 +136,8 @@ class ShopsView extends GetView<ShopsController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-         // controller.clear();
-          Get.toNamed(Routes.ADD_LEADS);
-          controller.datecontroller = TextEditingController(
-              text: DateFormat("yyyy-MM-dd").format(controller.currentDate));
+          controller.clear();
+          Get.toNamed(Routes.ADD_SHOPS);
         },
         child: Container(
           height: 60,

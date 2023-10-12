@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/modules/my_team/bindings/my_team_binding.dart';
+import 'package:kvn_farm_rich/app/modules/my_team/views/assigned_route_list.dart';
+import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart';
 import 'package:kvn_farm_rich/app/modules/place/bindings/place_binding.dart';
 import 'package:kvn_farm_rich/app/modules/place/views/place_view.dart';
 
@@ -38,7 +41,7 @@ import '../modules/pending_collection/views/pending_collection_view.dart';
 import '../modules/productdetails/bindings/productdetails_binding.dart';
 import '../modules/productdetails/views/productdetails_view.dart';
 import '../modules/shops/bindings/shops_binding.dart';
-import '../modules/shops/views/add_lead1.dart';
+import '../modules/shops/views/add_shop.dart';
 import '../modules/shops/views/shops_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
@@ -203,8 +206,8 @@ class AppPages {
       binding: AddProductsBinding(),
     ),
     GetPage(
-      name: _Paths.ADD_LEADS,
-      page: () => const AddLeads1(),
+      name: _Paths.ADD_SHOPS,
+      page: () => const AddShops(),
       binding: ShopsBinding(),
     ),
     GetPage(
@@ -212,10 +215,18 @@ class AppPages {
       page: () => const StateView(),
       binding: StateBinding(),
     ),
-     GetPage(
+    GetPage(
       name: _Paths.PLACE,
       page: () => const PlaceView(),
       binding: PlaceBinding(),
     ),
+    GetPage(
+        name: _Paths.ASSIGNEDROUTE,
+        page: () => const AssignedRouteView(),
+        binding: MyTeamBinding()),
+    GetPage(
+        name: _Paths.MY_TEAM_ASSIGN_SHOP,
+        page: () => const MyTeamAssigShopView(),
+        binding: MyTeamBinding()),
   ];
 }

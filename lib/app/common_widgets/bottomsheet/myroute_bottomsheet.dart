@@ -1,22 +1,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/home_card/home_item_card.dart';
+import 'package:kvn_farm_rich/app/common_widgets/marqueetext_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
+import 'package:kvn_farm_rich/app/models/assigned_route_list_model.dart';
 import 'package:kvn_farm_rich/app/modules/myroute/controllers/myroute_controller.dart';
-import 'package:kvn_farm_rich/app/modules/myroute/model/route_list.dart';
 import 'package:kvn_farm_rich/app/modules/myroute/views/custom_switch.dart';
+import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
-import 'package:kvn_farm_rich/constraints/app_colors.dart';
+import 'package:kvn_farm_rich/constraints/date_formats.dart';
+import 'package:kvn_farm_rich/constraints/phone_call_utils.dart';
 
 import '../../../constraints/common_widgets.dart';
-import '../../modules/myroute/views/retailer_profile.dart';
 
 class RouteBottomSheet extends GetView<MyrouteController> {
   final String tittle, location;
-  final RouteList items;
+  final String kmDiff;
+  final GetRouteDetails items;
 
   const RouteBottomSheet({
     super.key,
@@ -24,12 +27,13 @@ class RouteBottomSheet extends GetView<MyrouteController> {
     //  required this.type,
     required this.items,
     required this.location,
+    required this.kmDiff,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.width * 0.90,
+      //  height: MediaQuery.of(context).size.width * 0.85,
       width: double.infinity,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -39,254 +43,235 @@ class RouteBottomSheet extends GetView<MyrouteController> {
           color: Colors.white),
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.65,
-                    child: blackText(tittle, 16, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      child: greyText(location, 12,
-                          textOverflow: TextOverflow.ellipsis)),
-                ],
-              ),
-              Column(
-                children: [
-                  Obx(
-                    () => blackText(
-                        controller.checkIn.value ? 'Check Out' : 'Check In',
-                        14),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Obx(
-                    () => CustomSwitch(
-                        value: controller.checkIn.value,
-                        onChanged: (bool val) {}),
-                  )
-                ],
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          divider(),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              HomeCardItem(
-                path: "assets/svg/order.svg",
-                label: "Orders",
-                ontap: () {},
-              ),
-              HomeCardItem(
-                path: "assets/svg/route.svg",
-                label: "Mark Visit",
-                ontap: () {
-                  // Get.dialog(Visitpopup());
-                  Get.dialog(
-                    const AlertBox(),
-                  );
-                },
-              ),
-              HomeCardItem(
-                path: "assets/svg/home_profile.svg",
-                label: "Profile",
-                ontap: () {
-                  // Get.RetailerProfile();
-                  Get.to(() => RetailerProfile(items: items));
-                },
-              ),
-              HomeCardItem(
-                path: "assets/svg/stock.svg",
-                label: "View Stock",
-                ontap: () {
-                  Get.toNamed(Routes.STOCKS);
-                },
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 100,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: const LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.centerLeft,
-                    colors: [Color(0xff6dfa56), Color(0xff31cd40)],
-                  ),
-                ),
-                child: svgWidget('assets/svg/Call.svg',
-                    size: 15, color: Colors.white, blendMode: BlendMode.srcIn),
-              )
-            ],
-          )
-        ]),
-      ),
-    );
-  }
-}
+        child: Obx(
+          () => controller.isVisitLoading.value
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.65,
+                                child: blackText(tittle, 16,
+                                    fontWeight: FontWeight.w600,
+                                    textOverflow: TextOverflow.ellipsis),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.65,
+                                  child: greyText(location, 12,
+                                      textOverflow: TextOverflow.ellipsis)),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Obx(
+                                () => blackText(
+                                    controller.leadCheckIn.isNotEmpty
+                                        ? 'Check Out'
+                                        : 'Check In',
+                                    14),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Obx(
+                                () => CustomSwitch(
+                                    value: controller.leadCheckIn.isNotEmpty,
+                                    onChanged: (bool val) {
+                                      if (controller.leadCheckIn.isEmpty ||
+                                          (controller.leadCheckIn.isNotEmpty &&
+                                              controller.leadCheckIn.first
+                                                      .checkoutDate ==
+                                                  "0001-01-01 12:00:00")) {
+                                        controller.fetchLocation(
+                                          context,
+                                          val,
+                                          kmDiff,
+                                          items.visitType,
+                                          items.empId.toString(),
+                                          items.leadId.toString(),
+                                          items.place ?? '',
+                                        );
+                                      } else if (val == false &&
+                                          controller
+                                                  .leadCheckIn.first.workhour !=
+                                              "") {
+                                        Get.back();
+                                        toast('Already checkedin');
+                                      }
 
-class AlertBox extends StatelessWidget {
-  const AlertBox({
-    super.key,
-  });
+                                      // items.isCheckIn!.value = val;
+                                    }),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.015,
+                      ),
+                      divider1(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.03,
+                      ),
+                      Wrap(
+                        spacing: 12,
+                        children: [
+                          if (Session.roleId == '5')
+                            HomeCardItem(
+                              path: "assets/svg/order.svg",
+                              label: "Orders",
+                              ontap: () {
+                                // Get.toNamed(Routes.ORDERS,
+                                //     arguments: items.leadId.toString());
+                              },
+                            ),
+                          HomeCardItem(
+                            path: "assets/svg/activity.svg",
+                            label: "Activity",
+                            ontap: () {
+                              // Get.toNamed(Routes.ACTIVITY,
+                              //     arguments: items.leadId.toString());
+                            },
+                          ),
+                          HomeCardItem(
+                            path: "assets/svg/home_profile.svg",
+                            label: "Profile",
+                            ontap: () {
+                              Get.toNamed(Routes.SHOP_PROFILE,
+                                  arguments: items.leadId.toString());
+                            },
+                          ),
+                          // HomeCardItem(
+                          //   path: "assets/svg/stock.svg",
+                          //   label: "View Stock",
+                          //   ontap: () {
+                          //     Get.toNamed(Routes.STOCKS);
+                          //   },
+                          // )
+                        ],
+                      ),
 
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 12),
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30))),
-      title: blackText("Mark Visit", 20, fontWeight: FontWeight.w600),
-      content: SizedBox(
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.expand_more)),
-                    fillColor: const Color(0xFFF3F3F3),
-                    filled: true,
-                    hintText: "Select Item",
-                    hintStyle: const TextStyle(
-                      color: Color(0xff7b7b7b),
-                      fontSize: 16,
-                      fontFamily: "Manrope",
-                      fontWeight: FontWeight.w500,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              blackText('Remarks', 18, fontWeight: FontWeight.w400),
-              const SizedBox(
-                height: 6,
-              ),
-              SizedBox(
-                height: 100,
-                child: TextFormField(
-                  maxLines: null,
-                  expands: true,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                    fillColor: const Color(0xFFF3F3F3),
-                    filled: true,
-                    hintText: " ",
-                    hintStyle: const TextStyle(
-                      color: Color(0xff7b7b7b),
-                      fontSize: 16,
-                      fontFamily: "Manrope",
-                      fontWeight: FontWeight.w500,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  svgWidget('assets/svg/location.svg',
-                      color: redColor, blendMode: BlendMode.srcIn),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  greyText(
-                    fontWeight: FontWeight.w400,
-                    "Palayam, Kozhikode",
-                    12,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CommonButtonWidget(
-                label: "UPDATE",
-                onClick: () {
-                  Get.back();
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-      // actions: [
-      //   TextButton(
-      //     child: Text('Close'),
-      //     onPressed: () {
-      //       Get.back(); // dismiss the dialog
-      //     },
-      //   ),
-      // ],
-    );
-  }
-}
+                      if (controller.leadCheckIn.isNotEmpty &&
+                          controller.leadCheckIn.first.checkoutDate !=
+                              "0001-01-01 12:00:00")
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25, bottom: 10),
+                          child: MarqueeWidget(
+                              direction: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  if (controller.leadCheckIn.isNotEmpty)
+                                    blackText(
+                                        controller.leadCheckIn.isNotEmpty
+                                            ? 'Last CheckOut : '
+                                            : "",
+                                        13),
+                                  blackText(
+                                      controller.leadCheckIn.isNotEmpty
+                                          ? formatDateStr(controller
+                                              .leadCheckIn.first.checkoutDate
+                                              .toString())
+                                          : "",
+                                      13,
+                                      fontWeight: FontWeight.bold),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  blackText(
+                                    controller.leadCheckIn.isNotEmpty
+                                        ? 'Working Hr : '
+                                        : "",
+                                    13,
+                                  ),
+                                  blackText(
+                                      controller.leadCheckIn.isNotEmpty
+                                          ? '${controller.leadCheckIn.first.workhour}'
+                                          : "",
+                                      13,
+                                      fontWeight: FontWeight.bold)
+                                ],
+                              )),
+                        ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.04,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: InkWell(
+                          onTap: () {
+                            PhoneCallUtils.callPhoneNumber(
+                                controller.phoneNumber.value.toString());
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.28,
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: const LinearGradient(
+                                begin: Alignment.centerRight,
+                                end: Alignment.centerLeft,
+                                colors: [Color(0xff6dfa56), Color(0xff31cd40)],
+                              ),
+                            ),
+                            child: svgWidget('assets/svg/Call.svg',
+                                size: 15,
+                                color: Colors.white,
+                                blendMode: BlendMode.srcIn),
+                          ),
+                        ),
+                      ),
 
-class Visitpopup extends StatelessWidget {
-  const Visitpopup({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        color: Colors.white,
-        child: const Center(
-          child: Text(
-            'This is a popup screen',
-            style: TextStyle(fontSize: 24),
-          ),
+                      // Visibility(
+                      //   visible: (controller.leadCheckIn.isNotEmpty &&
+                      //           controller.leadCheckIn.first.checkoutDate !=
+                      //               '0001-01-01 12:00:00')
+                      //       ? true
+                      //       : false,
+                      //   child: Wrap(
+                      //     children: [
+                      //       if (controller.leadCheckIn.isNotEmpty)
+                      //         blackText(
+                      //             controller.leadCheckIn.isNotEmpty
+                      //                 ? 'Last CheckOut : '
+                      //                 : "",
+                      //             15,
+                      //             fontWeight: FontWeight.bold),
+                      //       blackText(
+                      //           controller.leadCheckIn.isNotEmpty
+                      //               ? '${controller.leadCheckIn.first.checkoutDate}'
+                      //               : "",
+                      //           14),
+                      //       const SizedBox(
+                      //         width: 5,
+                      //       ),
+                      //       blackText(
+                      //           controller.leadCheckIn.isNotEmpty
+                      //               ? 'Working Hr : '
+                      //               : "",
+                      //           15,
+                      //           fontWeight: FontWeight.bold),
+                      //       blackText(
+                      //           controller.leadCheckIn.isNotEmpty
+                      //               ? '${controller.leadCheckIn.first.workhour}'
+                      //               : "",
+                      //           14)
+                      //     ],
+                      //   ),
+                      //  )
+                    ]),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/api/api_provider.dart';
 import 'package:kvn_farm_rich/app/common_widgets/debouncer.dart';
+import 'package:kvn_farm_rich/app/common_widgets/popup/shop_location_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/branch_model.dart';
 import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
@@ -30,18 +31,10 @@ class ShopsController extends GetxController {
     "keyword",
     "Place",
   ];
-  final List<String> sourceoption = [
-    'Exhibition',
-    'Newspaper',
-    'Ads',
-    'Friends',
-    'Online'
-  ];
 
   TextEditingController keywordsearchcontroller = TextEditingController();
   TextEditingController placesearchcontroller = TextEditingController();
 
-  TextEditingController datecontroller = TextEditingController();
   TextEditingController statecontroller = TextEditingController();
   TextEditingController locationcontroller = TextEditingController();
   TextEditingController addresscontroller = TextEditingController();
@@ -51,12 +44,10 @@ class ShopsController extends GetxController {
   TextEditingController pincodecontroller = TextEditingController();
   TextEditingController contactPersoncontroller = TextEditingController();
   TextEditingController contactNumbercontroller = TextEditingController();
-  TextEditingController currentGradecontroller = TextEditingController();
+
   TextEditingController branchoptioncontroller = TextEditingController();
-  TextEditingController leadsourcecontroller = TextEditingController();
-  TextEditingController productioncapacitycontroller = TextEditingController();
+
   TextEditingController cuCodecontroller = TextEditingController();
-  
 
   @override
   void onInit() {
@@ -65,17 +56,32 @@ class ShopsController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    namecontroller.dispose();
+    contactPersoncontroller.dispose();
+    contactNumbercontroller.dispose();
+    emailcontroller.dispose();
+    statecontroller.dispose();
+    locationcontroller.dispose();
+    addresscontroller.dispose();
+    pincodecontroller.dispose();
+    branchoptioncontroller.dispose();
+    cuCodecontroller.dispose();
+    super.dispose();
+  }
+
   void getShops() async {
     isLoading(true);
     leadList.clear();
     try {
       final response = await ApiProvider().fetchLeads(
           placesearchcontroller.text,
-          Session.roleId,
+          "1",
           keywordsearchcontroller.text,
           Session.userId,
           '1',
-          "lead");
+          "customer");
       if (response != null) {
         if (response.status == true) {
           leadList.addAll(response.data);
@@ -137,6 +143,64 @@ class ShopsController extends GetxController {
       if (response != null) {
         if (response.status == true) {
           branchTypes.addAll(response.data);
+        }
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  clear() {
+    namecontroller.clear();
+    contactPersoncontroller.clear();
+    contactNumbercontroller.clear();
+    emailcontroller.clear();
+    statecontroller.clear();
+    locationcontroller.clear();
+    addresscontroller.clear();
+    pincodecontroller.clear();
+    branchoptioncontroller.clear();
+    cuCodecontroller.clear();
+  }
+
+  addShops() async {
+    isLoading(true);
+    try {
+      final response = await ApiProvider().addShops(
+          date: '2023-10-12',
+          name: namecontroller.text,
+          contactPerson: contactPersoncontroller.text,
+          number: contactNumbercontroller.text,
+          email: emailcontroller.text,
+          state: statecontroller.text,
+          place: locationcontroller.text,
+          address: addresscontroller.text,
+          pincode: pincodecontroller.text,
+          currentgrade: 'A',
+          tse: 0,
+          tsc: 0,
+          zsm: 0,
+          bh: 0,
+          leadsource: "Online",
+          createdby: Session.userId,
+          createdtype: Session.roleId,
+          branchid: branchoptioncontroller.text,
+          prodcapacity: "0",
+          cucode: cuCodecontroller.text,
+          flag: "customer");
+      if (response != null) {
+        if (response.status == true) {
+          toast(
+            response.message,
+          );
+          clear();
+          Get.close(1);
+          getShops();
+          shopLocationPopup(() {
+            picLocation(response.data.id.toString());
+          }, () {
+            Get.back();
+          });
         }
       }
     } finally {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/textfield/common_textfield.dart';
@@ -8,16 +7,15 @@ import 'package:kvn_farm_rich/app/common_widgets/textfield/dropdown_textfield.da
 import 'package:kvn_farm_rich/app/modules/shops/controllers/shops_controller.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
-import 'package:table_calendar/table_calendar.dart';
 
-class AddLeads1 extends GetView<ShopsController> {
-  const AddLeads1({super.key});
+class AddShops extends GetView<ShopsController> {
+  const AddShops({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = SizedBox(height: MediaQuery.of(context).size.height * 0.02);
     return Scaffold(
-      appBar: const CommonAppBar(label: 'Add Leads'),
+      appBar: const CommonAppBar(label: 'Add Shop'),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
@@ -30,102 +28,6 @@ class AddLeads1 extends GetView<ShopsController> {
                 const SizedBox(
                   height: 5,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const HeaderWidget(
-                      number: "1",
-                      color: Color(0xffD80005),
-                    ),
-                    Expanded(
-                        child: Divider(
-                      color: Colors.red.withOpacity(0.3),
-                      thickness: 2,
-                    )),
-                    HeaderWidget(
-                        number: "2",
-                        color: const Color(0xffD80005).withOpacity(0.3)),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                CommonTextFeild(
-                  readonly: true,
-                  hintText: 'Date',
-                  labelText: 'Select Date',
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Select Date';
-                    }
-                    return null;
-                  },
-                  textEditingController: controller.datecontroller,
-                  onTap: () async {
-                    controller.invoiceDate.value = "";
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    return showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Get.isDarkMode
-                            ? const Color(0xff1F1F1F)
-                            : Colors.white,
-                        elevation: 10.0,
-                        isDismissible: true,
-                        shape: bootomSheetShapeType2(),
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            child: TableCalendar(
-                                shouldFillViewport: true,
-                                calendarStyle: const CalendarStyle(
-                                    selectedTextStyle: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    todayTextStyle: TextStyle(
-                                      color: redColor,
-                                    ),
-                                    selectedDecoration: BoxDecoration(
-                                        color: redColor,
-                                        shape: BoxShape.circle)),
-                                daysOfWeekVisible: true,
-                                daysOfWeekHeight: 40,
-                                headerStyle: const HeaderStyle(
-                                  leftChevronVisible: true,
-                                  rightChevronVisible: true,
-                                  titleTextStyle: TextStyle(
-                                      color: redColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                  titleCentered: true,
-                                  formatButtonVisible: false,
-                                ),
-                                onDaySelected: (date, focusday) {
-                                  controller.invoiceDate.value =
-                                      DateFormat("yyyy-MM-dd").format(date);
-                                  controller.invDate =
-                                      controller.invoiceDate.toString();
-                                  controller.selectfrom = focusday;
-                                  controller.datecontroller.text =
-                                      controller.invDate;
-                                  Get.back();
-                                },
-                                selectedDayPredicate: (day) =>
-                                    isSameDay(day, controller.selectfrom),
-                                firstDay: DateTime.utc(2010, 10, 16),
-                                lastDay: DateTime.utc(2030, 3, 14),
-                                focusedDay: controller.invoiceDate.value == ""
-                                    ? DateTime.now()
-                                    : DateTime.parse(
-                                        controller.selectfrom.toString())),
-                          );
-                        });
-                  },
-                  suffixIcon: const Icon(
-                    Icons.calendar_today_outlined,
-                    size: 20,
-                    color: redColor,
-                  ),
-                ),
-                size,
                 DrowpDownButton(
                   hintText: 'Select Branch',
                   label: 'Select Branch',
@@ -142,26 +44,6 @@ class AddLeads1 extends GetView<ShopsController> {
                       .map((label) => DropdownMenuItem(
                             value: label.id.toString(),
                             child: Text(label.name),
-                          ))
-                      .toList(),
-                ),
-                size,
-                DrowpDownButton(
-                  hintText: 'Lead Source',
-                  label: 'Lead Source',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please select an option';
-                    }
-                    return null;
-                  },
-                  onChanged: (String? value) {
-                    controller.leadsourcecontroller.text = value.toString();
-                  },
-                  iteams: controller.sourceoption
-                      .map((label) => DropdownMenuItem(
-                            value: label,
-                            child: Text(label.toString()),
                           ))
                       .toList(),
                 ),
@@ -220,12 +102,11 @@ class AddLeads1 extends GetView<ShopsController> {
                 size,
                 CommonTextFeild(
                   hintText: 'Name',
-                  labelText: 'Enter Name',
-               
+                  labelText: 'Enter Customer Name',
                   textEditingController: controller.namecontroller,
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Enter Name';
+                      return 'Enter Customer Name';
                     }
                     return null;
                   },
@@ -311,38 +192,12 @@ class AddLeads1 extends GetView<ShopsController> {
                 ),
                 size,
                 CommonTextFeild(
-                  hintText: 'Current Grade',
-                  labelText: 'Enter Grade',
-                  textEditingController: controller.currentGradecontroller,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Current Grade';
-                    }
-                    return null;
-                  },
-                ),
-                size,
-                CommonTextFeild(
-                    hintText: 'Current Production Capacity',
-                    labelText: 'Enter  Production Capacity',
-                    textInputType: TextInputType.number,
-                    textEditingController:
-                        controller.productioncapacitycontroller,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Enter Production Capacity';
-                      } else {
-                        return null;
-                      }
-                    }),
-                size,
-                CommonTextFeild(
-                  hintText: 'CU Code',
-                  labelText: 'Enter CuCode',
+                  hintText: 'Customer Code',
+                  labelText: 'Enter Customer Code',
                   textEditingController: controller.cuCodecontroller,
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Current CuCode';
+                      return 'Current Customer Code';
                     }
                     return null;
                   },
@@ -356,12 +211,12 @@ class AddLeads1 extends GetView<ShopsController> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(12.0),
         child: CommonButtonWidget(
-          label: 'NEXT',
+          label: 'SUBMIT',
+          isLoading: controller.isLoading.value,
           onClick: () async {
             FocusScope.of(context).unfocus();
             if (controller.formKey.currentState!.validate()) {
-             // await controller.getTeam();
-             // Get.to(const NextAddLeads());
+              await controller.addShops();
             }
           },
         ),
@@ -426,4 +281,3 @@ RoundedRectangleBorder bootomSheetShapeType2() {
     ),
   );
 }
-

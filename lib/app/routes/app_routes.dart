@@ -38,9 +38,11 @@ abstract class Routes {
   static const GOOGLE_MAP = _Paths.GOOGLE_MAP;
   static const ADD_PRODUCTS = _Paths.ADD_PRODUCTS;
   static const SHOP_PROFILE = _Paths.SHOP_PROFILE;
-  static const ADD_LEADS = _Paths.ADD_LEADS;
+  static const ADD_SHOPS = _Paths.ADD_SHOPS;
   static const STATE = _Paths.STATE;
   static const PLACE = _Paths.PLACE;
+  static const ASSIGNEDROUTE = _Paths.ASSIGNEDROUTE;
+  static const MY_TEAM_ASSIGN_SHOP = _Paths.MY_TEAM_ASSIGN_SHOP;
 }
 
 abstract class _Paths {
@@ -76,7 +78,9 @@ abstract class _Paths {
   static const GOOGLE_MAP = '/google-map';
   static const ADD_PRODUCTS = '/add-products';
   static const SHOP_PROFILE = '/shop-profile';
-  static const ADD_LEADS = '/add-leads';
+  static const ADD_SHOPS = '/add-shops';
   static const STATE = '/state';
   static const PLACE = '/place';
+  static const ASSIGNEDROUTE = '/assigned-route';
+  static const MY_TEAM_ASSIGN_SHOP = '/my-team_assign_shop';
 }
