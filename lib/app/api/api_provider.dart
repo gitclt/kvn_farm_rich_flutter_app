@@ -15,6 +15,7 @@ import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
 import 'package:kvn_farm_rich/app/models/location_update_model.dart';
 import 'package:kvn_farm_rich/app/models/login_response.dart';
 import 'package:kvn_farm_rich/app/models/mark_visit_types_model.dart';
+import 'package:kvn_farm_rich/app/models/my_visit_model.dart';
 import 'package:kvn_farm_rich/app/models/not_assigned_route_model.dart';
 import 'package:kvn_farm_rich/app/models/place_model.dart';
 import 'package:kvn_farm_rich/app/models/shop_checkin_model.dart';
@@ -296,29 +297,28 @@ class ApiProvider {
     }
   }
 
-  Future<ShopModel?> addShops({
-    required String date,
-    required String name,
-    required String contactPerson,
-    required String number,
-    required String email,
-    required String state,
-    required String place,
-    required String address,
-    required String pincode,
-    required String currentgrade,
-    int? tse,
-    int? tsc,
-    int? zsm,
-    int? bh,
-    String? leadsource,
-    String? createdby,
-    String? createdtype,
-    String? branchid,
-    String? prodcapacity,
-    String? cucode,
-    required String flag
-  }) async {
+  Future<ShopModel?> addShops(
+      {required String date,
+      required String name,
+      required String contactPerson,
+      required String number,
+      required String email,
+      required String state,
+      required String place,
+      required String address,
+      required String pincode,
+      required String currentgrade,
+      int? tse,
+      int? tsc,
+      int? zsm,
+      int? bh,
+      String? leadsource,
+      String? createdby,
+      String? createdtype,
+      String? branchid,
+      String? prodcapacity,
+      String? cucode,
+      required String flag}) async {
     var add = {
       "date": date,
       "name": name,
@@ -415,7 +415,7 @@ class ApiProvider {
       "flag": flag
     };
     final response = await http.post(
-        Uri.parse('${BaseUrl().baseUrl}Lead/leadnot_assigned'),
+        Uri.parse('${BaseUrl().baseUrl}farmrouteapi/shopsnot_assigned'),
         body: add);
     try {
       if (response.statusCode == 200) {
@@ -569,6 +569,24 @@ class ApiProvider {
       if (response.statusCode == 200) {
         var data = response.body;
         return ShopCheckInResponse.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<VisitResponse?> getMyVisit(
+    String date,
+    String id,
+  ) async {
+    final response =
+        await HttpApiConnect().get('Lead/list_visit?date=$date&empid=$id');
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return VisitResponse.fromJson(json.decode(data));
       } else {
         return null;
       }

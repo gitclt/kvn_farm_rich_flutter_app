@@ -8,10 +8,8 @@ import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/textfield/textfield_with_baorder.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/controllers/shop_assign_controller.dart';
-import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 import 'package:kvn_farm_rich/constraints/phone_call_utils.dart';
-
 import 'package:maps_launcher/maps_launcher.dart';
 
 class MyTeamAssigShopView extends GetView<ShopAssignController> {
@@ -23,81 +21,37 @@ class MyTeamAssigShopView extends GetView<ShopAssignController> {
       body: Obx(
         () => Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.800,
-                      child: BoarderTextField(
-                        hintText: "Search Leads....",
-                        textEditingController:
-                            controller.searchResponse.value == "keyword"
-                                ? controller.keywordController
-                                : controller.placeController,
-                        onChanged: (value) {
-                          controller.onSearch(value);
-                        },
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () async {
-                            final value = await searchPopup();
-                            if (value != null) {
-                              controller.keywordController.clear();
-                              controller.placeController.clear();
-                              controller.getNotAssignedRoutes();
-                              controller.searchResponse.value = value;
-                            }
-                          },
-                        ),
-                      ).paddingOnly(top: 5),
+                BoarderTextField(
+                  hintText: "Search Shops....",
+                  textEditingController:
+                      controller.searchResponse.value == "keyword"
+                          ? controller.keywordController
+                          : controller.placeController,
+                  onChanged: (value) {
+                    controller.onSearch(value);
+                  },
+                  suffixIcon: IconButton(
+                    icon: Image.asset(
+                      "assets/image/filter.png",
+                      color: Colors.white,
+                      width: 20,
+                      height: 20,
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.12,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: redColor),
-                      child: IconButton(
-                        onPressed: () async {
-                          final res = await filterPopup();
-                          if (res != null) {
-                            controller.filterresponse.value = res;
-                            controller.getNotAssignedRoutes();
-                          }
-                        },
-                        icon: Image.asset(
-                          "assets/image/filter.png",
-                          color: Colors.white,
-                          width: 20,
-                          height: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                controller.filterresponse.value == ''
-                    ? const SizedBox()
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          FilterItem(
-                            name: controller.filterresponse.value,
-                            visible: controller.filterresponse.value ==
-                                    'Prospective1'
-                                ? false
-                                : true,
-                            ontap: () {
-                              controller.filterresponse.value = 'Prospective1';
-                              controller.getNotAssignedRoutes();
-                            },
-                          ),
-                        ],
-                      ).paddingOnly(top: 15),
+                    onPressed: () async {
+                      final value = await searchPopup();
+                      if (value != null) {
+                        controller.keywordController.clear();
+                        controller.placeController.clear();
+                        controller.getNotAssignedRoutes();
+                        controller.searchResponse.value = value;
+                      }
+                    },
+                  ),
+                ).paddingOnly(top: 5),
                 const SizedBox(
                   height: 10,
                 ),

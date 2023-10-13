@@ -1,12 +1,12 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/api/api_provider.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/dialog_helper.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/mark_visit_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/models/assigned_route_list_model.dart';
 import 'package:kvn_farm_rich/app/models/mark_visit_types_model.dart';
 import 'package:kvn_farm_rich/app/models/shop_checkin_model.dart';
@@ -251,7 +251,7 @@ class MyrouteController extends GetxController {
     // }
   }
 
- // final databaseHelper = DatabaseHelper();
+  // final databaseHelper = DatabaseHelper();
   Future<void> markCheckIn(String kmDiff, String visitType, String empId,
       String leadId, String place) async {
     DialogHelper.showLoading("Please wait while marking Check In...");
@@ -268,7 +268,7 @@ class MyrouteController extends GetxController {
           toast(response.message);
           getTodayCheckIn(empId, leadId, visitType);
 
-        //  await databaseHelper.checkAlreadyCheckedin(leadId, "true", "");
+          //  await databaseHelper.checkAlreadyCheckedin(leadId, "true", "");
         } else {
           DialogHelper.hideLoading();
         }
@@ -335,8 +335,8 @@ class MyrouteController extends GetxController {
           leadId,
           workHour,
           kmDiff,
-          planChecked.value == true ? '1' : '0',
-          creditChecked.value == true ? '1' : '0',
+          '0',
+          '0',
           Session.roleId,
           "",
           checkinId,

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/bindings/my_team_binding.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/assigned_route_list.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart';
+import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_view.dart';
 import 'package:kvn_farm_rich/app/modules/place/bindings/place_binding.dart';
 import 'package:kvn_farm_rich/app/modules/place/views/place_view.dart';
 
@@ -220,6 +221,10 @@ class AppPages {
       page: () => const PlaceView(),
       binding: PlaceBinding(),
     ),
+     GetPage(
+        name: _Paths.MY_TEAM,
+        page: () => const MyTeamView(),
+        binding: MyTeamBinding()),
     GetPage(
         name: _Paths.ASSIGNEDROUTE,
         page: () => const AssignedRouteView(),
@@ -228,5 +233,6 @@ class AppPages {
         name: _Paths.MY_TEAM_ASSIGN_SHOP,
         page: () => const MyTeamAssigShopView(),
         binding: MyTeamBinding()),
+      
   ];
 }

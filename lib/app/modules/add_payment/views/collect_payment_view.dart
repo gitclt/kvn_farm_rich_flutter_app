@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
-import 'package:kvn_farm_rich/app/common_widgets/card/shop_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/textfield/search_feild.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';

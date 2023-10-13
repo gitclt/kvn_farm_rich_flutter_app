@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/home_card/home_item_card.dart';
@@ -154,13 +153,13 @@ class RouteBottomSheet extends GetView<MyrouteController> {
                                   arguments: items.leadId.toString());
                             },
                           ),
-                          // HomeCardItem(
-                          //   path: "assets/svg/stock.svg",
-                          //   label: "View Stock",
-                          //   ontap: () {
-                          //     Get.toNamed(Routes.STOCKS);
-                          //   },
-                          // )
+                          HomeCardItem(
+                            path: "assets/svg/stock.svg",
+                            label: "View Stock",
+                            ontap: () {
+                              Get.toNamed(Routes.STOCKS);
+                            },
+                          )
                         ],
                       ),
 

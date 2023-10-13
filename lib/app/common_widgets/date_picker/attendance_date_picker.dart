@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
@@ -17,48 +16,56 @@ class AttendanceDatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 241, 235, 235),
+      color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(0),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          IconButton(
-            onPressed: () {
-              decrement();
-            },
-            icon: const Icon(Icons.arrow_back_ios),
-            color: dateArrowColor,
-          ),
-          TextButton(
-            onPressed: changeDate == null
-                ? null
-                : () {
-                    changeDate!();
-                  },
-            child: Row(
-              children: [
-                const Icon(Icons.calendar_today, size: 17, color: redColor),
-                const SizedBox(
-                  width: 5,
+        padding: const EdgeInsets.only(left: 12, right: 12),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  decrement();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 24,
                 ),
-                Text(
-                  date,
-                  style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                color: dateArrowColor,
+              ),
+              TextButton(
+                onPressed: changeDate == null
+                    ? null
+                    : () {
+                        changeDate!();
+                      },
+                child: Row(
+                  children: [
+                    const Icon(Icons.calendar_today, size: 17, color: redColor),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      date,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              increment();
-            },
-            icon: const Icon(Icons.arrow_forward_ios),
-            color: dateArrowColor,
-          )
-        ]),
+              ),
+              IconButton(
+                onPressed: () {
+                  increment();
+                },
+                icon: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 24,
+                ),
+                color: dateArrowColor,
+              )
+            ]),
       ),
     );
   }

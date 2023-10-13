@@ -5,7 +5,6 @@ import 'package:kvn_farm_rich/app/common_widgets/debouncer.dart';
 import 'package:kvn_farm_rich/app/models/assigned_route_model.dart';
 import 'package:kvn_farm_rich/app/models/not_assigned_route_model.dart';
 
-
 class ShopAssignController extends GetxController {
   var isLoading = false.obs;
   var isAssignLoading = false.obs;
@@ -84,7 +83,7 @@ class ShopAssignController extends GetxController {
           selectedDate,
           keywordController.text,
           placeController.text,
-          filterresponse.value.toLowerCase());
+          "customer");
       if (response != null) {
         if (response.status == true) {
           notrouteListResponse.addAll(response.notAssignedRoute!);

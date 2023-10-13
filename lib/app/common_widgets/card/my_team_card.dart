@@ -56,8 +56,8 @@ class MyTeamAssignCard extends StatelessWidget {
               height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 svgWidget('assets/svg/location.svg'),
                 const SizedBox(
@@ -90,7 +90,7 @@ class MyTeamAssignCard extends StatelessWidget {
                     },
                     child: Container(
                       height: 30,
-                      width: 60,
+                      width: 62,
                       decoration: BoxDecoration(
                         color: const Color(0xffE1F8FF),
                         borderRadius: BorderRadius.circular(10),
@@ -137,7 +137,7 @@ class MyTeamAssignCard extends StatelessWidget {
               // Spacer(),
               DropDownStatus(type: items.type)
             ]),
-          ]).paddingAll(5),
+          ]).paddingSymmetric(horizontal: 6, vertical: 10),
         ],
       ),
     );
@@ -227,7 +227,7 @@ class DropDownStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     final ShopAssignController shopAssignController = Get.find();
     return Container(
-      width: MediaQuery.of(context).size.width * 0.40,
+      width: MediaQuery.of(context).size.width * 0.38,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),

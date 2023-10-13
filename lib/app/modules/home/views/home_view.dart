@@ -6,6 +6,7 @@ import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/drawer/drawer_view.dart';
 import 'package:kvn_farm_rich/app/modules/home/widget/emp_checkin_card.dart';
 import 'package:kvn_farm_rich/app/modules/home/widget/emp_checkout_card.dart';
+import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/pop-up.dart';
@@ -178,27 +179,37 @@ class MenuItems extends GetView<HomeController> {
             Get.toNamed(Routes.SHOPS);
           },
         ),
-        HomeCardItem(
-          path: 'assets/svg/route.svg',
-          label: 'My Route',
-          ontap: () {
-            Get.toNamed(Routes.MYROUTE);
-          },
-        ),
+        if (Session.roleId != '5' && Session.roleId != '3')
+          HomeCardItem(
+            path: 'assets/svg/route.svg',
+            label: 'My Route',
+            ontap: () {
+              Get.toNamed(Routes.MYROUTE, arguments: "");
+            },
+          ),
         HomeCardItem(
           path: 'assets/svg/home_user.svg',
           label: 'Attendance',
           ontap: () {
-            Get.toNamed(Routes.ATTENDANCE_REPORT,arguments: "");
+            Get.toNamed(Routes.ATTENDANCE_REPORT, arguments: "");
           },
         ),
-        HomeCardItem(
-          path: 'assets/svg/home_list.svg',
-          label: 'My Visit',
-          ontap: () {
-            Get.toNamed(Routes.MYVISIT);
-          },
-        ),
+        if (Session.roleId != '5' && Session.roleId != '3')
+          HomeCardItem(
+            path: 'assets/svg/home_list.svg',
+            label: 'My Visit',
+            ontap: () {
+              Get.toNamed(Routes.MYVISIT, arguments: "");
+            },
+          ),
+        if (Session.roleId == '3')
+          HomeCardItem(
+            path: 'assets/svg/expiryproduct.svg',
+            label: 'My Teams',
+            ontap: () {
+              Get.toNamed(Routes.MY_TEAM);
+            },
+          ),
         HomeCardItem(
           path: 'assets/svg/home_checklist.svg',
           label: 'My Orders',

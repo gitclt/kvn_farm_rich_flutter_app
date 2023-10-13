@@ -1,85 +1,210 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class VisitCardWidget extends StatelessWidget {
-  final String slno;
   final String name;
-  // String checkIn,
-  // String checkOut,
+  final Function onTap;
   final String location;
-  final String duration;
-  final String remark;
+  final String place;
+  final String km;
+  final String checkInTime;
+  final String checkOutTime;
+  final bool? visible;
+  final Function onTapGps;
+  final String gps;
   const VisitCardWidget(
       {super.key,
-      required this.slno,
       required this.name,
       required this.location,
-      required this.duration,
-      required this.remark});
+      required this.km,
+      required this.checkInTime,
+      required this.checkOutTime,
+      this.visible,
+      required this.onTap,
+      required this.onTapGps,
+      required this.gps,
+      required this.place});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.115,
-      child: Row(children: <Widget>[
-        header(context, slno),
-        verticalDivider(),
-        const SizedBox(
-          width: 8,
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 3, left: 5.0, right: 4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                blackText(name, 15,
-                    fontWeight: FontWeight.w600,
-                    textOverflow: TextOverflow.ellipsis),
-                const SizedBox(
-                  height: 10,
+    return Container(
+      // padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          color: const Color(0xffffffff),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromARGB(255, 240, 235, 235),
+                blurRadius: 3.0,
+                spreadRadius: 3),
+          ]),
+      child: InkWell(
+        onTap: () {
+          onTap();
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Visibility(
+              visible: visible!,
+              child: Container(
+                height: 25,
+                //  padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Color(0xffFEA500),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12)),
                 ),
-                Row(
+                child: Row(
                   children: [
-                    svgWidget('assets/svg/location.svg', size: 15),
-                    Expanded(
-                        child: greyText(location, 12,
-                            textOverflow: TextOverflow.ellipsis)),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Row(
-                      children: [
-                        svgWidget('assets/svg/time.svg', size: 15),
-                        greyText(duration, 12, fontWeight: FontWeight.w400)
-                      ],
+                    const Icon(
+                      Icons.info_outline,
+                      size: 14,
                     ),
                     const SizedBox(
-                      width: 25,
+                      width: 4,
                     ),
-                    Row(
-                      children: [
-                        blackText('Remark :', 12),
-                        const SizedBox(
-                          width: 2,
-                        ),
-                        greyText(remark, 12)
-                      ],
+                    blackText('You’re check in from $location,', 10,
+                        fontWeight: FontWeight.w400),
+                    blackText(
+                      ' $km KM ',
+                      10,
+                      fontWeight: FontWeight.w700,
                     ),
+                    blackText(' Distance', 10)
                   ],
-                ),
-              ],
+                ).paddingOnly(left: 8),
+              ),
             ),
-          ),
-        )
-      ]),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  blackText(name, 15,
+                      fontWeight: FontWeight.w600,
+                      textOverflow: TextOverflow.ellipsis),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      svgWidget('assets/svg/location.svg',
+                          color: const Color(0xFF6C6C6C), size: 15),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      Expanded(
+                          child: greyText(place, 12,
+                              textOverflow: TextOverflow.ellipsis)),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  visible == false
+                      ? Row(
+                          children: [
+                            svgWidget('assets/svg/distanceofroute.svg',
+                                size: 15,
+                                color: redColor,
+                                blendMode: BlendMode.srcIn),
+                            redText(
+                              ' $km KM',
+                              12,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                onTapGps();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffE1F8FF),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      const SizedBox(
+                                        width: 2,
+                                      ),
+                                      svgWidget('assets/svg/pin_drop.svg',
+                                          color: const Color(0xff4F9AB5),
+                                          blendMode: BlendMode.srcIn),
+                                      Text(
+                                        gps,
+                                        style: const TextStyle(
+                                            color: Color(0xff4F9AB5)),
+                                      ),
+                                      const SizedBox(
+                                        width: 2,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ).paddingOnly(bottom: 5)
+                      : const SizedBox(
+                          height: 0,
+                          width: 0,
+                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                        text: TextSpan(children: [
+                          const TextSpan(
+                              text: 'Checkin ',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                  color: greyTextColor)),
+                          TextSpan(
+                              text: checkInTime,
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: greyTextColor)),
+                        ]),
+                      ),
+                      RichText(
+                        text: TextSpan(children: [
+                          const TextSpan(
+                              text: 'Checkout ',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                  color: greyTextColor)),
+                          TextSpan(
+                              text: checkOutTime,
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: greyTextColor)),
+                        ]),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

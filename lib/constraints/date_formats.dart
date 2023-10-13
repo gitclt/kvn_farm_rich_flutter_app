@@ -37,10 +37,20 @@ String dateFormat5(DateTime dateTime) {
   return DateFormat('yyyy-MM-dd').format(dateTime);
 }
 
+String dateTimeFormat(String inputString) {
+  DateTime dateTime = DateTime.parse(inputString);
+  String formattedDate = DateFormat('dd/MM/yy hh:mm a').format(dateTime);
+  return formattedDate;
+}
+
 String formatTimeString(String inputTimeString) {
   DateTime dateTime = DateTime.parse(inputTimeString);
   String formattedTime = DateFormat('h:mm a').format(dateTime);
   return formattedTime;
+}
+
+String dateFormat(DateTime date) {
+  return DateFormat('dd/MM/yy hh:mm a').format(date);
 }
 
 DateTime getFormatedDate6(String date) {

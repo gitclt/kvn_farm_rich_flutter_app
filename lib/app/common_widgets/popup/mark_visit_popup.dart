@@ -186,52 +186,52 @@ class AddSalePopupState extends State<MarkVisitPopup>
                                   const SizedBox(
                                     height: 14,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      containerBox(
-                                        Row(
-                                          children: [
-                                            Obx(
-                                              () => Checkbox(
-                                                visualDensity:
-                                                    VisualDensity.compact,
-                                                activeColor: Colors.red,
-                                                value: routeController
-                                                    .planChecked.value,
-                                                onChanged: (newValue) {
-                                                  routeController.planChecked
-                                                      .value = newValue!;
-                                                },
-                                              ),
-                                            ),
-                                            blackText('Plan Tour', 16)
-                                          ],
-                                        ),
-                                      ),
-                                      containerBox(
-                                        Row(
-                                          children: [
-                                            Obx(
-                                              () => Checkbox(
-                                                visualDensity:
-                                                    VisualDensity.compact,
-                                                activeColor: Colors.red,
-                                                value: routeController
-                                                    .creditChecked.value,
-                                                onChanged: (newValue) {
-                                                  routeController.creditChecked
-                                                      .value = newValue!;
-                                                },
-                                              ),
-                                            ),
-                                            blackText('Credit Visit', 16)
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ).paddingOnly(left: 3, right: 3),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     containerBox(
+                                  //       Row(
+                                  //         children: [
+                                  //           Obx(
+                                  //             () => Checkbox(
+                                  //               visualDensity:
+                                  //                   VisualDensity.compact,
+                                  //               activeColor: Colors.red,
+                                  //               value: routeController
+                                  //                   .planChecked.value,
+                                  //               onChanged: (newValue) {
+                                  //                 routeController.planChecked
+                                  //                     .value = newValue!;
+                                  //               },
+                                  //             ),
+                                  //           ),
+                                  //           blackText('Plan Tour', 16)
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     containerBox(
+                                  //       Row(
+                                  //         children: [
+                                  //           Obx(
+                                  //             () => Checkbox(
+                                  //               visualDensity:
+                                  //                   VisualDensity.compact,
+                                  //               activeColor: Colors.red,
+                                  //               value: routeController
+                                  //                   .creditChecked.value,
+                                  //               onChanged: (newValue) {
+                                  //                 routeController.creditChecked
+                                  //                     .value = newValue!;
+                                  //               },
+                                  //             ),
+                                  //           ),
+                                  //           blackText('Credit Visit', 16)
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ).paddingOnly(left: 3, right: 3),
                                   const SizedBox(
                                     height: 15,
                                   ),
