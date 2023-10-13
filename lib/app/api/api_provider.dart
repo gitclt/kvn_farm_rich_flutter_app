@@ -18,6 +18,7 @@ import 'package:kvn_farm_rich/app/models/mark_visit_types_model.dart';
 import 'package:kvn_farm_rich/app/models/my_visit_model.dart';
 import 'package:kvn_farm_rich/app/models/not_assigned_route_model.dart';
 import 'package:kvn_farm_rich/app/models/place_model.dart';
+import 'package:kvn_farm_rich/app/models/route_place_model.dart';
 import 'package:kvn_farm_rich/app/models/shop_checkin_model.dart';
 import 'package:kvn_farm_rich/app/models/shop_model.dart';
 import 'package:kvn_farm_rich/app/models/signout_response.dart';
@@ -421,6 +422,21 @@ class ApiProvider {
       if (response.statusCode == 200) {
         var data = response.body;
         return NotAssigedRouteListResponse.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<RoutePlaceModel?> assignRoutePlace() async {
+    var response =
+        await HttpApiConnect().get("farmrouteapi/farmplace_routelist");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return RoutePlaceModel.fromJson(json.decode(data));
       } else {
         return null;
       }

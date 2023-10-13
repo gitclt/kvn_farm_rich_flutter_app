@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/my_route_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
+import 'package:kvn_farm_rich/app/common_widgets/popup/routes_popup.dart';
+import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart';
@@ -47,19 +49,29 @@ class MyrouteView extends GetView<MyrouteController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Row(
-                  //   children: [
-                  //     svgWidget('assets/svg/location.svg', color: Colors.red),
-                  //     const SizedBox(
-                  //       width: 5,
-                  //     ),
-                  //     greyText(
-                  //       fontWeight: FontWeight.w400,
-                  //       "Palayam, Kozhikode",
-                  //       15,
-                  //     )
-                  //   ],
-                  // ),
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => RoutesPopup(
+                              
+                              children: controller.routePlaceList
+                              ));
+                    },
+                    child: Row(
+                      children: [
+                        svgWidget('assets/svg/location.svg', color: Colors.red),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        greyText(
+                          fontWeight: FontWeight.w400,
+                          "Palayam, Kozhikode",
+                          15,
+                        )
+                      ],
+                    ),
+                  ),
                   rectangleRedBg(Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15.0, vertical: 12.0),

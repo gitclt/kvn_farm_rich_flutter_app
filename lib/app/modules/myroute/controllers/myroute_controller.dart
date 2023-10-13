@@ -9,6 +9,7 @@ import 'package:kvn_farm_rich/app/common_widgets/popup/mark_visit_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/assigned_route_list_model.dart';
 import 'package:kvn_farm_rich/app/models/mark_visit_types_model.dart';
+import 'package:kvn_farm_rich/app/models/route_place_model.dart';
 import 'package:kvn_farm_rich/app/models/shop_checkin_model.dart';
 import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/constraints/date_formats.dart';
@@ -21,6 +22,9 @@ class MyrouteController extends GetxController {
   // RxList<RouteList> routeList = <RouteList>[].obs;
   final aRouteList = <GetRouteDetails>[].obs;
   final shopvisitlist = <GetRouteDetails>[].obs;
+  final routePlaceList = <Routes>[].obs;
+  final placeList = <Place>[].obs;
+  String routeName = '';
 
   final isLoading = false.obs;
   final isVisitLoading = false.obs;
@@ -28,7 +32,7 @@ class MyrouteController extends GetxController {
   var color = Colors.blue.obs;
   RxBool checkIn = false.obs;
   TextEditingController remarkController = TextEditingController();
-  String selcteditemdateormonth = 'Plan Tour';
+  //String selcteditemdateormonth = 'Plan Tour';
   RxString phoneNumber = ''.obs;
   RxBool planChecked = false.obs;
   RxBool creditChecked = false.obs;
@@ -45,14 +49,10 @@ class MyrouteController extends GetxController {
     'Online'
   ];
 
-  void onClickLoaddate(String value) {
-    selcteditemdateormonth = value;
-    update();
-  }
-
   @override
   void onInit() {
     super.onInit();
+    assignRoute();
     getAssignedRoutes();
     getMarkTypes();
   }
@@ -60,6 +60,19 @@ class MyrouteController extends GetxController {
   void changeDate(DateTime newDate) {
     selectedDate.value = newDate;
     getAssignedRoutes();
+  }
+
+  assignRoute() async {
+    try {
+      final response = await ApiProvider().assignRoutePlace();
+      if (response != null) {
+        if (response.status) {
+          routePlaceList.addAll(response.data);
+
+
+        }
+      }
+    } finally {}
   }
 
   Future<void> getMarkTypes() async {

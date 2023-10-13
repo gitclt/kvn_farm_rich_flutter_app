@@ -5,11 +5,15 @@ class CheckBoxButton extends StatelessWidget {
   // final List<String> items;
   final bool selectItem;
   final Function act;
+  final double? height;
+  final double? width;
 
   const CheckBoxButton({
     Key? key,
     required this.selectItem,
     required this.act,
+    this.height = 20,
+    this.width = 20,
   }) : super(key: key);
 
   @override
@@ -24,8 +28,8 @@ class CheckBoxButton extends StatelessWidget {
                 act();
               },
               child: Container(
-                height: 20,
-                width: 20,
+                height: height,
+                width: width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
                   border: Border.all(

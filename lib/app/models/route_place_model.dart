@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 RoutePlaceModel routePlaceModelFromJson(String str) =>
     RoutePlaceModel.fromJson(json.decode(str));
 
@@ -54,15 +56,17 @@ class Routes {
 class Place {
   String name;
   int id;
+  RxBool isSelect;
 
   Place({
     required this.name,
     required this.id,
+    required this.isSelect
   });
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
         name: json["name"],
-        id: json["id"],
+        id: json["id"], isSelect: false.obs,
       );
 
   Map<String, dynamic> toJson() => {
