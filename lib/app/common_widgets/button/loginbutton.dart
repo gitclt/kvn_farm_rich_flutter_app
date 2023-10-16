@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
@@ -9,6 +8,7 @@ class CommonButtonWidget extends StatelessWidget {
   final double? borderRadius;
   final VoidCallback onClick;
   final bool? isLoading;
+  final double? height;
 
   const CommonButtonWidget(
       {super.key,
@@ -17,7 +17,8 @@ class CommonButtonWidget extends StatelessWidget {
       this.fontSize,
       this.isLoading,
       this.borderRadius = 10,
-      this.color});
+      this.color,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class CommonButtonWidget extends StatelessWidget {
       },
       child: Container(
           width: double.maxFinite,
-          height: MediaQuery.of(context).size.height * .07,
+          height: height ?? MediaQuery.of(context).size.height * .07,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius!),
               // color: color ?? AppColors().primaryColor

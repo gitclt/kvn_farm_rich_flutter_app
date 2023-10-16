@@ -49,27 +49,40 @@ class MyrouteView extends GetView<MyrouteController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) => RoutesPopup(
-                              
-                              children: controller.routePlaceList
-                              ));
-                    },
-                    child: Row(
-                      children: [
-                        svgWidget('assets/svg/location.svg', color: Colors.red),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        greyText(
-                          fontWeight: FontWeight.w400,
-                          "Palayam, Kozhikode",
-                          15,
-                        )
-                      ],
+                  Obx(
+                    () => InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => RoutesPopup(
+                                onClick: () async {
+                                  final response =
+                                      await controller.getAssignedPlaces();
+                                  if (response != null) {
+                                    String placename = response.join(',');
+                                    controller.selectedRoute.value = placename;
+                                  }
+                                },
+                                isLoading: controller.placeLoading.value,
+                                
+                                children: controller.routePlaceList));
+                      },
+                      child: Row(
+                        children: [
+                          svgWidget('assets/svg/location.svg',
+                              color: Colors.red),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          greyText(
+                            fontWeight: FontWeight.w400,
+                            controller.selectedRoute.value == ""
+                                ? 'Select Place'
+                                : controller.selectedRoute.value,
+                            15,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   rectangleRedBg(Padding(

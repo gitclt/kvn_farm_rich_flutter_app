@@ -4,6 +4,7 @@ import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/my_team_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
+import 'package:kvn_farm_rich/app/common_widgets/popup/routes_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/textfield/textfield_with_baorder.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
@@ -18,88 +19,145 @@ class MyTeamAssigShopView extends GetView<ShopAssignController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CommonAppBar(label: "Assign Shop"),
-      body: Obx(
-        () => Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BoarderTextField(
-                  hintText: "Search Shops....",
-                  textEditingController:
-                      controller.searchResponse.value == "keyword"
-                          ? controller.keywordController
-                          : controller.placeController,
-                  onChanged: (value) {
-                    controller.onSearch(value);
-                  },
-                  suffixIcon: IconButton(
-                    icon: Image.asset(
-                      "assets/image/filter.png",
-                      color: Colors.white,
-                      width: 20,
-                      height: 20,
-                    ),
-                    onPressed: () async {
-                      final value = await searchPopup();
-                      if (value != null) {
-                        controller.keywordController.clear();
-                        controller.placeController.clear();
-                        controller.getNotAssignedRoutes();
-                        controller.searchResponse.value = value;
-                      }
-                    },
-                  ),
-                ).paddingOnly(top: 5),
-                const SizedBox(
-                  height: 10,
-                ),
-                Obx(
-                  () => controller.isLoading.value
-                      ? const Center(child: CircularProgressIndicator())
-                      : controller.notrouteListResponse.isEmpty
-                          ? const SizedBox(child: NoDataWidget())
-                          : Expanded(
-                              child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  physics: const ScrollPhysics(),
-                                  itemCount:
-                                      controller.notrouteListResponse.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final item =
-                                        controller.notrouteListResponse[index];
-                                    return Obx(() => MyTeamAssignCard(
-                                          shopname: item.name,
-                                          location: item.place ?? '',
-                                          number: item.mobile,
-                                          selectItem: item.isSelect.value,
-                                          items: item,
-                                          ontap: () {
-                                            item.isSelect.value =
-                                                !item.isSelect.value;
-                                          },
-                                          onTapGps: () async {
-                                            await MapsLauncher
-                                                .launchCoordinates(
-                                                    double.parse(
-                                                        item.lat.toString()),
-                                                    double.parse(
-                                                        item.longi.toString()));
-                                          },
-                                          onTapCall: () {
-                                            PhoneCallUtils.callPhoneNumber(
-                                                item.mobile.toString());
-                                          },
-                                        ).paddingAll(5));
-                                  }),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BoarderTextField(
+                hintText: "Search Shops....",
+                textEditingController: controller.keywordController,
+                // controller.searchResponse.value == "keyword"
+
+                onChanged: (value) {
+                  controller.onSearch(value);
+                },
+                // suffixIcon: IconButton(
+                //   icon: Image.asset(
+                //     "assets/image/filter.png",
+                //     //color: Colors.white,
+                //     width: 20,
+                //     height: 20,
+                //   ),
+                //   onPressed: () async {
+                //     final value = await searchPopup();
+                //     if (value != null) {
+                //       controller.keywordController.clear();
+                //       //  controller.placeController.clear();
+                //       controller.getNotAssignedRoutes();
+                //       // controller.searchResponse.value = value;
+                //     }
+                //   },
+                // ),
+              ).paddingOnly(top: 5),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Obx(
+                      () => InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) => RoutesPopup(
+                                  onClick: () async {
+                                    final response =
+                                        await controller.getAssignedPlaces();
+                                    if (response != null) {
+                                      String placename = response.join(',');
+                                      controller.selectedRoute.value =
+                                          placename;
+                                      controller.getNotAssignedRoutes();
+                                    }
+                                  },
+                                  isLoading: controller.placeLoading.value,
+                                  children: controller.routePlaceList));
+                        },
+                        child: Row(
+                          children: [
+                            svgWidget('assets/svg/location.svg',
+                                color: Colors.red),
+                            const SizedBox(
+                              width: 5,
                             ),
-                )
-              ],
-            ).paddingAll(5),
-          ),
+                            greyText(
+                              fontWeight: FontWeight.w400,
+                              controller.selectedRoute.value == ""
+                                  ? 'Select Place'
+                                  : controller.selectedRoute.value,
+                              15,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    rectangleRedBg(Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 12.0),
+                      child: Row(
+                        children: [
+                          blackText('Shops', 14, fontWeight: FontWeight.w500),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Obx(() => redText(
+                              ' ${controller.notrouteListResponse.length}', 14,
+                              fontWeight: FontWeight.w600))
+                        ],
+                      ),
+                    ))
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Obx(
+                () => controller.isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : controller.notrouteListResponse.isEmpty
+                        ? const SizedBox(child: NoDataWidget())
+                        : Expanded(
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                physics: const ScrollPhysics(),
+                                itemCount:
+                                    controller.notrouteListResponse.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final item =
+                                      controller.notrouteListResponse[index];
+                                  return Obx(() => MyTeamAssignCard(
+                                        shopname: item.name,
+                                        location: item.place ?? '',
+                                        number: item.mobile,
+                                        selectItem: item.isSelect.value,
+                                        items: item,
+                                        ontap: () {
+                                          item.isSelect.value =
+                                              !item.isSelect.value;
+                                        },
+                                        onTapGps: () async {
+                                          await MapsLauncher.launchCoordinates(
+                                              double.parse(item.lat.toString()),
+                                              double.parse(
+                                                  item.longi.toString()));
+                                        },
+                                        onTapCall: () {
+                                          PhoneCallUtils.callPhoneNumber(
+                                              item.mobile.toString());
+                                        },
+                                      ).paddingAll(5));
+                                }),
+                          ),
+              )
+            ],
+          ).paddingAll(5),
         ),
       ),
       bottomNavigationBar: Obx(

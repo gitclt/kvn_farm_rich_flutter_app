@@ -66,7 +66,8 @@ class Place {
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
         name: json["name"],
-        id: json["id"], isSelect: false.obs,
+        id: json["id"],
+        isSelect: false.obs,
       );
 
   Map<String, dynamic> toJson() => {

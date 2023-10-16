@@ -4,12 +4,18 @@ import 'package:kvn_farm_rich/app/api/api_provider.dart';
 import 'package:kvn_farm_rich/app/common_widgets/debouncer.dart';
 import 'package:kvn_farm_rich/app/models/assigned_route_model.dart';
 import 'package:kvn_farm_rich/app/models/not_assigned_route_model.dart';
+import 'package:kvn_farm_rich/app/models/route_place_model.dart';
 
 class ShopAssignController extends GetxController {
   var isLoading = false.obs;
   var isAssignLoading = false.obs;
   final value = Get.arguments;
   DateTime date = DateTime.now();
+  final String placeList = '';
+  final placeLoading = false.obs;
+  RxString selectedRoute = 'Select Place'.obs;
+  final routePlaceList = <Routes>[].obs;
+  String keyword = '';
 
   TextEditingController keywordController = TextEditingController();
   TextEditingController placeController = TextEditingController();
@@ -26,8 +32,40 @@ class ShopAssignController extends GetxController {
   void onInit() async {
     super.onInit();
     selectedDate = '${date.year}-${date.month}-${date.day}';
-
+    assignRoute();
     getAssignedRoutes();
+  }
+
+  assignRoute() async {
+    isLoading(true);
+    try {
+      final response = await ApiProvider().assignRoutePlace();
+      if (response != null) {
+        if (response.status) {
+          routePlaceList.addAll(response.data);
+        }
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  getAssignedPlaces() {
+    placeLoading(true);
+    try {
+      final selectedPlace = routePlaceList
+          .map((element) =>
+              element.places.where((element) => element.isSelect.value == true))
+          .toList();
+
+      for (var item in selectedPlace) {
+        final placeList = item.map((element) => element.name).toList();
+
+        return placeList;
+      }
+    } finally {
+      placeLoading(false);
+    }
   }
 
   void changeDate(DateTime newDate) {
@@ -38,8 +76,9 @@ class ShopAssignController extends GetxController {
   List<String> fitems = ["Prospective1", "Prospective2"];
   List<String> kitems = ["Search by ShopName", "Search by Place"];
   RxString filterresponse = 'Prospective1'.obs;
-  RxString searchResponse = 'keyword'.obs;
+  //RxString searchResponse = 'keyword'.obs;
   RxList<NotAssignedRoute> notrouteListResponse = <NotAssignedRoute>[].obs;
+  RxList<NotAssignedRoute> shopsMarkedResponse = <NotAssignedRoute>[].obs;
   RxList<RouteDatum> routeListResponse = <RouteDatum>[].obs;
 
   void getAssignedRoutes() async {
@@ -63,16 +102,12 @@ class ShopAssignController extends GetxController {
   final _debouncer = Debouncer(milliseconds: 1000);
   void onSearch(String value) {
     _debouncer.run(() {
+      keyword = value;
       getNotAssignedRoutes();
       FocusManager.instance.primaryFocus?.unfocus();
       return;
     });
   }
-
-  // void onSearch(String value) {
-  //   keyword = value;
-  //   getNotAssignedRoutes();
-  // }
 
   void getNotAssignedRoutes() async {
     isLoading(true);
@@ -81,12 +116,13 @@ class ShopAssignController extends GetxController {
       final response = await ApiProvider().getNotAssignedRoutes(
           value.id.toString(),
           selectedDate,
-          keywordController.text,
-          placeController.text,
+          keyword,
+          selectedRoute.value == 'Select Place' ? "" : selectedRoute.value,
           "customer");
       if (response != null) {
         if (response.status == true) {
           notrouteListResponse.addAll(response.notAssignedRoute!);
+          keyword = '';
         } else {
           isLoading(false);
         }

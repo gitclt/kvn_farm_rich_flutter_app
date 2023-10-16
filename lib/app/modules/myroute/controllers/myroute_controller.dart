@@ -23,8 +23,10 @@ class MyrouteController extends GetxController {
   final aRouteList = <GetRouteDetails>[].obs;
   final shopvisitlist = <GetRouteDetails>[].obs;
   final routePlaceList = <Routes>[].obs;
-  final placeList = <Place>[].obs;
-  String routeName = '';
+  final String placeList = '';
+  final placeLoading = false.obs;
+  final RxString selectedRoute = 'Select Place'.obs;
+  
 
   final isLoading = false.obs;
   final isVisitLoading = false.obs;
@@ -63,16 +65,33 @@ class MyrouteController extends GetxController {
   }
 
   assignRoute() async {
+     isLoading(true);
     try {
       final response = await ApiProvider().assignRoutePlace();
       if (response != null) {
         if (response.status) {
           routePlaceList.addAll(response.data);
-
-
         }
       }
-    } finally {}
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  getAssignedPlaces() {
+    placeLoading(true);
+    try {
+      final selectedPlace = routePlaceList
+          .map((element) =>
+              element.places.where((element) => element.isSelect.value == true))
+          .toList();
+      for (var item in selectedPlace) {
+        final placeList = item.map((element) => element.name).toList();
+        return placeList;
+      }
+    } finally {
+      placeLoading(false);
+    }
   }
 
   Future<void> getMarkTypes() async {
