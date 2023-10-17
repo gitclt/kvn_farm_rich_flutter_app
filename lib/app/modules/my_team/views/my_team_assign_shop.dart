@@ -73,9 +73,10 @@ class MyTeamAssigShopView extends GetView<ShopAssignController> {
                                       controller.selectedRoute.value =
                                           placename;
                                       controller.getNotAssignedRoutes();
+                                      
                                     }
                                   },
-                                  isLoading: controller.placeLoading.value,
+                                 // isLoading: controller.placeLoading.value,
                                   children: controller.routePlaceList));
                         },
                         child: Row(

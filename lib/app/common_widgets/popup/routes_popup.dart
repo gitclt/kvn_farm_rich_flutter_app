@@ -9,14 +9,14 @@ import 'package:kvn_farm_rich/app/models/route_place_model.dart';
 class RoutesPopup extends StatefulWidget {
   final List<Routes> children;
   final Function onClick;
-  final bool isLoading;
-  
-  const RoutesPopup(
-      {super.key,
-      required this.children,
-      required this.onClick,
-      required this.isLoading,
-     });
+  final bool? isLoading;
+
+  const RoutesPopup({
+    super.key,
+    required this.children,
+    required this.onClick,
+    this.isLoading,
+  });
 
   @override
   State<StatefulWidget> createState() => AddRoutePopupState();
@@ -86,8 +86,7 @@ class AddRoutePopupState extends State<RoutesPopup>
                                             e.isSelect.value =
                                                 !e.isSelect.value;
                                           },
-                                          selectItem: 
-                                              e.isSelect.value,
+                                          selectItem: e.isSelect.value,
                                         ),
                                       ))
                                   .toList(),

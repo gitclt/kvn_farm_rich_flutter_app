@@ -10,7 +10,6 @@ import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 import 'package:kvn_farm_rich/constraints/phone_call_utils.dart';
-
 import 'package:maps_launcher/maps_launcher.dart';
 
 class AssignedRouteView extends GetView<ShopAssignController> {
@@ -100,9 +99,12 @@ class AssignedRouteView extends GetView<ShopAssignController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+          controller.selectedRoute.value = '';
           controller.getNotAssignedRoutes();
-          Get.toNamed(Routes.MY_TEAM_ASSIGN_SHOP);
+          controller.uncheckValues();
+
+          await Get.toNamed(Routes.MY_TEAM_ASSIGN_SHOP);
         },
         child: Container(
           height: 60,

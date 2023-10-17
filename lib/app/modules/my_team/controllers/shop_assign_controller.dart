@@ -11,10 +11,11 @@ class ShopAssignController extends GetxController {
   var isAssignLoading = false.obs;
   final value = Get.arguments;
   DateTime date = DateTime.now();
-  final String placeList = '';
+  //final String placeList = '';
   final placeLoading = false.obs;
   RxString selectedRoute = 'Select Place'.obs;
   final routePlaceList = <Routes>[].obs;
+  final placeList = <Place>[].obs;
   String keyword = '';
 
   TextEditingController keywordController = TextEditingController();
@@ -36,8 +37,17 @@ class ShopAssignController extends GetxController {
     getAssignedRoutes();
   }
 
+  void uncheckValues() {
+    for (var element in routePlaceList) {
+      for (var element in element.places) {
+        element.isSelect.value = false;
+      }
+    }
+  }
+
   assignRoute() async {
     isLoading(true);
+    // routePlaceList.clear();
     try {
       final response = await ApiProvider().assignRoutePlace();
       if (response != null) {
@@ -50,21 +60,19 @@ class ShopAssignController extends GetxController {
     }
   }
 
-  getAssignedPlaces() {
-    placeLoading(true);
-    try {
-      final selectedPlace = routePlaceList
-          .map((element) =>
-              element.places.where((element) => element.isSelect.value == true))
-          .toList();
+  getAssignedPlaces() async {
+    final selectedPlace = routePlaceList
+        .map((element) =>
+            element.places.where((element) => element.isSelect.value == true))
+        .toList();
 
-      for (var item in selectedPlace) {
-        final placeList = item.map((element) => element.name).toList();
+    final place = selectedPlace
+        .where((element) => element.any((e) => e.isSelect.value) == true)
+        .toList();
+    for (var item in place) {
+      final placeList = item.map((e) => e.name).toList();
 
-        return placeList;
-      }
-    } finally {
-      placeLoading(false);
+      return placeList;
     }
   }
 
@@ -123,6 +131,7 @@ class ShopAssignController extends GetxController {
         if (response.status == true) {
           notrouteListResponse.addAll(response.notAssignedRoute!);
           keyword = '';
+          
         } else {
           isLoading(false);
         }
