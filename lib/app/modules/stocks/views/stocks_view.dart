@@ -13,6 +13,7 @@ class StocksView extends GetView<StocksController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: const CommonAppBar(label: "Stocks"),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Padding(
@@ -91,7 +92,13 @@ class StockCard extends GetView<StocksController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         blackText(title, 14, fontWeight: FontWeight.w600),
+                        const SizedBox(
+                          height: 4,
+                        ),
                         greyText(code, 12),
+                        const SizedBox(
+                          height: 4,
+                        ),
                         blackText('Total Quantity : $quantity', 12)
                       ],
                     )
