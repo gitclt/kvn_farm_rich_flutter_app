@@ -243,7 +243,7 @@ class ApiProvider {
     }
   }
 
-  Future<GetLeadListModel?> fetchLeads(
+  Future<GetShopListModel?> fetchLeads(
     String place,
     String roleid,
     String keyword,
@@ -256,7 +256,22 @@ class ApiProvider {
     try {
       if (response.statusCode == 200) {
         var data = response.body;
-        return GetLeadListModel.fromJson(json.decode(data));
+        return GetShopListModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<GetShopListModel?> getShopDetails(String leadId) async {
+    var response =
+        await HttpApiConnect().get("Lead/lead_view_by_id?leadid=$leadId");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return GetShopListModel.fromJson(json.decode(data));
       } else {
         return null;
       }

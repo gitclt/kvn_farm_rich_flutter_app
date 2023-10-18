@@ -8,7 +8,6 @@ import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/assigned_route_list_model.dart';
 import 'package:kvn_farm_rich/app/modules/myroute/controllers/myroute_controller.dart';
 import 'package:kvn_farm_rich/app/modules/myroute/views/custom_switch.dart';
-import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/date_formats.dart';
 import 'package:kvn_farm_rich/constraints/phone_call_utils.dart';
@@ -128,23 +127,23 @@ class RouteBottomSheet extends GetView<MyrouteController> {
                       Wrap(
                         spacing: 12,
                         children: [
-                          if (Session.roleId == '5')
-                            HomeCardItem(
-                              path: "assets/svg/order.svg",
-                              label: "Orders",
-                              ontap: () {
-                                // Get.toNamed(Routes.ORDERS,
-                                //     arguments: items.leadId.toString());
-                              },
-                            ),
+                          //  if (Session.roleId == '5')
                           HomeCardItem(
-                            path: "assets/svg/activity.svg",
-                            label: "Activity",
+                            path: "assets/svg/order.svg",
+                            label: "Orders",
                             ontap: () {
-                              // Get.toNamed(Routes.ACTIVITY,
+                              // Get.toNamed(Routes.ORDERS,
                               //     arguments: items.leadId.toString());
                             },
                           ),
+                          // HomeCardItem(
+                          //   path: "assets/svg/activity.svg",
+                          //   label: "Activity",
+                          //   ontap: () {
+                          //     // Get.toNamed(Routes.ACTIVITY,
+                          //     //     arguments: items.leadId.toString());
+                          //   },
+                          // ),
                           HomeCardItem(
                             path: "assets/svg/home_profile.svg",
                             label: "Profile",

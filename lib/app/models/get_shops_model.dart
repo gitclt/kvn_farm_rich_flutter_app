@@ -1,30 +1,30 @@
 import 'dart:convert';
 
-GetLeadListModel getLeadListModelFromJson(String str) =>
-    GetLeadListModel.fromJson(json.decode(str));
+GetShopListModel getLeadListModelFromJson(String str) =>
+    GetShopListModel.fromJson(json.decode(str));
 
-String getLeadListModelToJson(GetLeadListModel data) =>
+String getLeadListModelToJson(GetShopListModel data) =>
     json.encode(data.toJson());
 
-class GetLeadListModel {
+class GetShopListModel {
   bool status;
   String message;
-  List<GetLeadDetails> data;
+  List<GetShopDetails> data;
 
-  GetLeadListModel({
+  GetShopListModel({
     required this.status,
     required this.message,
     required this.data,
   });
 
-  factory GetLeadListModel.fromJson(Map<String, dynamic> json) =>
-      GetLeadListModel(
+  factory GetShopListModel.fromJson(Map<String, dynamic> json) =>
+      GetShopListModel(
         status: json["status"],
         message: json["message"],
         data: json["data"] == null
             ? []
-            : List<GetLeadDetails>.from(
-                json["data"].map((x) => GetLeadDetails.fromJson(x))),
+            : List<GetShopDetails>.from(
+                json["data"].map((x) => GetShopDetails.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,7 +34,7 @@ class GetLeadListModel {
       };
 }
 
-class GetLeadDetails {
+class GetShopDetails {
   int id;
   String date;
   String name;
@@ -60,7 +60,7 @@ class GetLeadDetails {
   // int deleteStatus;
   // String deletedOn;
 
-  GetLeadDetails(
+  GetShopDetails(
       {required this.id,
       required this.date,
       required this.name,
@@ -87,7 +87,7 @@ class GetLeadDetails {
       // required this.deletedOn,
       });
 
-  factory GetLeadDetails.fromJson(Map<String, dynamic> json) => GetLeadDetails(
+  factory GetShopDetails.fromJson(Map<String, dynamic> json) => GetShopDetails(
         id: json["id"],
         date: json["date"],
         name: json["name"] ?? "",

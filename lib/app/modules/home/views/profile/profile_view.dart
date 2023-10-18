@@ -45,8 +45,9 @@ class ProfileView extends GetView<ProfileController> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10, right: 20),
                           child: InkWell(
-                            onTap: () {
-                                Get.toNamed(Routes.EDIT_PROFILE);
+                            onTap: () async {
+                              controller.updateTextValue();
+                              await Get.toNamed(Routes.EDIT_PROFILE);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,

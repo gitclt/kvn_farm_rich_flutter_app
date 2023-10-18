@@ -6,6 +6,7 @@ import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_view.dart';
 import 'package:kvn_farm_rich/app/modules/place/bindings/place_binding.dart';
 import 'package:kvn_farm_rich/app/modules/place/views/place_view.dart';
+import 'package:kvn_farm_rich/app/modules/shops/views/shop_profile.dart';
 
 import '../modules/add_payment/bindings/add_payment_binding.dart';
 import '../modules/add_payment/views/add_payment_view.dart';
@@ -27,8 +28,6 @@ import '../modules/home/views/dashboard.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/employee_login.dart';
 import '../modules/login/views/otp_view.dart';
-import '../modules/products/bindings/masala_binding.dart';
-import '../modules/products/views/masala_view.dart';
 import '../modules/myroute/bindings/myroute_binding.dart';
 import '../modules/myroute/views/myroute_view.dart';
 import '../modules/myvisit/bindings/myvisit_binding.dart';
@@ -42,6 +41,8 @@ import '../modules/pending_collection/bindings/pending_collection_binding.dart';
 import '../modules/pending_collection/views/pending_collection_view.dart';
 import '../modules/productdetails/bindings/productdetails_binding.dart';
 import '../modules/productdetails/views/productdetails_view.dart';
+import '../modules/products/bindings/masala_binding.dart';
+import '../modules/products/views/masala_view.dart';
 import '../modules/shops/bindings/shops_binding.dart';
 import '../modules/shops/views/add_shop.dart';
 import '../modules/shops/views/shops_view.dart';
@@ -100,6 +101,10 @@ class AppPages {
       page: () => const MyrouteView(),
       binding: MyrouteBinding(),
     ),
+    GetPage(
+        name: _Paths.SHOP_PROFILE,
+        page: () => const ShopsProfile(),
+        binding: ShopsBinding()),
     GetPage(
       name: _Paths.PRODUCT,
       page: () => const MasalaView(),
@@ -222,7 +227,7 @@ class AppPages {
       page: () => const PlaceView(),
       binding: PlaceBinding(),
     ),
-     GetPage(
+    GetPage(
         name: _Paths.MY_TEAM,
         page: () => const MyTeamView(),
         binding: MyTeamBinding()),
@@ -235,10 +240,8 @@ class AppPages {
         page: () => const MyTeamAssigShopView(),
         binding: MyTeamBinding()),
     GetPage(
-      name: _Paths.EDIT_PROFILE,
-      page: () => const EditProfileView(),
-      binding: HomeBinding())
-    
-      
+        name: _Paths.EDIT_PROFILE,
+        page: () => const EditProfileView(),
+        binding: HomeBinding())
   ];
 }

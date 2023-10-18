@@ -32,7 +32,7 @@ class ProfileController extends GetxController {
       if (response != null) {
         if (response.status == true) {
           profileList.add(response.data);
-          updateTextValue();
+          // updateTextValue();
         } else {
           isLoading(false);
         }

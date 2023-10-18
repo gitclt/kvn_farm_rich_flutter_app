@@ -4,14 +4,16 @@ import 'package:kvn_farm_rich/constraints/app_colors.dart';
 Text greyText(String label, double fontSize,
     {TextAlign? textAlign,
     TextOverflow? textOverflow,
+    Color? color = const Color(0xFF7B7B7B),
     FontWeight? fontWeight = FontWeight.w400}) {
   return Text(
     label,
     textAlign: textAlign,
+    overflow: textOverflow,
     style: TextStyle(
         fontFamily: 'Manrope',
         overflow: textOverflow,
-        color: const Color(0xFF7B7B7B),
+        color: color,
         fontSize: fontSize,
         fontWeight: fontWeight),
   );

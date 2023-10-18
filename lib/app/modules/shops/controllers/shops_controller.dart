@@ -24,7 +24,7 @@ class ShopsController extends GetxController {
   var searchtype = "keyword".obs;
   String stateid = '';
   var shopid = "".obs;
-  var leadList = <GetLeadDetails>[].obs;
+  var leadList = <GetShopDetails>[].obs;
   final branchTypes = <BranchResponse>[].obs;
   String lat = '';
   String log = '';
@@ -79,7 +79,7 @@ class ShopsController extends GetxController {
     try {
       final response = await ApiProvider().fetchLeads(
           placesearchcontroller.text,
-        "1",
+          "1",
           keywordsearchcontroller.text,
           Session.userId,
           '1',

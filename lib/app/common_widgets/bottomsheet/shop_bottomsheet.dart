@@ -9,7 +9,7 @@ import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 import 'package:kvn_farm_rich/constraints/phone_call_utils.dart';
 
 class ShopBottomsheet extends StatelessWidget {
-  final GetLeadDetails allLeads;
+  final GetShopDetails allLeads;
   final VoidCallback? editShopClick;
   const ShopBottomsheet(
       {super.key,
