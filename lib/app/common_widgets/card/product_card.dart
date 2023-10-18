@@ -1,12 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 
 class ProductCard extends StatelessWidget {
   final String iteam;
   final String image;
-  
+
   final Function onTap;
   final String code;
   final Function? act;
@@ -17,7 +15,6 @@ class ProductCard extends StatelessWidget {
     // required this.colors,
     required this.image,
     required this.onTap,
-    
     required this.code,
     this.act,
     // required this.color,
@@ -32,6 +29,14 @@ class ProductCard extends StatelessWidget {
           height: 200,
           width: 180,
           decoration: BoxDecoration(
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x19000000),
+                blurRadius: 10,
+                offset: Offset(0, 0),
+                spreadRadius: 0,
+              )
+            ],
             borderRadius: BorderRadius.circular(16),
             color: Colors.white,
           ),
@@ -69,14 +74,12 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 blackText(iteam, 12, fontWeight: FontWeight.w600),
-               
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 greyText(code, 12),
-              
               ],
             ),
           ]),

@@ -1,6 +1,6 @@
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 
-import 'package:kvn_farm_rich/app/modules/masala/views/staggered_grid_view.dart';
+import 'package:kvn_farm_rich/app/modules/products/views/staggered_grid_view.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:flutter/material.dart';
 
