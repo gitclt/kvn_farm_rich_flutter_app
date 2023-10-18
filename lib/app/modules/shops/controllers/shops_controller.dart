@@ -8,6 +8,7 @@ import 'package:kvn_farm_rich/app/models/branch_model.dart';
 import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
 import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
+import 'package:kvn_farm_rich/constraints/date_formats.dart';
 
 class ShopsController extends GetxController {
   var invoiceDate = ''.obs;
@@ -18,6 +19,7 @@ class ShopsController extends GetxController {
   DateTime? selectfrom;
   final formKey = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
+  String addLeaddate = dateFormat5(DateTime.now());
 
   var searchtype = "keyword".obs;
   String stateid = '';
@@ -77,7 +79,7 @@ class ShopsController extends GetxController {
     try {
       final response = await ApiProvider().fetchLeads(
           placesearchcontroller.text,
-          "1",
+        "1",
           keywordsearchcontroller.text,
           Session.userId,
           '1',
@@ -167,7 +169,7 @@ class ShopsController extends GetxController {
     isLoading(true);
     try {
       final response = await ApiProvider().addShops(
-          date: '2023-10-12',
+          date: addLeaddate,
           name: namecontroller.text,
           contactPerson: contactPersoncontroller.text,
           number: contactNumbercontroller.text,

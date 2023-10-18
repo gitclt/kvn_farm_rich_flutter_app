@@ -102,6 +102,11 @@ String formatDateString(String inputDateString) {
   String formattedDate = DateFormat('d/MM/yyyy').format(dateTime);
   return formattedDate;
 }
+String formatDateString3(String inputDateString) {
+  DateTime dateTime = DateTime.parse(inputDateString);
+  String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+  return formattedDate;
+}
 
 Duration parseDuration(String s) {
   int hours = 0;
