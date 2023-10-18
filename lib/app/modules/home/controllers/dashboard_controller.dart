@@ -30,20 +30,23 @@ class DashboardController extends GetxController {
       //   Get.toNamed(Routes.SUPPORT);
       // }),
       DrawerItem('assets/svg/home_user.svg', 'Attendance', () {
-        Get.toNamed(Routes.ATTENDANCE_REPORT);
+        Get.toNamed(Routes.ATTENDANCE_REPORT, arguments: "");
         Get.back();
       }),
       DrawerItem('assets/svg/route.svg', 'My Route', () {
-        Get.toNamed(Routes.MYROUTE);
+        Get.toNamed(Routes.MYROUTE, arguments: "");
         Get.back();
       }),
       DrawerItem('assets/svg/home_shop.svg', 'Shops', () {
+        Get.toNamed(Routes.SHOPS);
         Get.back();
       }),
-      DrawerItem('assets/svg/home_list.svg', 'My Visits', () {
+      DrawerItem('assets/svg/home_list.svg', 'My Visit', () {
+        Get.toNamed(Routes.MYVISIT, arguments: "");
         Get.back();
       }),
       DrawerItem('assets/svg/order.svg', 'My Orders', () {
+        Get.toNamed(Routes.ORDER_HISTORY);
         Get.back();
       }),
       DrawerItem('assets/svg/logout.svg', 'Logout', () {
