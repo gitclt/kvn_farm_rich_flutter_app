@@ -42,6 +42,12 @@ class EditProfileView extends GetView<ProfileController> {
                               hintText: 'Name',
                               // labelText: controller.profileList.first.name,
                               textEditingController: controller.namecontroller,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Enter Name';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(
                               height: 20,
@@ -52,6 +58,18 @@ class EditProfileView extends GetView<ProfileController> {
                             ),
                             CommonTextFeild(
                               hintText: 'Email',
+
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Enter Email';
+                                } else if (!RegExp(
+                                        r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                                    .hasMatch(value)) {
+                                  return 'Please Enter a valid Email';
+                                } else {
+                                  return null;
+                                }
+                              },
                               // labelText: controller.profileList.first.email,
                               textEditingController: controller.emailcontroller,
                             ),

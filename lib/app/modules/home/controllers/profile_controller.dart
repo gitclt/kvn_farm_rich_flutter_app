@@ -25,6 +25,7 @@ class ProfileController extends GetxController {
   void getProfile() async {
     isLoading(true);
     profileList.clear();
+
     clear();
     try {
       final response = await ApiProvider().getProfile(Session.userId);
