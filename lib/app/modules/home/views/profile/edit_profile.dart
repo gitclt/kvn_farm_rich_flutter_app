@@ -64,21 +64,19 @@ class EditProfileView extends GetView<ProfileController> {
                 )),
         ),
       ),
-      bottomNavigationBar: Obx(() => controller.editLoading.value
-          ? const CircularProgressIndicator()
-          : Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-              child: CommonButtonWidget(
-                label: "SAVE",
-                isLoading: controller.editLoading.value,
-                onClick: () {
-                  FocusScope.of(context).unfocus();
-                  if (controller.formKey.currentState!.validate()) {
-                    controller.editProfile();
-                  }
-                },
-              ),
-            )),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+        child: CommonButtonWidget(
+          label: "SAVE",
+          isLoading: controller.editLoading.value,
+          onClick: () {
+            FocusScope.of(context).unfocus();
+            if (controller.formKey.currentState!.validate()) {
+              controller.editProfile();
+            }
+          },
+        ),
+      ),
     );
   }
 }
