@@ -12,13 +12,16 @@ class ProductView extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: GridView.custom(
         gridDelegate: SliverWovenGridDelegate.count(pattern: [
-          const WovenGridTile(1),
+          const WovenGridTile(
+            1,
+            // crossAxisRatio: 0.9,
+          ),
           const WovenGridTile(
             8 / 8,
             crossAxisRatio: 0.9,
             alignment: AlignmentDirectional.topCenter,
           )
-        ], crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 4),
+        ], crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8),
         childrenDelegate: SliverChildBuilderDelegate((context, index) {
           return ProductCard(
             iteam: 'SAMBAR POWDER',
