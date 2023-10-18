@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/header_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:get/get.dart';
 
 class DrawerView extends GetView<DashboardController> {
   const DrawerView({super.key});
@@ -30,8 +31,8 @@ class DrawerView extends GetView<DashboardController> {
               width: 126,
               height: 126,
             )).paddingOnly(top: 20),
-            const DrawerHeaderCard(
-              name: 'Anshad',
+            DrawerHeaderCard(
+              name: Session.userName,
             ),
             AnimationLimiter(
               child: ListView.separated(
