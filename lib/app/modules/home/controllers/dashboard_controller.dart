@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/modules/home/model/drawer_model.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/home_view.dart';
-import 'package:kvn_farm_rich/app/modules/home/views/profile_view.dart';
+import 'package:kvn_farm_rich/app/modules/home/views/profile/profile_view.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/search_view.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/pop-up.dart';

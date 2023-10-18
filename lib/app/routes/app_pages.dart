@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/modules/home/views/profile/edit_profile.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/bindings/my_team_binding.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/assigned_route_list.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart';
@@ -233,6 +234,11 @@ class AppPages {
         name: _Paths.MY_TEAM_ASSIGN_SHOP,
         page: () => const MyTeamAssigShopView(),
         binding: MyTeamBinding()),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: HomeBinding())
+    
       
   ];
 }

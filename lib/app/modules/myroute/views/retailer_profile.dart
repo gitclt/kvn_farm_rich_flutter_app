@@ -1,6 +1,6 @@
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
-import 'package:kvn_farm_rich/app/modules/home/views/profile_view.dart';
+import 'package:kvn_farm_rich/app/modules/home/views/profile/profile_view.dart';
 import 'package:kvn_farm_rich/app/modules/myroute/model/route_list.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:flutter/material.dart';

@@ -1,63 +1,85 @@
-import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
-import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
-import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/common_widgets/app_bar/home_app_bar.dart';
+import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/app/modules/home/controllers/profile_controller.dart';
+import 'package:kvn_farm_rich/app/modules/home/views/drawer/drawer_view.dart';
+import 'package:kvn_farm_rich/app/routes/app_pages.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
+import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 
-import '../../../common_widgets/svg_icons/svg_widget.dart';
+import '../../../../common_widgets/svg_icons/svg_widget.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CommonAppBar(
+        key: controller.dashBoardController.dashboardScaffoldkey,
+        drawer: const DrawerView(),
+        appBar: HomeAppBar(
+          onClick: () {
+            controller.dashBoardController.dashboardScaffoldkey.currentState
+                ?.openDrawer();
+          },
           label: 'Profile',
         ),
-        body: Container(
-            decoration: const BoxDecoration(
-              color: scaffoldBgColor,
-            ),
-            child: ListView(
-              shrinkWrap: true,
-              physics: const ScrollPhysics(),
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
+        body: Obx(() => (controller.isLoading.value)
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Container(
+                decoration: const BoxDecoration(
+                  color: scaffoldBgColor,
+                ),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, right: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [svgWidget("assets/svg/edit.svg")],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, right: 20),
+                          child: InkWell(
+                            onTap: () {
+                                Get.toNamed(Routes.EDIT_PROFILE);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [svgWidget("assets/svg/edit.svg")],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const ProfileImgWidget(),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        blackText(controller.profileList.first.name!, 16,
+                            fontWeight: FontWeight.w600),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        blackText(controller.profileList.first.roleName, 14,
+                            fontWeight: FontWeight.w500),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const ProfileImgWidget(),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    blackText("Anshad", 16, fontWeight: FontWeight.w600),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    blackText("C-KL-000001", 14, fontWeight: FontWeight.w500),
-                    const SizedBox(
-                      height: 30,
+                    EmployeeBottomWidget(
+                      name: controller.profileList.first.name!,
+                      phone: "+91 ${controller.profileList.first.mobile}",
+                      email: controller.profileList.first.email,
                     ),
                   ],
-                ),
-                const EmployeeBottomWidget(
-                  name: 'Anshad',
-                  phone: "+91 8563524047",
-                  email: "anshad000@gmail.com",
-                ),
-              ],
-            )));
+                ))));
   }
 }
 
@@ -170,8 +192,8 @@ class EmployeeBottomWidget extends StatelessWidget {
                         ],
                       ),
                       spacer,
-                      // Divider with color
-                      devider(context),
+                      divider(),
+                      // devider(context),
                       // Profile settings
                       spacer,
                       Visibility(

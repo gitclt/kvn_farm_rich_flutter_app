@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
@@ -37,7 +36,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               },
               icon: svgWidget('assets/svg/shop_cart.svg')),
         ),
-        IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg')),
+        //  IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg')),
       ],
     );
   }

@@ -104,6 +104,7 @@ class HomeCategories extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         onClick!();
@@ -117,18 +118,21 @@ class HomeCategories extends StatelessWidget {
             ),
           ], borderRadius: BorderRadius.circular(16), color: Colors.white),
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 28, top: 19, bottom: 19),
+            padding: EdgeInsets.only(
+                left: size.width * 0.025,
+                right: size.width * 0.072,
+                top: size.width * 0.04,
+                bottom: size.width * 0.04),
             child: Row(
               children: [
                 // svgWidget(path),
                 Image.asset(
                   path,
-                  width: MediaQuery.of(context).size.width * 0.13,
-                  height: MediaQuery.of(context).size.width * 0.12,
+                  width: size.width * 0.13,
+                  height: size.width * 0.13,
                 ),
                 const SizedBox(
-                  width: 5,
+                  width: 10,
                 ),
                 blackText(label, 14, fontWeight: FontWeight.w500)
               ],

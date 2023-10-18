@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/my_route_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
-import 'package:kvn_farm_rich/app/common_widgets/popup/routes_popup.dart';
-import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart';
@@ -49,42 +47,42 @@ class MyrouteView extends GetView<MyrouteController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Obx(
-                    () => InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) => RoutesPopup(
-                                onClick: () async {
-                                  final response =
-                                      await controller.getAssignedPlaces();
-                                  if (response != null) {
-                                    String placename = response.join(',');
-                                    controller.selectedRoute.value = placename;
-                                  }
-                                },
-                                isLoading: controller.placeLoading.value,
+                  // Obx(
+                  //   () => InkWell(
+                  //     onTap: () {
+                  //       showDialog(
+                  //           context: context,
+                  //           builder: (_) => RoutesPopup(
+                  //               onClick: () async {
+                  //                 final response =
+                  //                     await controller.getAssignedPlaces();
+                  //                 if (response != null) {
+                  //                   String placename = response.join(',');
+                  //                   controller.selectedRoute.value = placename;
+                  //                 }
+                  //               },
+                  //               isLoading: controller.placeLoading.value,
                                 
-                                children: controller.routePlaceList));
-                      },
-                      child: Row(
-                        children: [
-                          svgWidget('assets/svg/location.svg',
-                              color: Colors.red),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          greyText(
-                            fontWeight: FontWeight.w400,
-                            controller.selectedRoute.value == ""
-                                ? 'Select Place'
-                                : controller.selectedRoute.value,
-                            15,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  //               children: controller.routePlaceList));
+                  //     },
+                  //     child: Row(
+                  //       children: [
+                  //         svgWidget('assets/svg/location.svg',
+                  //             color: Colors.red),
+                  //         const SizedBox(
+                  //           width: 5,
+                  //         ),
+                  //         greyText(
+                  //           fontWeight: FontWeight.w400,
+                  //           controller.selectedRoute.value == ""
+                  //               ? 'Select Place'
+                  //               : controller.selectedRoute.value,
+                  //           15,
+                  //         )
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   rectangleRedBg(Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15.0, vertical: 12.0),

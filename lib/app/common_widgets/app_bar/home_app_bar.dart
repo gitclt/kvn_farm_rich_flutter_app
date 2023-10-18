@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
@@ -9,8 +8,11 @@ import 'package:kvn_farm_rich/constraints/app_colors.dart';
 class HomeAppBar extends GetView<DashboardController>
     implements PreferredSizeWidget {
   final Function onClick;
+  final String label;
 
-  const HomeAppBar(this.onClick, {super.key});
+  const HomeAppBar({super.key, required this.onClick, required this.label});
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,9 @@ class HomeAppBar extends GetView<DashboardController>
         child: svgWidget('assets/svg/menu.svg'),
       ),
       centerTitle: true,
-      title: const Text(
-        'Home',
-        style: TextStyle(
+      title: Text(
+        label,
+        style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w800, fontSize: 20),
       ),
       actions: [
@@ -37,7 +39,7 @@ class HomeAppBar extends GetView<DashboardController>
               Get.toNamed(Routes.CART);
             },
             icon: svgWidget('assets/svg/shop_cart.svg')),
-        IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg'))
+        //  IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg'))
       ],
     );
   }

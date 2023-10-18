@@ -24,7 +24,8 @@ class HomeView extends GetView<HomeController> {
         key: controller.dashBoardController.dashboardScaffoldkey,
         drawer: const DrawerView(),
         appBar: HomeAppBar(
-          () {
+          label: 'Home',
+          onClick: () {
             controller.dashBoardController.dashboardScaffoldkey.currentState
                 ?.openDrawer();
           },
@@ -50,8 +51,6 @@ class HomeView extends GetView<HomeController> {
                                 ? const EmpCheckInCard()
                                 : const EmpCheckOutCard(),
                       ),
-
-                      // const TopWidget(),
 
                       const SizedBox(
                         height: 25,

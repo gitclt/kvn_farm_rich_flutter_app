@@ -86,6 +86,39 @@ class ApiProvider {
     }
   }
 
+  Future<UserUpdateModel?> editProfile({
+    required String id,
+    String? name,
+    String? code,
+    String? password,
+    String? mobile,
+    String? email,
+    String? state,
+    String? place,
+  }) async {
+    var add = {
+      "id": id,
+      "name": name,
+      "code": code,
+      "password": password,
+      "mobile": mobile,
+      "email": email,
+      "state": state,
+      "location": place,
+    };
+    var response = await HttpApiConnect().post("Employee/Update_profile", add);
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return UserUpdateModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<ApiModel?> updateUserLoginStatus() async {
     var add = {
       "app_version": AppSettings().appVersionNo.toString(),
