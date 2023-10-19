@@ -18,6 +18,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class HomeController extends GetxController {
   DashboardController dashBoardController = Get.find();
+
   final isLoadingAttendance = false.obs;
   AttendenceResponse attendance = AttendenceResponse();
   TextEditingController remarkController = TextEditingController();

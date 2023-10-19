@@ -6,17 +6,19 @@ class AttendanceDatePicker extends StatelessWidget {
   final Function? changeDate;
   final Function increment;
   final Function decrement;
+  final Color? bgColor;
   const AttendanceDatePicker(
       {super.key,
       required this.date,
       this.changeDate,
       required this.increment,
-      required this.decrement});
+      required this.decrement,
+      this.bgColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: bgColor ?? Colors.white,
       child: Padding(
         padding: const EdgeInsets.only(left: 12, right: 12),
         child: Row(
@@ -29,7 +31,7 @@ class AttendanceDatePicker extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios,
-                  size: 24,
+                  size: 20,
                 ),
                 color: dateArrowColor,
               ),
@@ -61,7 +63,7 @@ class AttendanceDatePicker extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.arrow_forward_ios,
-                  size: 24,
+                  size: 20,
                 ),
                 color: dateArrowColor,
               )

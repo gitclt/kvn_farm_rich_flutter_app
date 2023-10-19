@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class ExpiryProductDetailsCard extends StatelessWidget {
   final String shopname;
@@ -58,7 +58,7 @@ class ExpiryProductDetailsCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    blackText("Total Qty:", 12, fontWeight: FontWeight.w600),
+                    blackText("Total Qty : ", 12, fontWeight: FontWeight.w600),
                     redText(qty, 12, fontWeight: FontWeight.w600)
                   ],
                 ),
@@ -67,16 +67,14 @@ class ExpiryProductDetailsCard extends StatelessWidget {
                     ontap();
                   },
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       redText("Transfer", 12, fontWeight: FontWeight.w600),
-                      const SizedBox(
-                        width: 1,
-                      ),
                       const Icon(
                         Icons.arrow_forward_ios,
-                        color: Colors.red,
+                        color: redColor,
                         size: 10,
-                      ).paddingOnly(top: 3),
+                      ).paddingAll(3),
                     ],
                   ),
                 )
