@@ -78,21 +78,17 @@ class MyrouteController extends GetxController {
   }
 
   getAssignedPlaces() {
-   
-   
-      final selectedPlace = routePlaceList
-          .map((element) =>
-              element.places.where((element) => element.isSelect.value == true))
-          .toList();
-      final place = selectedPlace
-          .where((element) => element.any((e) => e.isSelect.value) == true)
-          .toList();
-      for (var item in place) {
-        final placeList = item.map((e) => e.name).toList();
-        return placeList;
-      }
-    
-    
+    final selectedPlace = routePlaceList
+        .map((element) =>
+            element.places.where((element) => element.isSelect.value == true))
+        .toList();
+    final place = selectedPlace
+        .where((element) => element.any((e) => e.isSelect.value) == true)
+        .toList();
+    for (var item in place) {
+      final placeList = item.map((e) => e.name).toList();
+      return placeList;
+    }
   }
 
   Future<void> getMarkTypes() async {
@@ -343,7 +339,7 @@ class MyrouteController extends GetxController {
     String hours = (difference.inHours % 12).toString().padLeft(2, '0');
     String minutes = (difference.inMinutes % 60).toString().padLeft(2, '0');
 
-    return ('$hours:$minutes');
+    return ('$hours:$minutes mins');
   }
 
   Future<void> getCheckOutMarkVisit(
