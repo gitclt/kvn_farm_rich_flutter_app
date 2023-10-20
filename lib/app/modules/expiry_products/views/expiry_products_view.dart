@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/modules/expiry_products/views/expiry_product_products.dart';
 import 'package:kvn_farm_rich/app/modules/expiry_products/views/expiry_product_shop.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 import '../controllers/expiry_products_controller.dart';
 
@@ -13,6 +13,7 @@ class ExpiryProductsView extends GetView<ExpiryProductsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldBgColor,
       appBar: const CommonAppBar(
         label: "Expiry Products",
         visibility: true,
@@ -23,7 +24,7 @@ class ExpiryProductsView extends GetView<ExpiryProductsController> {
           children: [
             TabBar(
               labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-              labelColor: Colors.red,
+              labelColor: redColor,
               unselectedLabelStyle:
                   const TextStyle(fontWeight: FontWeight.w400),
               unselectedLabelColor: Colors.black,

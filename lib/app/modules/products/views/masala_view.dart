@@ -17,6 +17,7 @@ class MasalaView extends GetView<MasalaController> {
       appBar: const CommonAppBar(label: "Products"),
       body: DefaultTabController(
         length: 2,
+        initialIndex: 0,
         child: Column(
           children: [
             Container(

@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/expiry_product_home_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/expiry_shop_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/date_picker/attendance_date_picker.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import 'package:get/get.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 import '../controllers/expiry_products_controller.dart';
 
@@ -23,6 +23,7 @@ class ExpiryProductShopDetailsView extends GetView<ExpiryProductsController> {
           child: Column(
         children: [
           Obx(() => AttendanceDatePicker(
+                bgColor: visitDividerColor,
                 date: controller.date.value,
                 changeDate: () {},
                 decrement: () {

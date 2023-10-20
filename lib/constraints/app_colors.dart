@@ -4,8 +4,8 @@ const primaryColor = LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
   colors: [
-    Color(0xFFB20002),
     Color(0xFFD80005),
+    Color(0xFFB20002),
   ],
 );
 const mapColor = Color(0xFF033EB2);

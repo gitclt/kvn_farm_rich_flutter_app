@@ -20,6 +20,7 @@ class HomeView extends GetView<HomeController> {
     var sizedBox = const SizedBox(
       height: 12,
     );
+
     return Scaffold(
         key: controller.dashBoardController.dashboardScaffoldkey,
         drawer: const DrawerView(),
@@ -70,6 +71,7 @@ class HomeView extends GetView<HomeController> {
                       const SizedBox(
                         height: 20,
                       ),
+
                       Row(
                         // crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,7 +79,7 @@ class HomeView extends GetView<HomeController> {
                           HomeCategories(
                             path: 'assets/image/blend_masala.png',
                             label: 'BLENDED \nMASALA',
-                            onClick: () {
+                            onClick: () async {
                               Get.toNamed(Routes.PRODUCT);
                             },
                           ),
@@ -90,6 +92,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ],
                       ),
+
                       const SizedBox(
                         height: 20,
                       ),
