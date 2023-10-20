@@ -339,7 +339,7 @@ class MyrouteController extends GetxController {
     String hours = (difference.inHours % 12).toString().padLeft(2, '0');
     String minutes = (difference.inMinutes % 60).toString().padLeft(2, '0');
 
-    return ('$hours:$minutes mins');
+    return ('$hours:$minutes');
   }
 
   Future<void> getCheckOutMarkVisit(

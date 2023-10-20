@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
@@ -33,14 +32,18 @@ class VisitCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(2),
+
       decoration: BoxDecoration(
-          color: const Color(0xffffffff),
+          color: scaffoldBgColor,
           borderRadius: BorderRadius.circular(12),
           boxShadow: const [
             BoxShadow(
-                color: Color.fromARGB(255, 240, 235, 235),
-                blurRadius: 3.0,
-                spreadRadius: 3),
+              color: Color(0x19000000),
+              blurRadius: 4,
+              offset: Offset(0, 2),
+              spreadRadius: 0,
+            )
           ]),
       child: InkWell(
         onTap: () {
@@ -108,60 +111,43 @@ class VisitCardWidget extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  visible == false
-                      ? Row(
-                          children: [
-                            svgWidget('assets/svg/distanceofroute.svg',
-                                size: 15,
-                                color: redColor,
-                                blendMode: BlendMode.srcIn),
-                            redText(
-                              ' $km KM',
-                              12,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                onTapGps();
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: const Color(0xffE1F8FF),
-                                  borderRadius: BorderRadius.circular(5),
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          onTapGps();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xffE1F8FF),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                const SizedBox(
+                                  width: 2,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
-                                      svgWidget('assets/svg/pin_drop.svg',
-                                          color: const Color(0xff4F9AB5),
-                                          blendMode: BlendMode.srcIn),
-                                      Text(
-                                        gps,
-                                        style: const TextStyle(
-                                            color: Color(0xff4F9AB5)),
-                                      ),
-                                      const SizedBox(
-                                        width: 2,
-                                      )
-                                    ],
-                                  ),
+                                svgWidget('assets/svg/pin_drop.svg',
+                                    color: const Color(0xff4F9AB5),
+                                    blendMode: BlendMode.srcIn),
+                                Text(
+                                  gps,
+                                  style:
+                                      const TextStyle(color: Color(0xff4F9AB5)),
                                 ),
-                              ),
+                                const SizedBox(
+                                  width: 2,
+                                )
+                              ],
                             ),
-                          ],
-                        ).paddingOnly(bottom: 5)
-                      : const SizedBox(
-                          height: 0,
-                          width: 0,
+                          ),
                         ),
+                      ),
+                    ],
+                  ).paddingOnly(bottom: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

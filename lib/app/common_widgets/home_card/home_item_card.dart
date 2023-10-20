@@ -120,7 +120,7 @@ class HomeCategories extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
                 left: size.width * 0.025,
-                right: size.width * 0.072,
+                right: size.width * 0.075,
                 top: size.width * 0.04,
                 bottom: size.width * 0.04),
             child: Row(

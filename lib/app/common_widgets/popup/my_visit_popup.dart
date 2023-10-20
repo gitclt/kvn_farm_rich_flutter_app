@@ -9,7 +9,8 @@ class MyVisitPopup extends StatefulWidget {
   final String location;
   final String? tour;
   final String? credit;
-  //final bool? visible;
+  final String visitType;
+  // final bool? visible;
   const MyVisitPopup({
     super.key,
     required this.type,
@@ -17,7 +18,8 @@ class MyVisitPopup extends StatefulWidget {
     required this.location,
     this.tour,
     this.credit,
-    // this.visible = false
+    required this.visitType,
+    //  this.visible
   });
 
   @override
@@ -86,7 +88,9 @@ class _MyVisitPopupState extends State<MyVisitPopup>
                           ),
                           greyText(widget.remark, 14,
                               textOverflow: TextOverflow.visible),
-
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
                           // Visibility(
                           //   visible: widget.visible!,
                           //   child: Padding(
@@ -107,16 +111,37 @@ class _MyVisitPopupState extends State<MyVisitPopup>
                           //   ),
                           // ),
                           const SizedBox(
-                            height: 12,
+                            height: 15,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              svgWidget('assets/svg/location.svg',
-                                  color: redColor),
-                              const SizedBox(
-                                width: 4,
+                              Row(
+                                children: [
+                                  svgWidget('assets/svg/location.svg',
+                                      color: redColor),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  blackText(widget.location, 12)
+                                ],
                               ),
-                              blackText(widget.location, 12)
+                              Row(
+                                children: [
+                                  Container(
+                                    width: size.width * 0.028,
+                                    height: size.width * 0.028,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: redColor),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  blackText(widget.visitType, 12,
+                                      fontWeight: FontWeight.w500)
+                                ],
+                              ),
                             ],
                           )
                         ]),

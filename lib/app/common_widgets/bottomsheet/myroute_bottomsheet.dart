@@ -196,7 +196,7 @@ class RouteBottomSheet extends GetView<MyrouteController> {
                                   ),
                                   blackText(
                                       controller.leadCheckIn.isNotEmpty
-                                          ? '${controller.leadCheckIn.first.workhour}'
+                                          ? '${controller.leadCheckIn.first.workhour} mins'
                                           : "",
                                       13,
                                       fontWeight: FontWeight.bold)

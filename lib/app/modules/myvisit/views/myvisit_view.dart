@@ -17,7 +17,7 @@ class MyvisitView extends GetView<MyvisitController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: scaffoldBgColor,
         appBar: const CommonAppBar(label: 'My Visit'),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,7 @@ class MyvisitView extends GetView<MyvisitController> {
                       : Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                top: 5, left: 15, right: 15, bottom: 8),
+                                top: 5, left: 12, right: 12, bottom: 8),
                             child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: controller.myVisisitList.length,
@@ -65,11 +65,14 @@ class MyvisitView extends GetView<MyvisitController> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 8),
                                   child: VisitCardWidget(
-                                    visible: controller.myVisisitList[index]
-                                                .visitType ==
-                                            'Live'
-                                        ? false
-                                        : true,
+                                    visible:
+                                        //  controller.myVisisitList[index]
+                                        //             .visitType ==
+                                        //         'Live'
+                                        double.parse(visit.kmDiff.toString()) >=
+                                                3
+                                            ? true
+                                            : false,
                                     name: visit.lead.toString(),
                                     location: visit.visitLoc.toString(),
                                     place: visit.place.toString(),
@@ -90,6 +93,25 @@ class MyvisitView extends GetView<MyvisitController> {
                                                 type: visit.type,
                                                 remark: visit.remark.toString(),
                                                 location: visit.place!,
+                                                // visible:
+                                                //     (int.parse(visit.tour!) ==
+                                                //                 1 ||
+                                                //             int.parse(visit
+                                                //                     .credit!) ==
+                                                //                 1)
+                                                //         ? true
+                                                //         : false,
+                                                // tour:
+                                                //     int.parse(visit.tour!) == 1
+                                                //         ? 'Plan Tour'
+                                                //         : '',
+                                                // credit:
+                                                //     int.parse(visit.credit!) ==
+                                                //             1
+                                                //         ? 'Credit Visit'
+                                                //         : '',
+                                                visitType:
+                                                    visit.visitType.toString(),
                                               ));
                                     },
                                   ),
