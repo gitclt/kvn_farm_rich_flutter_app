@@ -219,7 +219,7 @@ class HomeController extends GetxController {
         remark: isVisibleRemarkField(hourCount) ? remarkController : null);
 
     if (returnResponse == true) {
-      DialogHelper.showLoading("fetching Location ...");
+      DialogHelper.showLoading("Fetching Location ...");
       final position = await determinePosition();
 
       if (position != null) {

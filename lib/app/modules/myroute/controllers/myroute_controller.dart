@@ -180,7 +180,7 @@ class MyrouteController extends GetxController {
     double longi,
   ) async {
     // if (value != 1) {
-    DialogHelper.showLoading("fetching Location ...");
+    DialogHelper.showLoading("Fetching Location ...");
     final location = await determinePosition();
     DialogHelper.hideLoading();
     if (location == null) return 0.0;
@@ -240,7 +240,7 @@ class MyrouteController extends GetxController {
   ) async {
     itemController.clear;
     remarkController.clear;
-    DialogHelper.showLoading("fetching Location ...");
+    DialogHelper.showLoading("Fetching Location ...");
     final location = await determinePosition();
     DialogHelper.hideLoading();
     if (location == null) return;
