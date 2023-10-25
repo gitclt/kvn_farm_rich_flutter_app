@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 
 class ProductCard extends StatelessWidget {
@@ -77,11 +78,12 @@ class ProductCard extends StatelessWidget {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                greyText("Mrp :", 12),
                 greyText(code, 12),
               ],
-            ),
+            ).paddingOnly(top: 5),
           ]),
         ));
   }

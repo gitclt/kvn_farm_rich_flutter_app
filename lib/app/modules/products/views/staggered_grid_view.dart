@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/product_card.dart';
+import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/product_popup.dart';
+import 'package:kvn_farm_rich/app/modules/products/controllers/masala_controller.dart';
 
-class ProductView extends StatelessWidget {
+class ProductView extends GetView<MasalaController> {
   const ProductView({super.key});
 
   @override
@@ -23,22 +27,26 @@ class ProductView extends StatelessWidget {
           )
         ], crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8),
         childrenDelegate: SliverChildBuilderDelegate((context, index) {
-          return ProductCard(
-            iteam: 'SAMBAR POWDER',
-            code: '#6302',
-            image: "assets/image/powder.png",
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) => const ProductPopup(
-                  image: "assets/image/largeproduct.png",
-                  code: '#6302',
-                  name: "TURMERIC POWDER",
-                ),
-              );
-            },
-          );
-        }, childCount: 6),
+          return Obx(() => controller.isloading.value
+              ? const Center(child: CircularProgressIndicator())
+              : controller.productList.isEmpty
+                  ? const NoDataWidget()
+                  : ProductCard(
+                      iteam: controller.productList[index].name,
+                      code: controller.productList[index].mrp.toString(),
+                      image: "assets/image/powder.png",
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => ProductPopup(
+                            image: "assets/image/largeproduct.png",
+                            name: controller.productList[index].name,
+                            code: controller.productList[index].mrp.toString(),
+                          ),
+                        );
+                      },
+                    ));
+        }, childCount: controller.productList.length),
       ),
     );
   }

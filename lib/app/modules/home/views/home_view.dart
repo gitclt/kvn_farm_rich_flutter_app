@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/home_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/home_card/home_item_card.dart';
+import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/drawer/drawer_view.dart';
 import 'package:kvn_farm_rich/app/modules/home/widget/emp_checkin_card.dart';
@@ -67,30 +69,78 @@ class HomeView extends GetView<HomeController> {
                       const SizedBox(
                         height: 20,
                       ),
-                      blackText('Categories', 22, fontWeight: FontWeight.w700),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          blackText('Categories', 22,
+                              fontWeight: FontWeight.w700),
+                          InkWell(
+                            onTap: () {
+                              
+                            },
+                            child: Row(
+                              children: [
+                                greyText('View All', 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: red2Color),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 12,
+                                  color: red2Color,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
-
-                      Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          HomeCategories(
-                            path: 'assets/image/blend_masala.png',
-                            label: 'BLENDED \nMASALA',
-                            onClick: () async {
-                              Get.toNamed(Routes.PRODUCT);
-                            },
-                          ),
-                          HomeCategories(
-                            path: 'assets/image/spice_powder.png',
-                            label: 'SPICES \nPOWDER',
-                            onClick: () {
-                              Get.toNamed(Routes.PRODUCT);
-                            },
-                          ),
-                        ],
+                      Obx(
+                        () => controller.isloading.value
+                            ? const Center(child: CircularProgressIndicator())
+                            : controller.categoryList.isEmpty
+                                ? const NoDataWidget()
+                                : AnimatedContainer(
+                                    duration:
+                                        const Duration(milliseconds: 1500),
+                                    curve: Curves.bounceInOut,
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 0.0,
+                                        childAspectRatio: 1.9,
+                                        mainAxisSpacing: 0.0,
+                                      ),
+                                      itemCount: controller.categoryList.length,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        return AnimationConfiguration
+                                            .staggeredGrid(
+                                                position: index,
+                                                duration: const Duration(
+                                                    milliseconds: 500),
+                                                columnCount: 6,
+                                                child: ScaleAnimation(
+                                                    child: FadeInAnimation(
+                                                        child: HomeCategories(
+                                                  label: controller
+                                                      .categoryList[index],
+                                                  onClick: () {
+                                                    Get.toNamed(Routes.PRODUCT,
+                                                        arguments: controller
+                                                                .categoryList[
+                                                            index]);
+                                                  },
+                                                ))));
+                                      },
+                                    ),
+                                  ),
                       ),
 
                       const SizedBox(

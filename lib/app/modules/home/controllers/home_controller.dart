@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   DashboardController dashBoardController = Get.find();
 
   final isLoadingAttendance = false.obs;
+  final isloading = false.obs;
   AttendenceResponse attendance = AttendenceResponse();
   TextEditingController remarkController = TextEditingController();
   String curlat = '';
@@ -45,15 +46,18 @@ class HomeController extends GetxController {
   String selectedValue = '#AMINA ENTERPRICES';
 
   late List<CameraDescription> cameras;
+
+  var categoryList = <String>[].obs;
   // ignore: prefer_typing_uninitialized_variables
   late final firstCamera;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
 
     startCamera();
     getAttendance();
+    await getProduct();
   }
 
   void onClickDivision(String value) {
@@ -256,6 +260,25 @@ class HomeController extends GetxController {
       contactAdministrationSnackBar('Something Went Wrong', e.toString());
     } finally {
       isLoadingAttendance(false);
+    }
+  }
+
+  Future<void> getProduct() async {
+    isloading(true);
+    try {
+      final response = await ApiProvider().getProduct();
+      if (response != null) {
+        if (response.status == true) {
+          for (var item in response.data) {
+            String catname = item.catName;
+            if (!categoryList.any((category) => category == catname)) {
+              categoryList.add(item.catName);
+            }
+          }
+        }
+      }
+    } finally {
+      isloading(false);
     }
   }
 }

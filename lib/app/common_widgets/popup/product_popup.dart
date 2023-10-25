@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
@@ -85,7 +84,13 @@ class AddSalePopupState extends State<ProductPopup>
                               blackText(widget.name, 20,
                                       fontWeight: FontWeight.bold)
                                   .paddingOnly(top: 10),
-                              greyText(widget.code, 14),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  greyText("Mrp :", 14),
+                                  greyText(widget.code, 14),
+                                ],
+                              ).paddingOnly(top: 5),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -99,7 +104,7 @@ class AddSalePopupState extends State<ProductPopup>
                                 isEnabled: true,
                               ).paddingOnly(top: 5, left: 5, right: 5),
                               CommonButtonWidget(
-                                label: "CHECKOUT",
+                                label: "ADD TO CART",
                                 onClick: () {},
                               ).paddingOnly(top: 25, left: 5, right: 5)
                             ],
