@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/textfield/search_feild.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/app/modules/products/controllers/masala_controller.dart';
 
 class ProductPopup extends StatefulWidget {
   final String image;
@@ -42,7 +43,7 @@ class AddSalePopupState extends State<ProductPopup>
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
+     final MasalaController Controller = Get.find();
     return Center(
         child: Material(
             color: Colors.transparent,
@@ -99,8 +100,9 @@ class AddSalePopupState extends State<ProductPopup>
                                       .paddingOnly(top: 10),
                                 ],
                               ).paddingAll(5),
-                              const CommonSearchTextField(
+                               CommonSearchTextField(
                                 hintText: "",
+                                textEditingController: Controller.qtycontroller,
                                 isEnabled: true,
                               ).paddingOnly(top: 5, left: 5, right: 5),
                               CommonButtonWidget(
