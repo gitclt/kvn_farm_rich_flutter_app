@@ -16,14 +16,19 @@ class ShopsController extends GetxController {
   var isLoading = false.obs;
 
   String invDate = '';
+  String shopId = '';
   DateTime? selectfrom;
   final formKey = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
   String addLeaddate = dateFormat5(DateTime.now());
+  GetShopDetails? shopDetailsResponse;
+  var editLoading = false.obs;
 
   var searchtype = "keyword".obs;
   String stateid = '';
   var shopid = "".obs;
+  var isDetailsLoading = false.obs;
   var leadList = <GetShopDetails>[].obs;
   final branchTypes = <BranchResponse>[].obs;
   String lat = '';
@@ -53,6 +58,10 @@ class ShopsController extends GetxController {
 
   @override
   void onInit() {
+    if (Get.arguments != null) {
+      shopId = Get.arguments;
+      viewLeadDetails(shopId);
+    }
     getShops();
     getBranchTypes();
     super.onInit();
@@ -103,6 +112,82 @@ class ShopsController extends GetxController {
       FocusManager.instance.primaryFocus?.unfocus();
       return;
     });
+  }
+
+  viewLeadDetails(String shopId) async {
+    isDetailsLoading(true);
+    clear();
+    try {
+      final response = await ApiProvider().getShopDetails(shopId);
+      if (response != null) {
+        if (response.status == true) {
+          shopDetailsResponse = response.data.first;
+          updateTextValue();
+        } else {
+          isDetailsLoading(false);
+        }
+      }
+    } finally {
+      isDetailsLoading(false);
+    }
+  }
+
+  void updateTextValue() {
+    locationcontroller =
+        TextEditingController(text: shopDetailsResponse!.place);
+    statecontroller = TextEditingController(text: shopDetailsResponse!.state);
+    namecontroller = TextEditingController(text: shopDetailsResponse!.name);
+    addresscontroller =
+        TextEditingController(text: shopDetailsResponse!.address);
+    pincodecontroller =
+        TextEditingController(text: shopDetailsResponse!.pincode);
+    emailcontroller = TextEditingController(text: shopDetailsResponse!.email);
+    contactPersoncontroller =
+        TextEditingController(text: shopDetailsResponse!.contactPerson);
+  }
+
+  void editLeads(String leadValue) async {
+    editLoading(true);
+
+    try {
+      final response = await ApiProvider().editLeads(
+        id: leadValue,
+       
+        name: namecontroller.text == ''
+            ? shopDetailsResponse!.name
+            : namecontroller.text,
+        contactPerson: contactPersoncontroller.text == ''
+            ? shopDetailsResponse!.contactPerson
+            : contactPersoncontroller.text,
+        email: emailcontroller.text == ''
+            ? shopDetailsResponse!.email
+            : emailcontroller.text,
+        state: statecontroller.text == ''
+            ? shopDetailsResponse!.state
+            : statecontroller.text,
+        place: locationcontroller.text == ''
+            ? shopDetailsResponse!.place
+            : locationcontroller.text,
+        address: addresscontroller.text == ''
+            ? shopDetailsResponse!.address
+            : addresscontroller.text,
+        pincode: pincodecontroller.text == ''
+            ? shopDetailsResponse!.pincode
+            : pincodecontroller.text,
+      );
+      if (response != null) {
+        if (response.status == true) {
+          toast(
+            response.message,
+          );
+          Get.close(2);
+        } else {
+          editLoading(false);
+        }
+      }
+    } finally {
+      editLoading(false);
+    }
   }
 
   picLocation(String id) async {

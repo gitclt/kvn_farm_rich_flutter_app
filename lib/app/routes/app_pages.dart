@@ -7,6 +7,7 @@ import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_view.dart';
 import 'package:kvn_farm_rich/app/modules/place/bindings/place_binding.dart';
 import 'package:kvn_farm_rich/app/modules/place/views/place_view.dart';
+import 'package:kvn_farm_rich/app/modules/shops/views/shop_edit.dart';
 import 'package:kvn_farm_rich/app/modules/shops/views/shop_profile.dart';
 
 import '../modules/add_payment/bindings/add_payment_binding.dart';
@@ -219,6 +220,11 @@ class AppPages {
       binding: ShopsBinding(),
     ),
     GetPage(
+      name: _Paths.SHOP_EDIT,
+      page: () => const ShopEditView(),
+      binding: ShopsBinding(),
+    ),
+    GetPage(
       name: _Paths.STATE,
       page: () => const StateView(),
       binding: StateBinding(),
@@ -244,7 +250,7 @@ class AppPages {
         name: _Paths.EDIT_PROFILE,
         page: () => const EditProfileView(),
         binding: HomeBinding()),
-         GetPage(
+    GetPage(
       name: _Paths.CATEGORY,
       page: () => const CategoryView(),
       binding: HomeBinding(),

@@ -14,15 +14,7 @@ void shopLocationPopup(Function onpress, Function onpress1) async {
           Text('Update Location'),
         ],
       ),
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-              width: 260,
-              child:
-                  greyText('You can update location by clicking Continue', 16)),
-        ],
-      ),
+      content: greyText('You can update location by clicking Continue', 16),
       actions: [
         const Divider(
           color: Color(0xffE3EBF6),
@@ -39,10 +31,18 @@ void shopLocationPopup(Function onpress, Function onpress1) async {
               },
               child: blackText('Skip', 15),
             ),
-            Container(
-              color: const Color(0xffE3EBF6),
+            // Container(
+            //   color: const Color(0xffE3EBF6),
+            //   height: 50,
+            //   width: 2,
+            // ),
+            const SizedBox(
               height: 50,
-              width: 2,
+              child: VerticalDivider(
+                color: Color(0xffE3EBF6),
+                width: 20,
+                thickness: 1,
+              ),
             ),
             TextButton(
               onPressed: () {

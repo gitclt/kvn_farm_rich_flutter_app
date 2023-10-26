@@ -316,6 +316,54 @@ class ApiProvider {
     }
   }
 
+  Future<UserUpdateModel?> editLeads({
+    required String id,
+    String? date,
+    String? name,
+    String? contactPerson,
+    String? number,
+    String? email,
+    String? state,
+    String? place,
+    String? address,
+    String? pincode,
+    String? currentgrade,
+    int? tse,
+    int? tsc,
+    int? zsm,
+    int? bh,
+  }) async {
+    var add = {
+      "id": id,
+      "date": date,
+      "name": name,
+      "contact_person": contactPerson,
+      "mobile": number,
+      "email": email,
+      "state": state,
+      "place": place,
+      "address": address,
+      "pincode": pincode,
+      "gps_loc": "",
+      "current_grade": currentgrade,
+      "tse": tse,
+      "tsc": tsc,
+      "zsm": zsm,
+      "bh": bh
+    };
+    var response = await HttpApiConnect().post("Lead/lead_update", add);
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return UserUpdateModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<StateModel?> getState() async {
     var response = await HttpApiConnect().get("Master/stateList");
     try {

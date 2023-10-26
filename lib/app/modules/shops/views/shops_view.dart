@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
+import 'package:kvn_farm_rich/app/common_widgets/bottomsheet/expiry_product_bottom_sheet.dart';
+import 'package:kvn_farm_rich/app/common_widgets/bottomsheet/shop_bottomsheet.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/shop_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/filter_popup.dart';
@@ -111,22 +113,24 @@ class ShopsView extends GetView<ShopsController> {
                                                 item.mobile.toString());
                                           },
                                           onClick: () {
-                                            //                     Get.bottomSheet(
-                                            //                       // ignore: prefer_const_constructors
-                                            //                       ShopBottomsheet(allLeads: item,
-                                            //                       editShopClick: () {
-                                            //                                                    controller
-                                            //     .viewLeadDetails(item.id.toString());
-                                            // // Get.back();
-                                            // Get.toNamed(Routes.SHOP_EDIT,
-                                            //     );
-                                            //                       },
-                                            //                       ),
-                                            //                       elevation: 20.0,
-                                            //                       enableDrag: false,
-                                            //                       backgroundColor: Colors.white,
-                                            //                       shape: bootomSheetShape(),
-                                            //                     );
+                                            Get.bottomSheet(
+                                              // ignore: prefer_const_constructors
+                                              ShopBottomsheet(
+                                                allLeads: item,
+                                                editShopClick: () {
+                                                  controller.viewLeadDetails(
+                                                      item.id.toString());
+                                                  // Get.back();
+                                                  Get.toNamed(
+                                                    Routes.SHOP_EDIT,
+                                                  );
+                                                },
+                                              ),
+                                              elevation: 20.0,
+                                              enableDrag: false,
+                                              backgroundColor: Colors.white,
+                                              shape: bootomSheetShape(),
+                                            );
                                           },
                                         ),
                                       ));

@@ -32,7 +32,7 @@ class ProfileView extends GetView<ProfileController> {
               )
             : Container(
                 decoration: const BoxDecoration(
-                  color: scaffoldBgColor,
+                  color: visitDividerColor,
                 ),
                 child: ListView(
                   shrinkWrap: true,

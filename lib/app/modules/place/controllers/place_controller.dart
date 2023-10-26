@@ -40,7 +40,7 @@ class PlaceController extends GetxController {
         .where((element) => element.name
             .toUpperCase()
             .toLowerCase()
-            .contains(searchcontroller.text.toString()))
+            .contains(searchcontroller.text.toLowerCase().toString()))
         .toList());
     placeList.refresh();
   }
