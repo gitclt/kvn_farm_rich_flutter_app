@@ -45,6 +45,7 @@ abstract class Routes {
   static const MY_TEAM_ASSIGN_SHOP = _Paths.MY_TEAM_ASSIGN_SHOP;
   static const MY_TEAM = _Paths.MY_TEAM;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const CATEGORY = _Paths.CATEGORY;
 }
 
 abstract class _Paths {
@@ -87,4 +88,5 @@ abstract class _Paths {
   static const ASSIGNEDROUTE = '/assigned-route';
   static const MY_TEAM_ASSIGN_SHOP = '/my-team_assign_shop';
   static const EDIT_PROFILE = '/edit-profile';
+  static const CATEGORY = '/edit-category';
 }

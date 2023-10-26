@@ -76,7 +76,7 @@ class HomeView extends GetView<HomeController> {
                               fontWeight: FontWeight.w700),
                           InkWell(
                             onTap: () {
-                              
+                              Get.toNamed(Routes.CATEGORY);
                             },
                             child: Row(
                               children: [
