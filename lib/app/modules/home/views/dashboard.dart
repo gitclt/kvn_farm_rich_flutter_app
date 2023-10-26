@@ -1,3 +1,4 @@
+import 'package:kvn_farm_rich/app/common_widgets/card/product_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/modules/cart/controllers/cart_controller.dart';
 import 'package:kvn_farm_rich/app/modules/home/controllers/dashboard_controller.dart';
@@ -10,6 +11,7 @@ class DashboardView extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = Get.find();
     bool shouldNavigateToFirstTab = false;
     return WillPopScope(
       onWillPop: () async {
@@ -68,12 +70,26 @@ class DashboardView extends GetView<DashboardController> {
                     ),
                     label: 'Profile'),
                 BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: svgWidget('assets/svg/shop_cart.svg',
-                          color: controller.selectedIndex.value == 3
-                              ? redColor
-                              : Colors.black),
+                    icon: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        svgWidget('assets/svg/shop_cart.svg',
+                            color: controller.selectedIndex.value == 3
+                                ? redColor
+                                : Colors.black),
+                        Obx(() => (cartController.cartlist.isNotEmpty)
+                            ? Positioned(
+                                bottom: 8,
+                                left: 11,
+                                child: circleWidgetWithText(
+                                  20,
+                                  red2Color,
+                                  cartController.cartlist.length.toString(),
+                                  Colors.white,
+                                ),
+                              )
+                            : const SizedBox()),
+                      ],
                     ),
                     label: 'Cart')
               ]),
