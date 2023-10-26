@@ -41,7 +41,7 @@ import '../modules/pending_collection/bindings/pending_collection_binding.dart';
 import '../modules/pending_collection/views/pending_collection_view.dart';
 import '../modules/productdetails/bindings/productdetails_binding.dart';
 import '../modules/productdetails/views/productdetails_view.dart';
-import '../modules/products/bindings/masala_binding.dart';
+import '../modules/products/bindings/product_binding.dart';
 import '../modules/products/views/product_tab_view.dart';
 import '../modules/shops/bindings/shops_binding.dart';
 import '../modules/shops/views/add_shop.dart';

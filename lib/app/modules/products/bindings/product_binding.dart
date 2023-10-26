@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/masala_controller.dart';
+import '../controllers/product_controller.dart';
 
 class MasalaBinding extends Bindings {
   @override

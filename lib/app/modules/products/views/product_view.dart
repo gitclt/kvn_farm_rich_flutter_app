@@ -5,7 +5,7 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/product_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/product_popup.dart';
-import 'package:kvn_farm_rich/app/modules/products/controllers/masala_controller.dart';
+import 'package:kvn_farm_rich/app/modules/products/controllers/product_controller.dart';
 
 class ProductView extends GetView<MasalaController> {
   const ProductView({super.key});
