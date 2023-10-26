@@ -5,6 +5,7 @@ class BaseUrl {
   ///[live]/////
   //  String baseUrl = "http://192.168.1.10:8081/api/";
   String baseUrl = "https://kvn.gitonline.in/api/";
+   String imgUrl = "https://kvn.gitonline.in/";
 }
 
 class AppSettings {

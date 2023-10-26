@@ -36,6 +36,7 @@ class MasalaView extends GetView<MasalaController> {
                   unselectedLabelColor: Colors.black,
                   onTap: (int index) async {
                     String subcat = controller.subcatList[index];
+                    controller.subcatname.value = subcat;
                     await controller.getProductList(subcat);
                   },
                   tabs: controller.subcatList.map((subcat) {

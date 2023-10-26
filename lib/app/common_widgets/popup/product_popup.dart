@@ -3,17 +3,22 @@ import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/textfield/search_feild.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
-import 'package:kvn_farm_rich/app/modules/products/controllers/product_controller.dart';
 
 class ProductPopup extends StatefulWidget {
   final String image;
   final String name;
   final String code;
+  final Function ontap;
+  final bool isloading;
+  final TextEditingController qtycontroller;
   const ProductPopup({
     Key? key,
     required this.image,
     required this.name,
     required this.code,
+    required this.ontap,
+    required this.qtycontroller,
+    required this.isloading,
   }) : super(key: key);
   @override
   State<StatefulWidget> createState() => AddSalePopupState();
@@ -43,7 +48,7 @@ class AddSalePopupState extends State<ProductPopup>
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-     final MasalaController Controller = Get.find();
+
     return Center(
         child: Material(
             color: Colors.transparent,
@@ -72,14 +77,17 @@ class AddSalePopupState extends State<ProductPopup>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset(widget.image)
-                                      .paddingOnly(left: size.width * 0.27),
+                                  Image.network(widget.image,
+                                          fit: BoxFit.contain,
+                                          height: size.height * 0.25,
+                                          width: size.width * 0.56)
+                                      .paddingOnly(left: size.width * 0.16),
                                   InkWell(
                                       onTap: () {
                                         Get.back();
                                       },
                                       child: const Icon(Icons.close)
-                                          .paddingOnly(left: size.width * 0.21))
+                                          .paddingOnly(left: size.width * 0.07))
                                 ],
                               ),
                               blackText(widget.name, 20,
@@ -100,14 +108,19 @@ class AddSalePopupState extends State<ProductPopup>
                                       .paddingOnly(top: 10),
                                 ],
                               ).paddingAll(5),
-                               CommonSearchTextField(
+                              CommonSearchTextField(
                                 hintText: "",
-                                textEditingController: Controller.qtycontroller,
+                                textEditingController: widget.qtycontroller,
                                 isEnabled: true,
                               ).paddingOnly(top: 5, left: 5, right: 5),
                               CommonButtonWidget(
                                 label: "ADD TO CART",
-                                onClick: () {},
+                                isLoading: widget.isloading,
+                                onClick: () {
+                                  if (widget.qtycontroller.text != "") {
+                                    widget.ontap();
+                                  }
+                                },
                               ).paddingOnly(top: 25, left: 5, right: 5)
                             ],
                           ),

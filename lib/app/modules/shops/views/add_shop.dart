@@ -15,7 +15,7 @@ class AddShops extends GetView<ShopsController> {
   Widget build(BuildContext context) {
     final size = SizedBox(height: MediaQuery.of(context).size.height * 0.02);
     return Scaffold(
-      appBar: const CommonAppBar(label: 'Add Shop'),
+      appBar: const CommonAppBar(label: 'Add Shop',  visibility: false,),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(

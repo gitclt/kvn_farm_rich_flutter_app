@@ -17,6 +17,7 @@ class AttendanceReportView extends GetView<AttendanceReportController> {
         backgroundColor: scaffoldBgColor,
         appBar: const CommonAppBar(
           label: 'Attendance Report',
+          visibility: false,
         ),
         body: Column(
           children: [

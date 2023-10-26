@@ -20,7 +20,10 @@ class ShopsView extends GetView<ShopsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldBgColor,
-      appBar: const CommonAppBar(label: 'Shops'),
+      appBar: const CommonAppBar(
+        label: 'Shops',
+        visibility: false,
+      ),
       body: Obx(
         () => Column(
           children: [

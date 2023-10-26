@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
@@ -6,12 +5,14 @@ import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 class CartItemCard extends StatelessWidget {
   final String image;
   final String name, code, qty;
+  final Function ontap;
   const CartItemCard({
     Key? key,
     required this.image,
     required this.name,
     required this.code,
     required this.qty,
+    required this.ontap,
   }) : super(key: key);
 
   @override
@@ -27,14 +28,15 @@ class CartItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
+              Image.network(
                 image,
-                height: 86,
-                width: 66,
+                height: 100,
+                width: 100,
+                fit: BoxFit.contain,
               ),
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,26 +49,41 @@ class CartItemCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               blackText(name, 14, fontWeight: FontWeight.w600),
-                              greyText(code, 12, fontWeight: FontWeight.w400),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  greyText('Mrp :', 12,
+                                      fontWeight: FontWeight.w400),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  greyText(code, 12,
+                                      fontWeight: FontWeight.w400),
+                                ],
+                              ),
                             ],
                           ),
                           const SizedBox(
                             width: 5,
                           ),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                ontap();
+                              },
                               icon:
-                                  svgWidget("assets/svg/delete.svg", size: 19))
+                                  svgWidget("assets/svg/delete.svg", size: 25))
                         ],
                       ),
                       const SizedBox(
                         height: 14,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          blackText('Qty: $qty', 12,
-                              fontWeight: FontWeight.w600),
+                          greyText('Qty:', 12, fontWeight: FontWeight.w400),
+                          blackText(qty, 12, fontWeight: FontWeight.w600),
                         ],
                       ),
                     ],

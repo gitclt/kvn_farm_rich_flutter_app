@@ -17,7 +17,7 @@ class ExpiryProductShopDetailsView extends GetView<ExpiryProductsController> {
     return Scaffold(
       appBar: const CommonAppBar(
         label: "Expiry Products",
-        visibility: true,
+        visibility: false,
       ),
       body: Center(
           child: Column(

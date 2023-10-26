@@ -14,6 +14,7 @@ class ShopsProfile extends GetView<ShopProfileController> {
     return Scaffold(
         appBar: const CommonAppBar(
           label: 'Profile',
+            visibility: false,
         ),
         body: Obx(
           () => controller.isDetailsLoading.value

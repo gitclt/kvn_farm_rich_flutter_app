@@ -16,7 +16,7 @@ class ExpiryProductsView extends GetView<ExpiryProductsController> {
       backgroundColor: scaffoldBgColor,
       appBar: const CommonAppBar(
         label: "Expiry Products",
-        visibility: true,
+        visibility: false,
       ),
       body: DefaultTabController(
         length: 2,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/modules/home/controllers/dashboard_controller.dart';
-import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class HomeAppBar extends GetView<DashboardController>
@@ -11,8 +10,6 @@ class HomeAppBar extends GetView<DashboardController>
   final String label;
 
   const HomeAppBar({super.key, required this.onClick, required this.label});
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +30,12 @@ class HomeAppBar extends GetView<DashboardController>
         style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w800, fontSize: 20),
       ),
-      actions: [
-        IconButton(
-            onPressed: () {
-              Get.toNamed(Routes.CART);
-            },
-            icon: svgWidget('assets/svg/shop_cart.svg')),
+      actions: const [
+        // IconButton(
+        //     onPressed: () {
+        //       Get.toNamed(Routes.CART);
+        //     },
+        //     icon: svgWidget('assets/svg/shop_cart.svg')),
         //  IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg'))
       ],
     );

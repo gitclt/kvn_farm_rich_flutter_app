@@ -13,13 +13,16 @@ class CategoryView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(label: "Categories"),
+      appBar: const CommonAppBar(
+        label: "Categories",
+        visibility: false,
+      ),
       body: Obx(
         () => controller.isloading.value
             ? const Center(child: CircularProgressIndicator())
             : controller.categoryList.isEmpty
                 ? const NoDataWidget()
-                : Expanded(
+                : SingleChildScrollView(
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 1500),
                       curve: Curves.bounceInOut,
