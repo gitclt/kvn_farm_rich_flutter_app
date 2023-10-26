@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 
 class CustomImageAlertBox extends StatelessWidget {
   final String image;
@@ -16,19 +18,37 @@ class CustomImageAlertBox extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           SizedBox(
-            height: 500,
+            //  height: 500,
             child: ListView.builder(
                 itemCount: image.split(',').length,
                 shrinkWrap: true,
                 itemBuilder: (context, i) {
-                  return Image.network(image.split(',')[i]);
+                  return Image.network(
+                    image.split(',')[i],
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, exception, stackTrack) => Column(
+                      children: [
+                        const Center(
+                          child: Icon(
+                            Icons.error,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        blackText('Sorry! Image not found', 15,
+                            fontWeight: FontWeight.bold),
+                      ],
+                    ),
+                  );
                 }),
           ),
           Positioned(
-            top: -50,
-            right: 0,
+            top: -40,
+            right: -10,
             child: SizedBox(
-              width: 280,
+              //  width: 280,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -50,6 +70,6 @@ class CustomImageAlertBox extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).paddingOnly(top: MediaQuery.sizeOf(context).height * 0.05);
   }
 }
