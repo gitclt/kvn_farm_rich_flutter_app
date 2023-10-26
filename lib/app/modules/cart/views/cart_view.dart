@@ -121,38 +121,3 @@ class CartView extends GetView<CartController> {
     );
   }
 }
-
-class BottomWidgets extends StatelessWidget {
-  const BottomWidgets({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          blackText("Total Amount", 18, fontWeight: FontWeight.w400),
-          const Text(
-            "₹5252 ",
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Color(0xFFD80005),
-              fontSize: 18,
-            ),
-          )
-        ],
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      CommonButtonWidget(
-        label: "CHECKOUT",
-        onClick: () {
-          Get.back();
-        },
-      ),
-    ]);
-  }
-}
