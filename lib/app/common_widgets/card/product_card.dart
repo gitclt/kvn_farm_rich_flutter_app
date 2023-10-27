@@ -147,7 +147,7 @@ class _ProductCardState extends State<ProductCard> {
                                 )
                               : const SizedBox()),
                         ],
-                      ),
+                      ).paddingAll(5),
                     ).paddingOnly(top: 5),
                   ),
                 if (isCartItem < 0)

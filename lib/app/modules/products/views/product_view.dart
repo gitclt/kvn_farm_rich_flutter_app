@@ -21,10 +21,10 @@ class ProductView extends GetView<MasalaController> {
                   gridDelegate: SliverWovenGridDelegate.count(
                       pattern: [
                         const WovenGridTile(
-                          1 / 1.2,
+                          1 / 1.3,
                         ),
                         const WovenGridTile(
-                          7.2 / 8.9,
+                          7.1 / 8.9,
                           crossAxisRatio: 0.9,
                           alignment: AlignmentDirectional.topCenter,
                         )
