@@ -40,8 +40,7 @@ class CartView extends GetView<CartController> {
                                   await showDialog(
                                     context: context,
                                     builder: (_) => ProductPopup(
-                                      image:
-                                          controller.cartlist[index].image1,
+                                      image: controller.cartlist[index].image1,
                                       name: controller.cartlist[index].name,
                                       code: controller.cartlist[index].mrp
                                           .toString(),
@@ -57,8 +56,7 @@ class CartView extends GetView<CartController> {
                                   );
                                 },
                                 child: CartItemCard(
-                                  image:
-                                      controller.cartlist[index].image1,
+                                  image: controller.cartlist[index].image1,
                                   name: controller.cartlist[index].name,
                                   code:
                                       controller.cartlist[index].mrp.toString(),
@@ -81,28 +79,28 @@ class CartView extends GetView<CartController> {
                       )),
             controller.cartlist.isEmpty
                 ? const SizedBox()
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      blackText("TOTAL QUANTITY", 16,
-                          fontWeight: FontWeight.w500),
-                      Text(
-                        controller.cartlist
-                            .map((e) {
-                              final total = (double.parse(e.qty.toString()));
-                              return total;
-                            })
-                            .toList()
-                            .reduce((value, element) => value + element)
-                            .toStringAsFixed(0),
-                        textAlign: TextAlign.right,
-                        style: const TextStyle(
-                            color: Color(0xFFD80005),
-                            fontSize: 18,
+                : Obx(() => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        blackText("TOTAL QUANTITY", 16,
                             fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  )
+                        Text(
+                          controller.cartlist
+                              .map((e) {
+                                final total = (double.parse(e.qty.toString()));
+                                return total;
+                              })
+                              .toList()
+                              .reduce((value, element) => value + element)
+                              .toStringAsFixed(0),
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                              color: Color(0xFFD80005),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ))
           ],
         ),
       ),
