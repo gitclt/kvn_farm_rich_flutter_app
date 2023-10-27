@@ -29,6 +29,7 @@ class OrderDetailsModel {
 }
 
 class OrderDetail {
+  int id;
   int catid;
   String name;
   int subcatId;
@@ -42,8 +43,10 @@ class OrderDetail {
   int qty;
   DateTime date;
   String image1;
+  String code;
 
   OrderDetail({
+    required this.id,
     required this.catid,
     required this.name,
     required this.subcatId,
@@ -57,9 +60,11 @@ class OrderDetail {
     required this.qty,
     required this.date,
     required this.image1,
+    required this.code,
   });
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
+        id: json["id"],
         catid: json["catid"],
         name: json["name"],
         subcatId: json["subcat_id"],
@@ -73,9 +78,11 @@ class OrderDetail {
         qty: json["qty"],
         date: DateTime.parse(json["date"]),
         image1: json["image1"],
+        code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "catid": catid,
         "name": name,
         "subcat_id": subcatId,
@@ -90,5 +97,6 @@ class OrderDetail {
         "date":
             "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
         "image1": image1,
+        "code": code,
       };
 }

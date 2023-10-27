@@ -4,7 +4,7 @@ import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class OrderDetailsWidget extends StatelessWidget {
-  final String name, qty,image;
+  final String name, qty, image, mrp;
   final String code;
   final Function deleteonClick;
   const OrderDetailsWidget({
@@ -12,7 +12,9 @@ class OrderDetailsWidget extends StatelessWidget {
     required this.name,
     required this.code,
     required this.qty,
-    required this.deleteonClick, required this.image,
+    required this.deleteonClick,
+    required this.image,
+    required this.mrp,
   });
 
   @override
@@ -48,9 +50,16 @@ class OrderDetailsWidget extends StatelessWidget {
                   ),
                   sizedBox,
                   greyText(code, 12),
+                  sizedBox,
+                  Row(
+                    children: [
+                      greyText("Mrp :", 12),
+                      greyText(mrp, 12),
+                    ],
+                  ),
                   // ignore: prefer_const_constructors
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   blackText('Qty: $qty', 12, fontWeight: FontWeight.w600),
                 ],
@@ -65,6 +74,9 @@ class OrderDetailsWidget extends StatelessWidget {
                   size: 25, color: red2Color),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 5,
         ),
         Divider(
           thickness: 1,
