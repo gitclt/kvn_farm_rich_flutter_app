@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/common_widgets/card/product_card.dart';
+import 'package:kvn_farm_rich/app/modules/cart/controllers/cart_controller.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 
 import '../../../constraints/app_colors.dart';
@@ -12,6 +14,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = Get.find();
     return AppBar(
       elevation: 0.0,
       flexibleSpace: Container(
@@ -31,12 +34,27 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         Visibility(
           visible: visibility!,
           child: IconButton(
-              onPressed: () {
-                Get.toNamed(Routes.CART);
-              },
-              icon: svgWidget('assets/svg/shop_cart.svg')),
-        ),
-        //  IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg')),
+            onPressed: () {
+              Get.toNamed(Routes.CART);
+            },
+            icon: Stack(clipBehavior: Clip.none, children: [
+              svgWidget('assets/svg/shop_cart.svg', color: Colors.white),
+              Obx(() => (cartController.cartlist.isNotEmpty)
+                  ? Positioned(
+                      bottom: 8,
+                      left: 11,
+                      child: circleWidgetWithText(
+                        20,
+                        Colors.white,
+                        cartController.cartlist.length.toString(),
+                        red2Color,
+                      ),
+                    )
+                  : const SizedBox())
+            ]),
+          ),
+          //  IconButton(onPressed: () {}, icon: svgWidget('assets/svg/search.svg')),
+        ).paddingOnly(right: 10)
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/app/modules/cart/controllers/cart_controller.dart';
 import 'package:kvn_farm_rich/app/modules/cart/views/cart_view.dart';
 import 'package:kvn_farm_rich/app/modules/home/model/drawer_model.dart';
 import 'package:kvn_farm_rich/app/modules/home/views/home_view.dart';
@@ -10,6 +11,7 @@ import 'package:kvn_farm_rich/constraints/pop-up.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardController extends GetxController {
+  final CartController cartController = Get.find();
   RxInt selectedIndex = 0.obs;
   RxList<Widget> widgetOptions = <Widget>[
     const HomeView(),
@@ -22,8 +24,9 @@ class DashboardController extends GetxController {
       GlobalKey<ScaffoldState>();
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    await cartController.getData();
 
     drawerItems.addAll([
       DrawerItem('assets/svg/bottom_home.svg', 'Home', () {
