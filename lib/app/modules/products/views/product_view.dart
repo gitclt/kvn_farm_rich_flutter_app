@@ -38,14 +38,12 @@ class ProductView extends GetView<MasalaController> {
                       iteam: controller.productList[index].name,
                       itemId: controller.productList[index].id,
                       code: controller.productList[index].mrp.toString(),
-                      image:
-                          "{controller.productList[index].image1}",
+                      image: controller.productList[index].image1,
                       onTap: () {
                         showDialog(
                           context: context,
                           builder: (_) => ProductPopup(
-                            image:
-                                controller.productList[index].image1,
+                            image: controller.productList[index].image1,
                             name: controller.productList[index].name,
                             code: controller.productList[index].mrp.toString(),
                             qtycontroller: controller.qtycontroller,
