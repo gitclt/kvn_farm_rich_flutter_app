@@ -62,7 +62,7 @@ class MyrouteView extends GetView<MyrouteController> {
                   //                 }
                   //               },
                   //               isLoading: controller.placeLoading.value,
-                                
+
                   //               children: controller.routePlaceList));
                   //     },
                   //     child: Row(
@@ -316,9 +316,29 @@ class _CalenderState extends State<Calender> {
   List<DateTime> previousDateDisable() {
     DateTime currentDate = DateTime.now();
     List<DateTime> disabledDates = [];
-    for (int i = 1; i < currentDate.day; i++) {
-      disabledDates.add(DateTime(currentDate.year, currentDate.month, i));
+
+    // Loop through the months from the current month back to the beginning of the year
+    for (int month = 1; month <= currentDate.month; month++) {
+      for (int day = 1;
+          day <= DateTime(currentDate.year, month + 1, 0).day;
+          day++) {
+        if (currentDate.month == month && day >= currentDate.day) {
+          // If it's the current month, only disable days starting from yesterday
+          break;
+        }
+        disabledDates.add(DateTime(currentDate.year, month, day));
+      }
     }
+
     return disabledDates;
   }
+
+  // List<DateTime> previousDateDisable() {
+  //   DateTime currentDate = DateTime.now();
+  //   List<DateTime> disabledDates = [];
+  //   for (int i = 1; i < currentDate.day; i++) {
+  //     disabledDates.add(DateTime(currentDate.year, currentDate.month, i));
+  //   }
+  //   return disabledDates;
+  // }
 }
