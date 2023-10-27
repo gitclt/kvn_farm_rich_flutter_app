@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:kvn_farm_rich/app/api/base_url.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/product_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/product_popup.dart';
@@ -40,13 +39,13 @@ class ProductView extends GetView<MasalaController> {
                       itemId: controller.productList[index].id,
                       code: controller.productList[index].mrp.toString(),
                       image:
-                          "${BaseUrl().imgUrl}${controller.productList[index].image1}",
+                          "{controller.productList[index].image1}",
                       onTap: () {
                         showDialog(
                           context: context,
                           builder: (_) => ProductPopup(
                             image:
-                                "${BaseUrl().imgUrl}${controller.productList[index].image1}",
+                                controller.productList[index].image1,
                             name: controller.productList[index].name,
                             code: controller.productList[index].mrp.toString(),
                             qtycontroller: controller.qtycontroller,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kvn_farm_rich/app/api/base_url.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/button/loginbutton.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
@@ -42,7 +41,7 @@ class CartView extends GetView<CartController> {
                                     context: context,
                                     builder: (_) => ProductPopup(
                                       image:
-                                          "${BaseUrl().imgUrl}${controller.cartlist[index].image1}",
+                                          controller.cartlist[index].image1,
                                       name: controller.cartlist[index].name,
                                       code: controller.cartlist[index].mrp
                                           .toString(),
@@ -59,7 +58,7 @@ class CartView extends GetView<CartController> {
                                 },
                                 child: CartItemCard(
                                   image:
-                                      "${BaseUrl().imgUrl}${controller.cartlist[index].image1}",
+                                      controller.cartlist[index].image1,
                                   name: controller.cartlist[index].name,
                                   code:
                                       controller.cartlist[index].mrp.toString(),
