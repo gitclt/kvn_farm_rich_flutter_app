@@ -1,17 +1,22 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
+import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class OrderHistoryCardWidget extends StatelessWidget {
   final Function onClick;
+  final VoidCallback deleteonClick;
+  final bool? visible;
   final String location, qnty, ordernmbr;
   const OrderHistoryCardWidget(
       {super.key,
       required this.onClick,
       required this.location,
       required this.qnty,
-      required this.ordernmbr});
+      required this.ordernmbr,
+      required this.deleteonClick,
+      this.visible});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +24,16 @@ class OrderHistoryCardWidget extends StatelessWidget {
       onTap: () {
         onClick();
       },
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 3,
+      child: Container(
+        decoration: BoxDecoration(
+            color: const Color(0xffffffff),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: const [
+              BoxShadow(
+                  color: Color.fromARGB(255, 240, 235, 235),
+                  blurRadius: 3.0,
+                  spreadRadius: 3),
+            ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
           child:
@@ -42,27 +54,30 @@ class OrderHistoryCardWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 8,
+              height: 10,
             ),
-            blackText(ordernmbr, 16, fontWeight: FontWeight.w600),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                blackText(ordernmbr, 16, fontWeight: FontWeight.w600),
+                Visibility(
+                  visible: visible!,
+                  child: InkWell(
+                    onTap: () {
+                      deleteonClick();
+                    },
+                    child: svgWidget("assets/svg/delete.svg",
+                        size: 25, color: red2Color),
+                  ),
+                )
+              ],
+            ),
             const SizedBox(
               height: 8,
             ),
-            Row(
-              children: [
-                svgWidget('assets/svg/location.svg'),
-                const SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                  child: greyText(location, 12,
-                      textOverflow: TextOverflow.ellipsis),
-                )
-              ],
-            )
           ]),
         ),
-      ),
+      ).paddingAll(5),
     );
   }
 }

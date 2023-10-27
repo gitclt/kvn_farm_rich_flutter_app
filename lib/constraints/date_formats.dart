@@ -96,6 +96,9 @@ String formatDateStringDates(String inputDateString) {
   String formattedDate = DateFormat('EEEE').format(dateTime);
   return formattedDate;
 }
+dateToFormattedTime5(DateTime dateTime) {
+  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+}
 
 String formatDateString(String inputDateString) {
   DateTime dateTime = DateTime.parse(inputDateString);
@@ -107,7 +110,11 @@ String formatDateString3(String inputDateString) {
   String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
   return formattedDate;
 }
-
+String formatDateString8(String inputDateString) {
+  DateTime dateTime = DateTime.parse(inputDateString);
+  String formattedDate = DateFormat('yyyy/MM/dd').format(dateTime);
+  return formattedDate;
+}
 Duration parseDuration(String s) {
   int hours = 0;
   int minutes = 0;

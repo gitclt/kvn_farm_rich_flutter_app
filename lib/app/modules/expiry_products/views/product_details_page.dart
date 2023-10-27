@@ -78,6 +78,7 @@ class ExpiryProductsDetailsView extends GetView<ExpiryProductsController> {
                           ontap: () {
                             Get.bottomSheet(
                               ExpiryProductBottomSheet(
+                                label: 'Best Selling Shops',
                                 length: 10,
                                 location:
                                     "Crystal Building, Malad, Rathodi, Mankavu, Calicut",

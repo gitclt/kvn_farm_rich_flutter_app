@@ -120,7 +120,6 @@ class ShopsView extends GetView<ShopsController> {
                                                 editShopClick: () {
                                                   controller.viewLeadDetails(
                                                       item.id.toString());
-                                                  // Get.back();
                                                   Get.toNamed(
                                                     Routes.SHOP_EDIT,
                                                   );

@@ -21,10 +21,10 @@ class ProductView extends GetView<MasalaController> {
                   gridDelegate: SliverWovenGridDelegate.count(
                       pattern: [
                         const WovenGridTile(
-                          1,
+                          1 / 1.2,
                         ),
                         const WovenGridTile(
-                          8 / 8,
+                          7.2 / 8.9,
                           crossAxisRatio: 0.9,
                           alignment: AlignmentDirectional.topCenter,
                         )
@@ -37,15 +37,16 @@ class ProductView extends GetView<MasalaController> {
                     return ProductCard(
                       iteam: controller.productList[index].name,
                       itemId: controller.productList[index].id,
-                      code: controller.productList[index].mrp.toString(),
+                      code: controller.productList[index].code.toString(),
                       image: controller.productList[index].image1,
+                      mrp: controller.productList[index].mrp.toString(),
                       onTap: () {
                         showDialog(
                           context: context,
                           builder: (_) => ProductPopup(
                             image: controller.productList[index].image1,
                             name: controller.productList[index].name,
-                            code: controller.productList[index].mrp.toString(),
+                            code: controller.productList[index].code.toString(),
                             qtycontroller: controller.qtycontroller,
                             isloading: controller.cartloading.value,
                             ontap: () async {
@@ -55,6 +56,7 @@ class ProductView extends GetView<MasalaController> {
                                   .getProductList(controller.subcatname.value);
                               Get.back();
                             },
+                            mrp: controller.productList[index].mrp.toString(),
                           ),
                         );
                       },

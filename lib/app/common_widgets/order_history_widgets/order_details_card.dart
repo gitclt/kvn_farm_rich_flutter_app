@@ -1,17 +1,18 @@
-
 import 'package:flutter/material.dart';
+import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class OrderDetailsWidget extends StatelessWidget {
-  final String name, qty;
+  final String name, qty,image;
   final String code;
-
+  final Function deleteonClick;
   const OrderDetailsWidget({
     super.key,
     required this.name,
     required this.code,
     required this.qty,
+    required this.deleteonClick, required this.image,
   });
 
   @override
@@ -22,19 +23,16 @@ class OrderDetailsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        blackText('Order Details', 16, fontWeight: FontWeight.w600),
-        // const SizedBox(
-        //   height: 20,
-        // ),
         sizedBox,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/image/powder.png',
+            Image.network(
+              image,
               height: 86,
               width: 66,
+              fit: BoxFit.contain,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
@@ -42,7 +40,12 @@ class OrderDetailsWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  blackText(name, 14, fontWeight: FontWeight.w600),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      blackText(name, 14, fontWeight: FontWeight.w600),
+                    ],
+                  ),
                   sizedBox,
                   greyText(code, 12),
                   // ignore: prefer_const_constructors
@@ -52,9 +55,22 @@ class OrderDetailsWidget extends StatelessWidget {
                   blackText('Qty: $qty', 12, fontWeight: FontWeight.w600),
                 ],
               ),
-            )
+            ),
+            const Spacer(),
+            InkWell(
+              onTap: () {
+                deleteonClick();
+              },
+              child: svgWidget("assets/svg/delete.svg",
+                  size: 25, color: red2Color),
+            ),
           ],
-        )
+        ),
+        Divider(
+          thickness: 1,
+          height: 5,
+          color: Colors.grey.withOpacity(0.3),
+        ),
       ],
     );
   }

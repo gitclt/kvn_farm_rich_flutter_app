@@ -9,6 +9,7 @@ import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
 class ExpiryProductBottomSheet extends StatelessWidget {
   final String shopname;
+  final String label;
   final String location;
   final int length;
   final Function ontap;
@@ -18,7 +19,7 @@ class ExpiryProductBottomSheet extends StatelessWidget {
       required this.shopname,
       required this.location,
       required this.ontap,
-      required this.length});
+      required this.length, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,9 @@ class ExpiryProductBottomSheet extends StatelessWidget {
                     Get.back();
                   },
                   child: svgWidget('assets/svg/back_arrow.svg')),
-              const Text(
-                'Best Selling Shops',
-                style: TextStyle(
+               Text(
+                label,
+                style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 16,
                     color: Colors.white,

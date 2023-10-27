@@ -8,9 +8,10 @@ import 'package:kvn_farm_rich/constraints/app_colors.dart';
 class OrderTopWidget extends StatelessWidget {
   final String no;
   final String orderNo;
+  final String date;
   final String type;
   const OrderTopWidget(
-      {super.key, required this.no, required this.orderNo, required this.type});
+      {super.key, required this.no, required this.orderNo, required this.type, required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class OrderTopWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width * 0.03),
-                  child: greyText('3:49 PM', 12),
+                  child: greyText(date, 12),
                 )
               ],
             ),

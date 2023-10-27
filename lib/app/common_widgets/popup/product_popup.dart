@@ -8,6 +8,7 @@ class ProductPopup extends StatefulWidget {
   final String image;
   final String name;
   final String code;
+  final String mrp;
   final Function ontap;
   final bool isloading;
   final TextEditingController qtycontroller;
@@ -19,6 +20,7 @@ class ProductPopup extends StatefulWidget {
     required this.ontap,
     required this.qtycontroller,
     required this.isloading,
+    required this.mrp,
   }) : super(key: key);
   @override
   State<StatefulWidget> createState() => AddSalePopupState();
@@ -58,7 +60,7 @@ class AddSalePopupState extends State<ProductPopup>
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          top: size.height * 0.17,
+                          top: size.height * 0.12,
                           left: size.width * 0.018,
                           right: size.width * 0.018,
                           bottom: size.height * 0.17),
@@ -97,9 +99,15 @@ class AddSalePopupState extends State<ProductPopup>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   greyText("Mrp :", 14),
+                                  greyText(widget.mrp, 14),
+                                ],
+                              ).paddingOnly(top: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
                                   greyText(widget.code, 14),
                                 ],
-                              ).paddingOnly(top: 5),
+                              ).paddingOnly(top: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [

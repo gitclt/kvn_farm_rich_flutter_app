@@ -39,6 +39,7 @@ class ProductData {
   String name;
   String image1;
   String qty;
+  String code;
   int mrp;
 
   ProductData({
@@ -47,6 +48,7 @@ class ProductData {
     required this.catName,
     required this.subcatId,
     required this.subCatName,
+    required this.code,
     required this.name,
     required this.image1,
     required this.qty,
@@ -61,6 +63,7 @@ class ProductData {
         subCatName: json["subCatName"],
         name: json["name"],
         image1: json["image1"],
+        code: json["code"],
         qty: json["qty"] ?? "",
         mrp: json["mrp"],
       );
@@ -75,5 +78,6 @@ class ProductData {
         "image1": image1,
         "qty": qty,
         "mrp": mrp,
+        "code": code
       };
 }

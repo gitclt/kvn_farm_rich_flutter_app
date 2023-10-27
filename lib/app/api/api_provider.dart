@@ -17,6 +17,10 @@ import 'package:kvn_farm_rich/app/models/login_response.dart';
 import 'package:kvn_farm_rich/app/models/mark_visit_types_model.dart';
 import 'package:kvn_farm_rich/app/models/my_visit_model.dart';
 import 'package:kvn_farm_rich/app/models/not_assigned_route_model.dart';
+import 'package:kvn_farm_rich/app/models/order_by_date_model.dart';
+import 'package:kvn_farm_rich/app/models/order_details_model.dart';
+import 'package:kvn_farm_rich/app/models/order_list.model.dart';
+import 'package:kvn_farm_rich/app/models/order_no_model.dart';
 import 'package:kvn_farm_rich/app/models/place_model.dart';
 import 'package:kvn_farm_rich/app/models/product_model.dart';
 import 'package:kvn_farm_rich/app/models/route_place_model.dart';
@@ -714,6 +718,129 @@ class ApiProvider {
       if (response.statusCode == 200) {
         var data = response.body;
         return ProductModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<OrderNoModel?> getOrderNumber(
+    String leadid,
+  ) async {
+    var response =
+        await HttpApiConnect().get("Order_farm_api/Getorderno?lead_id=$leadid");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return OrderNoModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<LoginResponse?> addOrder(
+    List<Map<String, dynamic>> jsondata,
+  ) async {
+    var response = await HttpApiConnect().post("Order_farm_api", jsondata);
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return LoginResponse.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<OrderListModel?> getorderbylead(
+    String leadid,
+  ) async {
+    var response = await HttpApiConnect()
+        .get("Order_farm_api/Getorderdetails?key=$leadid&type=bylead");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return OrderListModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<OrderDetailsModel?> getorderbyOrderNo(
+    String orderno,
+  ) async {
+    var response = await HttpApiConnect()
+        .get("Order_farm_api/Getorderdetails?key=$orderno");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return OrderDetailsModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<OrderByDateModel?> getorderbyDate(
+    String fromdate,
+    String todate,
+    String leadid,
+  ) async {
+    var response = await HttpApiConnect().get(
+        "Order_farm_api/Getordersbydate?date1=$fromdate&date2=$todate&lead_id=$leadid");
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return OrderByDateModel.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<LoginResponse?> deletebyOrderNo(
+    String orderno,
+  ) async {
+    final url =
+        "${BaseUrl().baseUrl}Order_farm_api/Deleteorder?key=$orderno&type=byorderno";
+    var response = await http.post(Uri.parse(url));
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return LoginResponse.fromJson(json.decode(data));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<LoginResponse?> deletebyitem(
+    String itemid,
+  ) async {
+    final url =
+        "${BaseUrl().baseUrl}Order_farm_api/Deleteorder?key=$itemid&type=byid";
+    var response = await http.post(Uri.parse(url));
+
+    try {
+      if (response.statusCode == 200) {
+        var data = response.body;
+        return LoginResponse.fromJson(json.decode(data));
       } else {
         return null;
       }

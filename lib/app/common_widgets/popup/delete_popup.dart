@@ -57,3 +57,56 @@ void deletePopup(Function onpress, Function onpress1) async {
     ),
   );
 }
+
+deleteOrderPopup(Function onpress) async {
+  Get.dialog(
+    AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      title: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Are you sure?'),
+        ],
+      ),
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          greyText('Do you really want to delete?', 16),
+        ],
+      ),
+      actions: [
+        const Divider(
+          color: Color(0xffE3EBF6),
+          thickness: 2,
+          endIndent: 0,
+          indent: 0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: blackText('Cancel', 15),
+            ),
+            Container(
+              color: const Color(0xffE3EBF6),
+              height: 50,
+              width: 2,
+            ),
+            TextButton(
+              onPressed: () {
+                onpress();
+                Get.back();
+              },
+              child: redText('Yes', 15),
+            ),
+          ],
+        )
+      ],
+    ),
+  );
+}

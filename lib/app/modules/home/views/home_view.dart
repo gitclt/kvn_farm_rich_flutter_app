@@ -266,7 +266,7 @@ class MenuItems extends GetView<HomeController> {
           path: 'assets/svg/home_checklist.svg',
           label: 'My Orders',
           ontap: () {
-            Get.toNamed(Routes.ORDER_HISTORY);
+            Get.toNamed(Routes.MY_OEDER);
           },
         ),
         HomeCardItem(

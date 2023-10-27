@@ -5,6 +5,7 @@ import 'package:kvn_farm_rich/app/modules/my_team/bindings/my_team_binding.dart'
 import 'package:kvn_farm_rich/app/modules/my_team/views/assigned_route_list.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_assign_shop.dart';
 import 'package:kvn_farm_rich/app/modules/my_team/views/my_team_view.dart';
+import 'package:kvn_farm_rich/app/modules/order_history/views/my_order.dart/my_order.dart';
 import 'package:kvn_farm_rich/app/modules/place/bindings/place_binding.dart';
 import 'package:kvn_farm_rich/app/modules/place/views/place_view.dart';
 import 'package:kvn_farm_rich/app/modules/shops/views/shop_edit.dart';
@@ -145,6 +146,11 @@ class AppPages {
     GetPage(
       name: _Paths.ORDER_HISTORY_DETAILS,
       page: () => const OrderHistoryDetailsView(),
+      binding: OrderHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_OEDER,
+      page: () => const MyOrder(),
       binding: OrderHistoryBinding(),
     ),
     GetPage(

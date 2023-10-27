@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 
@@ -7,9 +6,9 @@ Widget orderButtonFunction(String type) {
     case "Visited":
       return statusButtonWidget(type, const Color(0xFFE4FFE0), Colors.green);
 
-    case "Pending":
+    case "pending":
       return statusButtonWidget(
-          type, const Color(0xFFFFD5B6), const Color(0xFFED893E));
+          "Pending", const Color(0xFFFFD5B6), const Color(0xFFED893E));
 
     case "Viewed":
       return statusButtonWidget(
@@ -19,9 +18,9 @@ Widget orderButtonFunction(String type) {
       return statusButtonWidget(
           type, const Color(0xFFE9EAFF), const Color(0xFF3F46EF));
 
-    case "Completed":
+    case "completed":
       return statusButtonWidget(
-          type, const Color(0xFFFEA500), const Color(0xFFFFFFFF));
+          "Completed", const Color(0xFFFEA500), const Color(0xFFFFFFFF));
     case "Partially Completed":
       return statusButtonWidget(
           type, const Color(0xFFE5F9FF), const Color(0xFF4C7785));

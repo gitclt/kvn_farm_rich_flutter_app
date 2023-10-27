@@ -13,11 +13,13 @@ class ProductCard extends StatefulWidget {
   final bool? visibles;
   final Function onTap;
   final String code;
+  final String mrp;
   final Function? act;
 
   const ProductCard({
     Key? key,
     required this.iteam,
+    required this.mrp,
     required this.image,
     required this.onTap,
     required this.code,
@@ -68,9 +70,14 @@ class _ProductCardState extends State<ProductCard> {
             blackText(widget.iteam, 16, fontWeight: FontWeight.w600)
                 .paddingOnly(top: 5),
             Row(
+              children: [
+                greyText("Mrp :", 14).paddingOnly(top: 5),
+                greyText(widget.mrp, 14).paddingOnly(top: 5),
+              ],
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                greyText("Mrp :", 14),
                 greyText(widget.code, 14),
                 const Spacer(),
                 if (isCartItem >= 0)

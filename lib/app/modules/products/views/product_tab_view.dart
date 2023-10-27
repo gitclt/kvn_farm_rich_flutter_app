@@ -14,7 +14,7 @@ class MasalaView extends GetView<MasalaController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldBgColor,
-      appBar: const CommonAppBar(label: "Products"),
+      appBar: CommonAppBar(label: controller.argument),
       body: Obx(() {
         if (controller.isClosed) {
           return const Center();

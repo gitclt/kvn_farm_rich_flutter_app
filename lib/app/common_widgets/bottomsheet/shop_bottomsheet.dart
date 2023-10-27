@@ -17,7 +17,7 @@ class ShopBottomsheet extends StatelessWidget {
       // required this.location,
       // required this.leadId,
       required this.allLeads,
-       this.editShopClick});
+      this.editShopClick});
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +96,7 @@ class ShopBottomsheet extends StatelessWidget {
                     HomeCardItem(
                       path: "assets/svg/shop_edit.svg",
                       label: "Edit",
-                      ontap: 
-                        editShopClick,
-                      
+                      ontap: editShopClick,
                     ),
                     // HomeCardItem(
                     //   path: "assets/svg/covert_tocustumer.svg",
@@ -122,14 +120,14 @@ class ShopBottomsheet extends StatelessWidget {
                     //         arguments: allLeads.id.toString());
                     //   },
                     // ),
-                    // HomeCardItem(
-                    //   path: "assets/svg/orders.svg",
-                    //   label: "Orders",
-                    //   ontap: () {
-                    //     Get.toNamed(Routes.ORDERS,
-                    //         arguments: allLeads.id.toString());
-                    //   },
-                    // ),
+                    HomeCardItem(
+                      path: 'assets/svg/home_checklist.svg',
+                      label: "Orders",
+                      ontap: () {
+                        Get.toNamed(Routes.ORDER_HISTORY,
+                            arguments: allLeads.id.toString());
+                      },
+                    ),
                   ],
                 ),
               ),

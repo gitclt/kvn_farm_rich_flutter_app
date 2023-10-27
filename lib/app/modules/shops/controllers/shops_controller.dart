@@ -91,7 +91,7 @@ class ShopsController extends GetxController {
           "1",
           keywordsearchcontroller.text,
           Session.userId,
-          '1',
+          '',
           "customer");
       if (response != null) {
         if (response.status == true) {
@@ -152,7 +152,6 @@ class ShopsController extends GetxController {
     try {
       final response = await ApiProvider().editLeads(
         id: leadValue,
-       
         name: namecontroller.text == ''
             ? shopDetailsResponse!.name
             : namecontroller.text,
