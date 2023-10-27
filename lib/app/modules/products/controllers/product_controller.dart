@@ -107,6 +107,9 @@ class MasalaController extends GetxController {
         productList[index].qty = qtycontroller.text;
         cartController.cartlist.add(productList[index]);
       }
+    } else {
+      productList[index].qty = qtycontroller.text;
+      cartController.cartlist.add(productList[index]);
     }
   }
 }
