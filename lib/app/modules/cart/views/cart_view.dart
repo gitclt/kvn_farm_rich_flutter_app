@@ -73,21 +73,22 @@ class CartView extends GetView<CartController> {
                                     );
                                   },
                                   child: CartItemCard(
-                                    image: controller.cartlist[index].image1,
-                                    name: controller.cartlist[index].name,
-                                    code: controller.cartlist[index].mrp
-                                        .toString(),
-                                    qty: controller.cartlist[index].qty,
-                                    ontap: () async {
-                                      deletePopup(() async {
-                                        controller.cartlist
-                                            .remove(controller.cartlist[index]);
-                                        await controller.saveData();
-                                      }, () {
-                                        Get.back();
-                                      });
-                                    },
-                                  ),
+                                      image: controller.cartlist[index].image1,
+                                      name: controller.cartlist[index].name,
+                                      code: controller.cartlist[index].code
+                                          .toString(),
+                                      qty: controller.cartlist[index].qty,
+                                      ontap: () async {
+                                        deletePopup(() async {
+                                          controller.cartlist.remove(
+                                              controller.cartlist[index]);
+                                          await controller.saveData();
+                                        }, () {
+                                          Get.back();
+                                        });
+                                      },
+                                      mrp: controller.cartlist[index].mrp
+                                          .toString()),
                                 );
                               },
                               separatorBuilder: (c, i) {

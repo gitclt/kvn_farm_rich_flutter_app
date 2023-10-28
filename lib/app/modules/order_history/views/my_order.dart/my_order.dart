@@ -14,6 +14,8 @@ import 'package:table_calendar/table_calendar.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
+import '../../../../../constraints/date_formats.dart';
+
 class MyOrder extends GetView<MyOrderController> {
   const MyOrder({super.key});
 
@@ -285,6 +287,11 @@ class MyOrder extends GetView<MyOrderController> {
                                                                   .orderNo);
                                                     });
                                                   },
+                                                  date: formatDateString3(
+                                                      controller
+                                                          .myOrderList[index]
+                                                          .date
+                                                          .toString()),
                                                 ).paddingAll(3),
                                               ));
                                     }),

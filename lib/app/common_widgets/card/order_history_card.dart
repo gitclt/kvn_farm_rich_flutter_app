@@ -8,7 +8,7 @@ class OrderHistoryCardWidget extends StatelessWidget {
   final Function onClick;
   final VoidCallback deleteonClick;
   final bool? visible;
-  final String location, qnty, ordernmbr;
+  final String location, qnty, ordernmbr,date;
   const OrderHistoryCardWidget(
       {super.key,
       required this.onClick,
@@ -16,7 +16,7 @@ class OrderHistoryCardWidget extends StatelessWidget {
       required this.qnty,
       required this.ordernmbr,
       required this.deleteonClick,
-      this.visible});
+      this.visible, required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class OrderHistoryCardWidget extends StatelessWidget {
                     const SizedBox(
                       width: 2,
                     ),
-                    greyText('May 27, 2023', 12)
+                    greyText(date, 12)
                   ],
                 ),
               ],

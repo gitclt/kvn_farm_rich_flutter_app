@@ -37,8 +37,9 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     final CartController cartController = Get.find();
     final MasalaController productController = Get.find();
-    final isCartItem = cartController.cartlist
-        .indexWhere((element) => element.id == widget.itemId);
+    RxInt isCartItem = cartController.cartlist
+        .indexWhere((element) => element.id == widget.itemId)
+        .obs;
     return InkWell(
         child: Container(
       padding: const EdgeInsets.all(15),
@@ -80,13 +81,23 @@ class _ProductCardState extends State<ProductCard> {
               children: [
                 greyText(widget.code, 14),
                 const Spacer(),
-                if (isCartItem >= 0)
+                if (isCartItem.value >= 0)
                   InkWell(
                     onTap: () {
                       setState(() {
-                        productController.qtycontroller = TextEditingController(
-                            text: cartController.cartlist[isCartItem].qty);
-
+                        if (isCartItem.value >= 0 &&
+                            isCartItem.value < cartController.cartlist.length) {
+                          if (cartController.cartlist[isCartItem.value].qty !=
+                              "") {
+                            productController.qtycontroller =
+                                TextEditingController(
+                              text:
+                                  cartController.cartlist[isCartItem.value].qty,
+                            );
+                          }
+                        } else {
+                          productController.qtycontroller.clear();
+                        }
                         widget.onTap();
                       });
                     },
@@ -110,47 +121,75 @@ class _ProductCardState extends State<ProductCard> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                productController.qtycontroller =
-                                    TextEditingController(
-                                        text: cartController
-                                            .cartlist[isCartItem].qty);
-
+                                if (isCartItem.value >= 0 &&
+                                    isCartItem.value <
+                                        cartController.cartlist.length) {
+                                  if (cartController
+                                          .cartlist[isCartItem.value].qty !=
+                                      "") {
+                                    productController.qtycontroller =
+                                        TextEditingController(
+                                      text: cartController
+                                          .cartlist[isCartItem.value].qty,
+                                    );
+                                  }
+                                } else {
+                                  productController.qtycontroller.clear();
+                                }
                                 widget.onTap();
                               });
                             },
-                            child: svgWidget('assets/svg/cart.svg',
-                                color: Colors.black, size: 20),
+                            child: svgWidget('assets/svg/shop_cart.svg',
+                                color: redColor),
                           ),
-                          Obx(() => (cartController.cartlist.isNotEmpty)
-                              ? Positioned(
-                                  bottom: 8,
-                                  left: 5,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        productController.qtycontroller =
-                                            TextEditingController(
-                                                text: cartController
-                                                    .cartlist[isCartItem].qty);
-
-                                        widget.onTap();
-                                      });
-                                    },
-                                    child: circleWidgetWithText(
-                                      20,
-                                      red2Color,
-                                      cartController.cartlist[isCartItem].qty
-                                          .toString(),
-                                      Colors.white,
-                                    ),
+                          Obx(() {
+                            if (cartController.cartlist.isNotEmpty &&
+                                isCartItem >= 0 &&
+                                isCartItem < cartController.cartlist.length) {
+                              return Positioned(
+                                bottom: 8,
+                                left: 5,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (isCartItem.value >= 0 &&
+                                          isCartItem.value <
+                                              cartController.cartlist.length) {
+                                        if (cartController
+                                                .cartlist[isCartItem.value]
+                                                .qty !=
+                                            "") {
+                                          productController.qtycontroller =
+                                              TextEditingController(
+                                            text: cartController
+                                                .cartlist[isCartItem.value].qty,
+                                          );
+                                        }
+                                      } else {
+                                        productController.qtycontroller.clear();
+                                      }
+                                      widget.onTap();
+                                    });
+                                  },
+                                  child: circleWidgetWithText(
+                                    20,
+                                    red2Color,
+                                    cartController
+                                        .cartlist[isCartItem.value].qty
+                                        .toString(),
+                                    Colors.white,
                                   ),
-                                )
-                              : const SizedBox()),
+                                ),
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
+                          }),
                         ],
                       ).paddingAll(5),
                     ).paddingOnly(top: 5),
                   ),
-                if (isCartItem < 0)
+                if (isCartItem.value < 0)
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(

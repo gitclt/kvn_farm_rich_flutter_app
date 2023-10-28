@@ -4,7 +4,7 @@ import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 
 class CartItemCard extends StatelessWidget {
   final String image;
-  final String name, code, qty;
+  final String name, code, qty,mrp;
   final Function ontap;
   const CartItemCard({
     Key? key,
@@ -12,7 +12,7 @@ class CartItemCard extends StatelessWidget {
     required this.name,
     required this.code,
     required this.qty,
-    required this.ontap,
+    required this.ontap, required this.mrp,
   }) : super(key: key);
 
   @override
@@ -59,7 +59,7 @@ class CartItemCard extends StatelessWidget {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  greyText(code, 12,
+                                  greyText(mrp, 12,
                                       fontWeight: FontWeight.w400),
                                 ],
                               ),
@@ -76,6 +76,7 @@ class CartItemCard extends StatelessWidget {
                                   svgWidget("assets/svg/delete.svg", size: 25))
                         ],
                       ),
+                      greyText(code, 12, fontWeight: FontWeight.w400),
                       const SizedBox(
                         height: 14,
                       ),

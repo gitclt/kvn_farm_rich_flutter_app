@@ -47,6 +47,7 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                                         controller.orderbylead[index].orderNo);
                                   });
                                 },
+                                date: "",
                               ).paddingAll(3),
                             ));
                       }),
