@@ -6,7 +6,7 @@ import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
 import 'package:kvn_farm_rich/app/models/order_by_date_model.dart';
 import 'package:kvn_farm_rich/app/pref/session.dart';
-import 'package:kvn_farm_rich/constraints/date_formats.dart';
+import 'package:intl/intl.dart';
 
 class MyOrderController extends GetxController {
   TextEditingController leadoptioncontroller = TextEditingController();
@@ -14,10 +14,8 @@ class MyOrderController extends GetxController {
   TextEditingController searchcontroller = TextEditingController();
   var myOrderList = <Message>[].obs;
   var isLoading = false.obs;
-  RxString fromDate = formatDateString8(DateTime.now().toString()).obs;
-  RxString toDate =
-      formatDateString8(DateTime.now().add(const Duration(days: 30)).toString())
-          .obs;
+  var fromDate = "".obs;
+  var toDate = "".obs;
 
   var invoiceDate = ''.obs;
   String invDate = '';
@@ -27,7 +25,8 @@ class MyOrderController extends GetxController {
   var leadList = <GetShopDetails>[].obs;
   GetShopListModel? leadresponse;
   @override
-  void onInit() {
+  void onInit() async {
+    await date();
     getMyOrder();
     super.onInit();
   }
@@ -98,5 +97,19 @@ class MyOrderController extends GetxController {
             searchcontroller.text.toUpperCase().toLowerCase().toString()))
         .toList());
     leadList.refresh();
+  }
+
+  date() {
+    DateTime currentDate = DateTime.now();
+    final date = DateFormat("M").format(currentDate);
+    final years = DateFormat("yyyy").format(currentDate);
+    int year = int.parse(years);
+    int month = int.parse(date);
+
+    DateTime firstDayOfMonth = DateTime(year, month, 1);
+    DateTime lastDayOfMonth = DateTime(year, month + 1, 0);
+
+    fromDate.value = DateFormat("yyyy-MM-dd").format(firstDayOfMonth);
+    toDate.value = DateFormat("yyyy-MM-dd").format(lastDayOfMonth);
   }
 }
