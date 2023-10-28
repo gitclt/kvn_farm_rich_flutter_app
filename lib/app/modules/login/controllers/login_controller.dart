@@ -10,7 +10,7 @@ class LoginController extends GetxController {
   TextEditingController passWordController = TextEditingController(text: "");
   final formKey = GlobalKey<FormState>();
   var isLoading = false.obs;
-   final isObscureText = true.obs;
+   final isObscureText = false.obs;
 
    void login() async {
     isLoading(true);

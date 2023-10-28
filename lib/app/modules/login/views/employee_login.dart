@@ -197,8 +197,8 @@ class LoginView extends GetView<LoginController> {
                                     return null;
                                   },
                                   suffixIcon: controller.isObscureText.value
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
                                   suffixIconClick: () {
                                     controller.isObscureText.value =
                                         !controller.isObscureText.value;
