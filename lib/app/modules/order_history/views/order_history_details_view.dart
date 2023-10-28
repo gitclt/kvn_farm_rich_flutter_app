@@ -59,7 +59,7 @@ class OrderHistoryDetailsView extends GetView<OrderDetailsController> {
                                       .toString(),
                                   qty: controller.orderbyorderno[index].qty
                                       .toString(),
-                                  mrp: controller.orderbyorderno[index].qty
+                                  mrp: controller.orderbyorderno[index].mrp
                                       .toString(),
                                   deleteonClick: () async {
                                     if (controller.orderbyorderno.length == 1) {

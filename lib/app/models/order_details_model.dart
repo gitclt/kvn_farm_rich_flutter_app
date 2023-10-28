@@ -44,6 +44,7 @@ class OrderDetail {
   DateTime date;
   String image1;
   String code;
+  String mrp;
 
   OrderDetail({
     required this.id,
@@ -61,6 +62,7 @@ class OrderDetail {
     required this.date,
     required this.image1,
     required this.code,
+    required this.mrp,
   });
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
@@ -79,6 +81,7 @@ class OrderDetail {
         date: DateTime.parse(json["date"]),
         image1: json["image1"],
         code: json["code"],
+        mrp: json["mrp"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -98,5 +101,6 @@ class OrderDetail {
             "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
         "image1": image1,
         "code": code,
+        "mrp": mrp
       };
 }

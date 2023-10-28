@@ -2,11 +2,13 @@ import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/api/api_provider.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/order_details_model.dart';
+import 'package:kvn_farm_rich/app/modules/order_history/controllers/my_order_controller.dart';
 import 'package:kvn_farm_rich/app/modules/order_history/controllers/order_history_controller.dart';
 
 class OrderDetailsController extends GetxController {
   final isLoading = false.obs;
   final OrderHistoryController orderController = Get.find();
+  final MyOrderController myorderController = Get.find();
 
   final argument = Get.arguments;
   var orderbyorderno = <OrderDetail>[].obs;
@@ -39,6 +41,7 @@ class OrderDetailsController extends GetxController {
       if (response != null) {
         toast(response.message);
         orderController.getOrderByLead();
+        myorderController.getMyOrder();
         await getOrderByOrderNo(argument.orderNo);
       } else {
         isLoading(false);
