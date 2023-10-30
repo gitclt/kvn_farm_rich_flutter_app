@@ -52,14 +52,18 @@ class ProfileController extends GetxController {
 
     try {
       final response = await ApiProvider().editProfile(
-        id: Session.userId,
-        name: namecontroller.text == ''
-            ? profileList.first.name
-            : namecontroller.text,
-        email: emailcontroller.text == ''
-            ? profileList.first.email
-            : emailcontroller.text,
-      );
+          id: Session.userId,
+          name: namecontroller.text == ''
+              ? profileList.first.name
+              : namecontroller.text,
+          code: profileList.first.code,
+          password: profileList.first.password,
+          mobile: profileList.first.mobile,
+          email: emailcontroller.text == ''
+              ? profileList.first.email
+              : emailcontroller.text,
+          state: profileList.first.state,
+          place: profileList.first.address);
       if (response != null) {
         if (response.status == true) {
           toast(
@@ -72,7 +76,6 @@ class ProfileController extends GetxController {
         }
       }
     } finally {
-      getProfile();
       editLoading(false);
     }
   }

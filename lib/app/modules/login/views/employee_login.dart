@@ -124,8 +124,7 @@ class LoginView extends GetView<LoginController> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Center(
-                                child:
-                                    Image.asset("assets/logo/kvn_logo.png")),
+                                child: Image.asset("assets/logo/kvn_logo.png")),
                           ),
                           // ),
                         ],
