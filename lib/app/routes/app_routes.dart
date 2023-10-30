@@ -47,7 +47,7 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const SHOP_EDIT = _Paths.SHOP_EDIT;
   static const CATEGORY = _Paths.CATEGORY;
-  static const MY_OEDER = _Paths.MY_OEDER;
+  static const MY_ORDER = _Paths.MY_ORDER;
 }
 
 abstract class _Paths {
@@ -92,5 +92,5 @@ abstract class _Paths {
   static const EDIT_PROFILE = '/edit-profile';
   static const SHOP_EDIT = '/shop-edit';
   static const CATEGORY = '/edit-category';
-  static const MY_OEDER = '/my-order';
+  static const MY_ORDER = '/my-order';
 }

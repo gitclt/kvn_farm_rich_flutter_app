@@ -48,7 +48,7 @@ class DashboardController extends GetxController {
         Get.toNamed(Routes.MYVISIT, arguments: "");
       }),
       DrawerItem('assets/svg/order.svg', 'My Orders', () {
-        Get.toNamed(Routes.ORDER_HISTORY);
+        Get.toNamed(Routes.MY_ORDER);
       }),
       DrawerItem('assets/svg/logout.svg', 'Logout', () {
         Get.back();

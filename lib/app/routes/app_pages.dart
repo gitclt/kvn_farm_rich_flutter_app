@@ -149,7 +149,7 @@ class AppPages {
       binding: OrderHistoryBinding(),
     ),
     GetPage(
-      name: _Paths.MY_OEDER,
+      name: _Paths.MY_ORDER,
       page: () => const MyOrder(),
       binding: OrderHistoryBinding(),
     ),
