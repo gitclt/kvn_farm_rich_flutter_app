@@ -179,7 +179,9 @@ class ShopsController extends GetxController {
           toast(
             response.message,
           );
+
           Get.close(2);
+          getShops();
         } else {
           editLoading(false);
         }
@@ -283,10 +285,15 @@ class ShopsController extends GetxController {
           Get.close(1);
           getShops();
           shopLocationPopup(() {
-            picLocation(response.data.id.toString());
+            picLocation(response.data!.id.toString());
           }, () {
             Get.back();
           });
+        } else {
+          toast(response.message);
+          clear();
+          Get.close(1);
+          getShops();
         }
       }
     } finally {
