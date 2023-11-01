@@ -19,8 +19,10 @@ class MasalaController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await getsubcat();
-    await getData();
+    if (argument != null) {
+      await getsubcat();
+      await getData();
+    }
   }
 
   @override

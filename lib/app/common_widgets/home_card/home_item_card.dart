@@ -112,7 +112,7 @@ class HomeCategories extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-              width: 160,
+              width: 165,
               height: 65,
               decoration: BoxDecoration(
                   boxShadow: const [
@@ -127,8 +127,7 @@ class HomeCategories extends StatelessWidget {
                   color: const Color(0xffFFF1E4)),
               child: Row(
                 children: [
-                  svgWidget("assets/svg/category_name.svg",
-                      color: const Color.fromARGB(255, 212, 138, 69), size: 40),
+                  Image.asset("assets/image/category.png"),
                   SizedBox(
                     width: 110,
                     child: blackText(label, 12,
