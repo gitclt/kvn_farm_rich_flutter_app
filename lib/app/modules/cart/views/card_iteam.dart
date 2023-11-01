@@ -4,7 +4,7 @@ import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 
 class CartItemCard extends StatelessWidget {
   final String image;
-  final String name, code, qty,mrp;
+  final String name, code, qty, mrp;
   final Function ontap;
   const CartItemCard({
     Key? key,
@@ -12,7 +12,8 @@ class CartItemCard extends StatelessWidget {
     required this.name,
     required this.code,
     required this.qty,
-    required this.ontap, required this.mrp,
+    required this.ontap,
+    required this.mrp,
   }) : super(key: key);
 
   @override
@@ -33,6 +34,10 @@ class CartItemCard extends StatelessWidget {
                 height: 100,
                 width: 100,
                 fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset('assets/image/search.png',
+                      height: 100, width: 100);
+                },
               ),
               Flexible(
                 child: Padding(

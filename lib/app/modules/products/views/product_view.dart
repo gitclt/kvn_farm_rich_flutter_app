@@ -51,12 +51,15 @@ class ProductView extends GetView<MasalaController> {
                             qtycontroller: controller.qtycontroller,
                             isloading: controller.cartloading.value,
                             ontap: () async {
+                              controller.cartloading(true);
                               await controller.addqty(index);
                               await controller.saveData();
+                              Get.back();
                               await controller
                                   .getProductList(controller.subcatname.value);
                               toast("Successfully added to Cart");
-                              Get.back();
+
+                              controller.cartloading(false);
                             },
                             mrp: controller.productList[index].mrp.toString(),
                           ),

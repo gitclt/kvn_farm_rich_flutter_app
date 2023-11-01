@@ -2,6 +2,7 @@ import 'package:kvn_farm_rich/app/common_widgets/card/product_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/svg_icons/svg_widget.dart';
 import 'package:kvn_farm_rich/app/modules/cart/controllers/cart_controller.dart';
 import 'package:kvn_farm_rich/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:kvn_farm_rich/app/modules/products/controllers/product_controller.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,8 +38,12 @@ class DashboardView extends GetView<DashboardController> {
               onTap: (int index) async {
                 controller.selectedIndex.value = index;
                 if (index == 3) {
+                  Get.put(MasalaController());
+
                   final CartController cartController = Get.find();
                   await cartController.getData();
+                } else {
+                  Get.delete<MasalaController>();
                 }
               },
               items: [

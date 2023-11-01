@@ -114,17 +114,28 @@ class HomeCategories extends StatelessWidget {
           Container(
               width: 160,
               height: 65,
-              decoration: BoxDecoration(boxShadow: const [
-                BoxShadow(
-                  color: Color(0x19000000),
-                  blurRadius: 4,
-                  offset: Offset(1, 2),
-                  spreadRadius: 1,
-                )
-              ], borderRadius: BorderRadius.circular(18), color: Colors.white),
-              child: Center(
-                child: blackText(label, 14,
-                    fontWeight: FontWeight.w500, textAlign: TextAlign.center),
+              decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x19000000),
+                      blurRadius: 2,
+                      offset: Offset(1, 1),
+                      spreadRadius: 0,
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(18),
+                  color: const Color(0xffFFF1E4)),
+              child: Row(
+                children: [
+                  svgWidget("assets/svg/category_name.svg",
+                      color: const Color.fromARGB(255, 212, 138, 69), size: 40),
+                  SizedBox(
+                    width: 110,
+                    child: blackText(label, 12,
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start),
+                  ),
+                ],
               ).paddingOnly(left: 5, right: 5))
         ],
       ),

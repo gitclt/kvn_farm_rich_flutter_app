@@ -61,6 +61,10 @@ class _ProductCardState extends State<ProductCard> {
             child: Image.network(
               widget.image,
               fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset('assets/image/search.png',
+                    height: 100, width: 100);
+              },
             ),
           ),
         ),
@@ -119,26 +123,6 @@ class _ProductCardState extends State<ProductCard> {
                         clipBehavior: Clip.none,
                         children: [
                           InkWell(
-                            onTap: () {
-                              setState(() {
-                                if (isCartItem.value >= 0 &&
-                                    isCartItem.value <
-                                        cartController.cartlist.length) {
-                                  if (cartController
-                                          .cartlist[isCartItem.value].qty !=
-                                      "") {
-                                    productController.qtycontroller =
-                                        TextEditingController(
-                                      text: cartController
-                                          .cartlist[isCartItem.value].qty,
-                                    );
-                                  }
-                                } else {
-                                  productController.qtycontroller.clear();
-                                }
-                                widget.onTap();
-                              });
-                            },
                             child: svgWidget('assets/svg/shop_cart.svg',
                                 color: redColor),
                           ),
@@ -150,27 +134,6 @@ class _ProductCardState extends State<ProductCard> {
                                 bottom: 8,
                                 left: 5,
                                 child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      if (isCartItem.value >= 0 &&
-                                          isCartItem.value <
-                                              cartController.cartlist.length) {
-                                        if (cartController
-                                                .cartlist[isCartItem.value]
-                                                .qty !=
-                                            "") {
-                                          productController.qtycontroller =
-                                              TextEditingController(
-                                            text: cartController
-                                                .cartlist[isCartItem.value].qty,
-                                          );
-                                        }
-                                      } else {
-                                        productController.qtycontroller.clear();
-                                      }
-                                      widget.onTap();
-                                    });
-                                  },
                                   child: circleWidgetWithText(
                                     20,
                                     red2Color,
@@ -186,7 +149,7 @@ class _ProductCardState extends State<ProductCard> {
                             }
                           }),
                         ],
-                      ).paddingAll(5),
+                      ).paddingOnly(top: 2),
                     ).paddingOnly(top: 5),
                   ),
                 if (isCartItem.value < 0)

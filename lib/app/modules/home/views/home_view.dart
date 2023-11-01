@@ -54,7 +54,6 @@ class HomeView extends GetView<HomeController> {
                                 ? const EmpCheckInCard()
                                 : const EmpCheckOutCard(),
                       ),
-
                       const SizedBox(
                         height: 25,
                       ),
@@ -65,7 +64,6 @@ class HomeView extends GetView<HomeController> {
                       ),
                       sizedBox,
                       const MenuItems(),
-
                       const SizedBox(
                         height: 20,
                       ),
@@ -114,7 +112,7 @@ class HomeView extends GetView<HomeController> {
                                           const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 0.0,
-                                        childAspectRatio: 1.9,
+                                        childAspectRatio: 2,
                                         mainAxisSpacing: 0.0,
                                       ),
                                       itemCount: controller.categoryList.length,
@@ -142,25 +140,9 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-                      // blackText('Explore Brands', 22, fontWeight: FontWeight.w700),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      // SizedBox(
-                      //   height: MediaQuery.of(context).size.height * 0.10,
-                      //   child: ListView.builder(
-                      //       itemCount: 3,
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemBuilder: (context, index) {
-                      //         return BrandCard(
-                      //           path: controller.brands[index],
-                      //         );
-                      //       }),
-                      // )
                     ]),
               ),
             ],
