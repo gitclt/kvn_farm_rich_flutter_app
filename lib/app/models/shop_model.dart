@@ -7,24 +7,24 @@ String leadModelToJson(ShopModel data) => json.encode(data.toJson());
 class ShopModel {
   bool status;
   String message;
-  ShopDetails data;
+  ShopDetails? data;
 
   ShopModel({
     required this.status,
     required this.message,
-    required this.data,
+    this.data,
   });
 
   factory ShopModel.fromJson(Map<String, dynamic> json) => ShopModel(
         status: json["status"],
         message: json["message"],
-        data: ShopDetails.fromJson(json["data"]),
+        data: json["data"] == null ? null : ShopDetails.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "data": data.toJson(),
+        "data": data!.toJson(),
       };
 }
 
