@@ -109,7 +109,7 @@ class ApiProvider {
       "mobile": mobile,
       "email": email,
       "state": state,
-      "location": place,
+      "address": place,
     };
     var response = await HttpApiConnect().post("Employee/Update_profile", add);
     try {

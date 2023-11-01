@@ -76,6 +76,7 @@ class ProfileController extends GetxController {
         }
       }
     } finally {
+      getProfile();
       editLoading(false);
     }
   }
