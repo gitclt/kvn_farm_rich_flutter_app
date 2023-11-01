@@ -7,6 +7,7 @@ import 'package:kvn_farm_rich/app/common_widgets/popup/delete_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/product_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/texts/text.dart';
 import 'package:kvn_farm_rich/app/modules/cart/views/card_iteam.dart';
+import 'package:kvn_farm_rich/app/modules/products/controllers/product_controller.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
 
@@ -16,6 +17,7 @@ class CartView extends GetView<CartController> {
   const CartView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final MasalaController productController = Get.find();
     return Scaffold(
         appBar: const CommonAppBar(
           label: "Cart",
@@ -83,6 +85,10 @@ class CartView extends GetView<CartController> {
                                           controller.cartlist.remove(
                                               controller.cartlist[index]);
                                           await controller.saveData();
+                                          await productController.saveData();
+                                          await productController.getData();
+                                          productController.productList
+                                              .refresh();
                                         }, () {
                                           Get.back();
                                         });

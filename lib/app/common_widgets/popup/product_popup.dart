@@ -79,11 +79,19 @@ class AddSalePopupState extends State<ProductPopup>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.network(widget.image,
-                                          fit: BoxFit.contain,
-                                          height: size.height * 0.25,
-                                          width: size.width * 0.56)
-                                      .paddingOnly(left: size.width * 0.16),
+                                  Image.network(
+                                    widget.image,
+                                    fit: BoxFit.contain,
+                                    height: size.height * 0.25,
+                                    width: size.width * 0.56,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/image/search.png',
+                                        height: size.height * 0.25,
+                                        width: size.width * 0.56,
+                                      );
+                                    },
+                                  ).paddingOnly(left: size.width * 0.16),
                                   InkWell(
                                       onTap: () {
                                         Get.back();
