@@ -1,5 +1,4 @@
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:kvn_farm_rich/app/api/base_url.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
 import 'package:kvn_farm_rich/app/common_widgets/order_history_widgets/order_details_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/order_history_widgets/order_top_card.dart';
@@ -53,7 +52,7 @@ class OrderHistoryDetailsView extends GetView<OrderDetailsController> {
                                 verticalOffset: 50.0,
                                 child: OrderDetailsWidget(
                                   image:
-                                      "${BaseUrl().imgUrl}${controller.orderbyorderno[index].image1}",
+                                      controller.orderbyorderno[index].image1,
                                   name: controller.orderbyorderno[index].name,
                                   code: controller.orderbyorderno[index].id
                                       .toString(),
