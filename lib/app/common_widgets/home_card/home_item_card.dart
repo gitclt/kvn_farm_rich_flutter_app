@@ -127,7 +127,11 @@ class HomeCategories extends StatelessWidget {
                   color: const Color(0xffFFF1E4)),
               child: Row(
                 children: [
-                  Image.asset("assets/image/category.png"),
+                  Image.asset(
+                    "assets/image/category.png",
+                    height: 40,
+                    width: 40,
+                  ),
                   SizedBox(
                     width: 110,
                     child: blackText(label, 12,
