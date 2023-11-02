@@ -32,7 +32,7 @@ class CategoryView extends GetView<HomeController> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 0.0,
-                          childAspectRatio: 2.25,
+                          childAspectRatio: 2,
                           mainAxisSpacing: 0.0,
                         ),
                         itemCount: controller.categoryList.length,
@@ -53,7 +53,7 @@ class CategoryView extends GetView<HomeController> {
                               ))));
                         },
                       ),
-                    ).paddingOnly(top: 5),
+                    ).paddingAll(15),
                   ),
       ),
     );
