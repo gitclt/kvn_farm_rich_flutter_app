@@ -35,6 +35,10 @@ class OrderDetailsWidget extends StatelessWidget {
               height: 86,
               width: 66,
               fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset('assets/image/search.png',
+                    height: 86, width: 66);
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
