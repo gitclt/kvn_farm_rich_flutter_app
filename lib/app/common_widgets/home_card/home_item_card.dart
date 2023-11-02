@@ -114,8 +114,8 @@ class HomeCategories extends StatelessWidget {
           children: [
             Flexible(
               child: Container(
-                  width: MediaQuery.of(context).size.width * 0.41,
-                  height: MediaQuery.of(context).size.width * 0.18,
+                  width: constraints.maxWidth * 1,
+                  height: constraints.maxWidth * 0.4,
                   decoration: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(
@@ -135,7 +135,7 @@ class HomeCategories extends StatelessWidget {
                         width: 40,
                       ),
                       SizedBox(
-                        width: 120,
+                        width: constraints.maxWidth * 0.7,
                         child: blackText(label, 12,
                                 fontWeight: FontWeight.w500,
                                 textAlign: TextAlign.start)

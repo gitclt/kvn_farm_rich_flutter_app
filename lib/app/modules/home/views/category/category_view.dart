@@ -31,7 +31,7 @@ class CategoryView extends GetView<HomeController> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 0.0,
+                          crossAxisSpacing: 10.0,
                           childAspectRatio: 2,
                           mainAxisSpacing: 0.0,
                         ),
