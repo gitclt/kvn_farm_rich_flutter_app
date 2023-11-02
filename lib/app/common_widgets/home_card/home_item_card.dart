@@ -111,36 +111,38 @@ class HomeCategories extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-              width: MediaQuery.of(context).size.width * 0.42,
-              height: MediaQuery.of(context).size.width * 0.18,
-              decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x19000000),
-                      blurRadius: 4,
-                      offset: Offset(1, 2),
-                      spreadRadius: 1,
-                    )
+          Flexible(
+            child: Container(
+                width: MediaQuery.of(context).size.width * 0.41,
+                height: MediaQuery.of(context).size.width * 0.18,
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x19000000),
+                        blurRadius: 4,
+                        offset: Offset(1, 2),
+                        spreadRadius: 1,
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(18),
+                    color: const Color(0xffFFF1E4)),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/image/category.png",
+                      height: 40,
+                      width: 40,
+                    ),
+                    SizedBox(
+                      width: 120,
+                      child: blackText(label, 12,
+                              fontWeight: FontWeight.w500,
+                              textAlign: TextAlign.start)
+                          .paddingOnly(left: 5, right: 5),
+                    ),
                   ],
-                  borderRadius: BorderRadius.circular(18),
-                  color: const Color(0xffFFF1E4)),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/image/category.png",
-                    height: 40,
-                    width: 40,
-                  ),
-                  SizedBox(
-                    width: 120,
-                    child: blackText(label, 12,
-                            fontWeight: FontWeight.w500,
-                            textAlign: TextAlign.start)
-                        .paddingOnly(left: 5, right: 5),
-                  ),
-                ],
-              ))
+                )),
+          )
         ],
       ),
     );
