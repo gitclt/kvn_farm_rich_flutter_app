@@ -27,7 +27,7 @@ class ProductView extends GetView<MasalaController> {
                         const WovenGridTile(
                           7.1 / 8.9,
                           crossAxisRatio: 0.9,
-                          alignment: AlignmentDirectional.topCenter,
+                          alignment: AlignmentDirectional.topEnd,
                         )
                       ],
                       crossAxisCount: 2,

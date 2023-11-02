@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/status_card.dart';
@@ -10,8 +9,14 @@ class OrderTopWidget extends StatelessWidget {
   final String orderNo;
   final String date;
   final String type;
+  final String name;
   const OrderTopWidget(
-      {super.key, required this.no, required this.orderNo, required this.type, required this.date});
+      {super.key,
+      required this.no,
+      required this.orderNo,
+      required this.type,
+      required this.date,
+      required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +31,14 @@ class OrderTopWidget extends StatelessWidget {
             const SizedBox(
               height: 6,
             ),
-            blackText(orderNo, 16, fontWeight: FontWeight.w600),
+            blackText("#$orderNo", 16, fontWeight: FontWeight.w600),
             const SizedBox(
-              height: 15,
+              height: 8,
+            ),
+            greyText(name, 16,
+                fontWeight: FontWeight.w400, color: const Color(0xff8C8C8C)),
+            const SizedBox(
+              height: 8,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +54,7 @@ class OrderTopWidget extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    blackText('Ordered', 12,fontWeight: FontWeight.w400),
+                    blackText('Ordered', 12, fontWeight: FontWeight.w400),
                   ],
                 ),
                 Padding(

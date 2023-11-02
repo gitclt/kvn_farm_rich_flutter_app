@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/api/api_provider.dart';
-import 'package:kvn_farm_rich/app/common_widgets/bottomsheet/order_shop_bottomsheet.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
 import 'package:kvn_farm_rich/app/models/order_by_date_model.dart';
 import 'package:kvn_farm_rich/app/pref/session.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 class MyOrderController extends GetxController {
@@ -28,6 +28,7 @@ class MyOrderController extends GetxController {
   void onInit() async {
     await date();
     getMyOrder();
+    await getShops();
     super.onInit();
   }
 
@@ -74,17 +75,6 @@ class MyOrderController extends GetxController {
         if (response.status == true) {
           leadresponse = response;
           leadList.addAll(response.data);
-
-          Get.bottomSheet(
-            OrderShopBottomsheet(
-              ontap: () {},
-            ),
-            elevation: 20.0,
-            enableDrag: false,
-            isDismissible: true,
-            backgroundColor: Colors.white,
-            shape: bootomSheetShape(),
-          );
         } else {}
       }
     } finally {}

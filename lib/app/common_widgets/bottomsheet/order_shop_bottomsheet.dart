@@ -70,8 +70,8 @@ class OrderShopBottomsheet extends GetView<MyOrderController> {
 
                     Get.back();
                     if (controller.shopid.value != "") {
-                      controller.leadoptioncontroller = TextEditingController(
-                          text: controller.shopname.value);
+                      controller.leadoptioncontroller.text =
+                          controller.shopname.value;
                       await controller.getMyOrder();
                     }
                   },

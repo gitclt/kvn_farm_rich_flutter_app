@@ -6,6 +6,7 @@ import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:kvn_farm_rich/constraints/date_formats.dart';
 import '../controllers/order_history_controller.dart';
 
 class OrderHistoryView extends GetView<OrderHistoryController> {
@@ -47,7 +48,9 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                                         controller.orderbylead[index].orderNo);
                                   });
                                 },
-                                date: "",
+                                date: formatDateString3(controller
+                                    .orderbylead[index].date
+                                    .toString()),
                               ).paddingAll(3),
                             ));
                       }),

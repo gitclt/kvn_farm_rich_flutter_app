@@ -32,14 +32,15 @@ class OrderData {
   String orderNo;
   int qty;
   String status;
+  String date;
 
-  OrderData({
-    required this.leadId,
-    required this.leadname,
-    required this.orderNo,
-    required this.qty,
-    required this.status,
-  });
+  OrderData(
+      {required this.leadId,
+      required this.leadname,
+      required this.orderNo,
+      required this.qty,
+      required this.status,
+      required this.date});
 
   factory OrderData.fromJson(Map<String, dynamic> json) => OrderData(
         leadId: json["lead_id"],
@@ -47,6 +48,7 @@ class OrderData {
         orderNo: json["orderNo"],
         qty: json["qty"],
         status: json["status"],
+        date: json["date"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,5 +57,6 @@ class OrderData {
         "orderNo": orderNo,
         "qty": qty,
         "status": status,
+        "date": date
       };
 }

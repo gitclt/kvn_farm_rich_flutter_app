@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:kvn_farm_rich/app/common_widgets/app_bar/common_app_bar.dart';
+import 'package:kvn_farm_rich/app/common_widgets/bottomsheet/order_shop_bottomsheet.dart';
 import 'package:kvn_farm_rich/app/common_widgets/card/order_history_card.dart';
 import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/delete_popup.dart';
@@ -231,7 +232,16 @@ class MyOrder extends GetView<MyOrderController> {
                   borderRadius: 10,
                   textEditingController: controller.leadoptioncontroller,
                   onTap: () async {
-                    controller.getShops();
+                    Get.bottomSheet(
+                      OrderShopBottomsheet(
+                        ontap: () {},
+                      ),
+                      elevation: 20.0,
+                      enableDrag: false,
+                      isDismissible: true,
+                      backgroundColor: Colors.white,
+                      shape: bootomSheetShape(),
+                    );
                   },
                   suffixIcon: const Icon(
                     Icons.arrow_forward_ios,

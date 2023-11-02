@@ -32,6 +32,7 @@ class OrderHistoryDetailsView extends GetView<OrderDetailsController> {
                       date: formatDateString3(
                           controller.orderbyorderno.first.date.toString()),
                       type: controller.orderbyorderno.first.status.toString(),
+                      name: controller.orderbyorderno.first.leadname.toString(),
                     ),
                   ),
                   const Divider(
