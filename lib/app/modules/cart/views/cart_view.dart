@@ -86,7 +86,7 @@ class CartView extends GetView<CartController> {
                                           controller.cartlist.remove(
                                               controller.cartlist[index]);
                                           toast(
-                                              "Successfully deleted from Cart");
+                                              "Successfully deleted from cart");
                                           await controller.saveData();
                                           await productController.saveData();
                                           await productController.getData();

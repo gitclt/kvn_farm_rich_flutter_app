@@ -57,7 +57,7 @@ class ProductView extends GetView<MasalaController> {
                               Get.back();
                               await controller
                                   .getProductList(controller.subcatname.value);
-                              toast("Successfully added to Cart");
+                              toast("Successfully added to cart");
 
                               controller.cartloading(false);
                             },
