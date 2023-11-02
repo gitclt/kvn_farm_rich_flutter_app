@@ -24,3 +24,4 @@ const popupLineColor = Color(0xFFDEDEDE);
 const boxGreyColor = Color(0xFFD8D8D8);
 const greyTextColor = Color(0xFF505150);
 const visitDividerColor = Color(0xFFF3F3F3);
+const categoryColor = Color(0xFFFFF1E4);
