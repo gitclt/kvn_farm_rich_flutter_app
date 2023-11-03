@@ -16,7 +16,7 @@ class OrderHistoryDetailsView extends GetView<OrderDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CommonAppBar(label: 'Order History'),
+        appBar: const CommonAppBar(label: 'Order Details'),
         body: Obx(() => controller.isLoading.value
             ? const Center(child: CircularProgressIndicator())
             : Column(

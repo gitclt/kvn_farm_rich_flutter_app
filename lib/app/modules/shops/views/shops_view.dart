@@ -81,15 +81,19 @@ class ShopsView extends GetView<ShopsController> {
                                             const Duration(milliseconds: 350),
                                         verticalOffset: 50.0,
                                         child: ShopCard(
-                                          gps: double.parse(
-                                                      item.lat.toString()) !=
-                                                  0
-                                              ? false
-                                              : double.parse(item.longi
-                                                          .toString()) !=
-                                                      0
-                                                  ? false
-                                                  : true,
+                                          gps: item.lat == ""
+                                              ? true
+                                              : item.longi == ""
+                                                  ? true
+                                                  : double.parse(item.lat
+                                                              .toString()) !=
+                                                          0
+                                                      ? false
+                                                      : double.parse(item.longi
+                                                                  .toString()) !=
+                                                              0
+                                                          ? false
+                                                          : true,
                                           geoTagClick: () {
                                             controller.shopid.value =
                                                 item.id.toString();
