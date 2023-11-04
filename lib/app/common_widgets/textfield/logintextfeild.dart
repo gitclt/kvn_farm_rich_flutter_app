@@ -97,7 +97,7 @@ class LoginTextField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
-          prefixIcon: prefixIcon,
+          prefixIcon: prefixIcon, 
           // border: const OutlineInputBorder(
           //   borderRadius: BorderRadius.all(
           //     Radius.circular(10),
