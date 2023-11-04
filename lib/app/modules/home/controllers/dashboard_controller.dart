@@ -62,6 +62,7 @@ class DashboardController extends GetxController {
         await openDialog('Logout', 'Are you sure you want to Logout ?');
     if (returnResponse == true) {
       final prefs = await SharedPreferences.getInstance();
+      prefs.remove("cartdata");
       prefs.clear();
       Get.offAllNamed(Routes.SPLASH);
     }
