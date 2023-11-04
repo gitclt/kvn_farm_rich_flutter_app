@@ -161,7 +161,6 @@ class RouteBottomSheet extends GetView<MyrouteController> {
                           )
                         ],
                       ),
-
                       if (controller.leadCheckIn.isNotEmpty &&
                           controller.leadCheckIn.first.checkoutDate !=
                               "0001-01-01 12:00:00")
@@ -196,7 +195,9 @@ class RouteBottomSheet extends GetView<MyrouteController> {
                                   ),
                                   blackText(
                                       controller.leadCheckIn.isNotEmpty
-                                          ? '${controller.leadCheckIn.first.workhour} mins'
+                                          ? controller.showWorkingHour(
+                                              controller
+                                                  .leadCheckIn.first.workhour!)
                                           : "",
                                       13,
                                       fontWeight: FontWeight.bold)
@@ -231,44 +232,6 @@ class RouteBottomSheet extends GetView<MyrouteController> {
                           ),
                         ),
                       ),
-
-                      // Visibility(
-                      //   visible: (controller.leadCheckIn.isNotEmpty &&
-                      //           controller.leadCheckIn.first.checkoutDate !=
-                      //               '0001-01-01 12:00:00')
-                      //       ? true
-                      //       : false,
-                      //   child: Wrap(
-                      //     children: [
-                      //       if (controller.leadCheckIn.isNotEmpty)
-                      //         blackText(
-                      //             controller.leadCheckIn.isNotEmpty
-                      //                 ? 'Last CheckOut : '
-                      //                 : "",
-                      //             15,
-                      //             fontWeight: FontWeight.bold),
-                      //       blackText(
-                      //           controller.leadCheckIn.isNotEmpty
-                      //               ? '${controller.leadCheckIn.first.checkoutDate}'
-                      //               : "",
-                      //           14),
-                      //       const SizedBox(
-                      //         width: 5,
-                      //       ),
-                      //       blackText(
-                      //           controller.leadCheckIn.isNotEmpty
-                      //               ? 'Working Hr : '
-                      //               : "",
-                      //           15,
-                      //           fontWeight: FontWeight.bold),
-                      //       blackText(
-                      //           controller.leadCheckIn.isNotEmpty
-                      //               ? '${controller.leadCheckIn.first.workhour}'
-                      //               : "",
-                      //           14)
-                      //     ],
-                      //   ),
-                      //  )
                     ]),
         ),
       ),

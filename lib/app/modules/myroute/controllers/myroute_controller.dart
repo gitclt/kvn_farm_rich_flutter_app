@@ -387,4 +387,22 @@ class MyrouteController extends GetxController {
       isVisitLoading(false);
     }
   }
+
+  String showWorkingHour(String workhour) {
+    List<String> parts = workhour.split(':');
+    int hours = int.parse(parts[0]);
+    int minutes = int.parse(parts[1]);
+
+    // Check if the hours are 0
+    String displayTime;
+    if (hours == 0) {
+      // Display only the minutes if the hours are 0
+      displayTime = '$minutes mins';
+    } else {
+      // Display the full time if hours are not 0
+      displayTime = workhour;
+    }
+
+    return displayTime;
+  }
 }
