@@ -55,7 +55,7 @@ dependencies:
   geolocator: ^10.1.0
   permission_handler: ^11.0.1
   path: ^1.8.3
-  http_parser: ^4.0.2
+  # http_parser: ^4.0.2
   maps_launcher: ^2.2.0
   bouncing_widget: ^2.0.0
   google_maps_flutter: ^2.5.0
