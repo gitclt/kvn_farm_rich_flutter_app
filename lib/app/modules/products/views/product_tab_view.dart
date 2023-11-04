@@ -33,6 +33,7 @@ class MasalaView extends GetView<MasalaController> {
                 child: TabBar(
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                   labelColor: redColor,
+                  isScrollable: false,
                   indicatorColor: redColor,
                   unselectedLabelStyle:
                       const TextStyle(fontWeight: FontWeight.bold),
@@ -56,6 +57,7 @@ class MasalaView extends GetView<MasalaController> {
                       ? const Center()
                       : Expanded(
                           child: TabBarView(
+                            physics: const NeverScrollableScrollPhysics(),
                             children: controller.subcatList.map((subcat) {
                               return const ProductView();
                             }).toList(),
