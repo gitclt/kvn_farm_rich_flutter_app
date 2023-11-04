@@ -18,8 +18,10 @@ class OrderDetailsModel {
   factory OrderDetailsModel.fromJson(Map<String, dynamic> json) =>
       OrderDetailsModel(
         status: json["status"],
-        data: List<OrderDetail>.from(
-            json["data"].map((x) => OrderDetail.fromJson(x))),
+        data: json["data"] == null
+            ? []
+            : List<OrderDetail>.from(
+                json["data"].map((x) => OrderDetail.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
