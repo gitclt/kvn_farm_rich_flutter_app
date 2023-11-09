@@ -6,6 +6,7 @@ import 'package:kvn_farm_rich/app/common_widgets/nodata_widget.dart';
 import 'package:kvn_farm_rich/app/common_widgets/popup/product_popup.dart';
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/modules/products/controllers/product_controller.dart';
+import 'package:kvn_farm_rich/constraints/date_formats.dart';
 
 class ProductView extends GetView<MasalaController> {
   const ProductView({super.key});
@@ -50,6 +51,18 @@ class ProductView extends GetView<MasalaController> {
                             code: controller.productList[index].code.toString(),
                             qtycontroller: controller.qtycontroller,
                             isloading: controller.cartloading.value,
+                            prunit: controller.productList[index].priunit
+                                .toString(),
+                            secunit: controller.productList[index].secunit
+                                .toString(),
+                            mfdate: formatDateString2(controller
+                                .productList[index].mfgdate
+                                .toString()),
+                            exdate: formatDateString2(controller
+                                .productList[index].expdate
+                                .toString()),
+                            batchno:
+                                controller.productList[index].batch.toString(),
                             ontap: () async {
                               controller.cartloading(true);
                               await controller.addqty(index);

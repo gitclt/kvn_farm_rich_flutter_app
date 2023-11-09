@@ -38,9 +38,14 @@ class ProductData {
   String subCatName;
   String name;
   String image1;
-  String qty;
-  String code;
   int mrp;
+  String code;
+  String priunit;
+  String secunit;
+  String batch;
+  String? expdate;
+  String? mfgdate;
+  String qty;
 
   ProductData({
     required this.id,
@@ -48,24 +53,36 @@ class ProductData {
     required this.catName,
     required this.subcatId,
     required this.subCatName,
-    required this.code,
     required this.name,
     required this.image1,
-    required this.qty,
+    // required this.addedon,
     required this.mrp,
+    required this.code,
+    required this.priunit,
+    required this.secunit,
+    required this.batch,
+    required this.expdate,
+    required this.mfgdate,
+    required this.qty,
   });
 
   factory ProductData.fromJson(Map<String, dynamic> json) => ProductData(
         id: json["id"],
         catId: json["cat_id"],
-        catName: json["catName"],
+        catName: json["catName"] ?? "",
         subcatId: json["subcat_id"],
         subCatName: json["subCatName"],
         name: json["name"],
         image1: json["image1"],
-        code: json["code"],
-        qty: json["qty"] ?? "",
+        // addedon: json["addedon"],
         mrp: json["mrp"],
+        code: json["code"],
+        priunit: json["priunit"] ?? "",
+        secunit: json["secunit"] ?? "",
+        batch: json["batch"] ?? "",
+        expdate: json["expdate"] ?? "",
+        mfgdate: json["mfgdate"] ?? "",
+        qty: json["qty"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,8 +93,14 @@ class ProductData {
         "subCatName": subCatName,
         "name": name,
         "image1": image1,
-        "qty": qty,
+        // "addedon": addedon,
         "mrp": mrp,
-        "code": code
+        "code": code,
+        "priunit": priunit,
+        "secunit": secunit,
+        "batch": batch,
+        "expdate": expdate,
+        "mfgdate": mfgdate,
+        "qty": qty,
       };
 }

@@ -11,6 +11,7 @@ import 'package:kvn_farm_rich/app/modules/cart/views/card_iteam.dart';
 import 'package:kvn_farm_rich/app/modules/products/controllers/product_controller.dart';
 import 'package:kvn_farm_rich/constraints/app_colors.dart';
 import 'package:kvn_farm_rich/constraints/common_widgets.dart';
+import 'package:kvn_farm_rich/constraints/date_formats.dart';
 
 import '../controllers/cart_controller.dart';
 
@@ -63,6 +64,21 @@ class CartView extends GetView<CartController> {
                                         code: controller.cartlist[index].code
                                             .toString(),
                                         qtycontroller: controller.qtycontroller,
+                                        prunit: controller
+                                            .cartlist[index].priunit
+                                            .toString(),
+                                        secunit: controller
+                                            .cartlist[index].secunit
+                                            .toString(),
+                                        mfdate: formatDateString2(controller
+                                            .cartlist[index].mfgdate
+                                            .toString()),
+                                        exdate: formatDateString2(controller
+                                            .cartlist[index].expdate
+                                            .toString()),
+                                        batchno: controller
+                                            .cartlist[index].batch
+                                            .toString(),
                                         isloading: controller.isloading.value,
                                         ontap: () async {
                                           await controller.addqty(index);
@@ -80,7 +96,8 @@ class CartView extends GetView<CartController> {
                                       name: controller.cartlist[index].name,
                                       code: controller.cartlist[index].code
                                           .toString(),
-                                      qty: controller.cartlist[index].qty,
+                                      qty: controller.cartlist[index].qty
+                                          .toString(),
                                       ontap: () async {
                                         deletePopup(() async {
                                           controller.cartlist.remove(

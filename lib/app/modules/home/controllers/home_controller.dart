@@ -270,9 +270,9 @@ class HomeController extends GetxController {
       if (response != null) {
         if (response.status == true) {
           for (var item in response.data) {
-            String catname = item.catName;
+            String catname = item.catName.toString();
             if (!categoryList.any((category) => category == catname)) {
-              categoryList.add(item.catName);
+              categoryList.add(item.catName.toString());
             }
           }
         }
