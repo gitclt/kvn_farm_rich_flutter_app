@@ -62,7 +62,9 @@ class ShopEditView extends GetView<ShopsController> {
                           textEditingController: controller.locationcontroller,
                           onTap: () async {
                             final place = await Get.toNamed(Routes.PLACE,
-                                arguments: controller.stateid.toString());
+                                arguments: controller.stateid == ""
+                                    ? controller.stateList.first.id
+                                    : controller.stateid.toString());
                             if (place != null) {
                               controller.locationcontroller.text = place;
                             }

@@ -6,6 +6,7 @@ import 'package:kvn_farm_rich/app/common_widgets/popup/shop_location_popup.dart'
 import 'package:kvn_farm_rich/app/common_widgets/toast.dart';
 import 'package:kvn_farm_rich/app/models/branch_model.dart';
 import 'package:kvn_farm_rich/app/models/get_shops_model.dart';
+import 'package:kvn_farm_rich/app/models/state_model.dart';
 import 'package:kvn_farm_rich/app/pref/session.dart';
 import 'package:kvn_farm_rich/app/routes/app_pages.dart';
 import 'package:kvn_farm_rich/constraints/date_formats.dart';
@@ -14,7 +15,7 @@ class ShopsController extends GetxController {
   var invoiceDate = ''.obs;
   DateTime currentDate = DateTime.now();
   var isLoading = false.obs;
-
+  var stateList = <StateDetails>[].obs;
   String invDate = '';
   String shopId = '';
   DateTime? selectfrom;
@@ -122,6 +123,7 @@ class ShopsController extends GetxController {
       if (response != null) {
         if (response.status == true) {
           shopDetailsResponse = response.data.first;
+          await getStateId();
           updateTextValue();
         } else {
           isDetailsLoading(false);
@@ -298,6 +300,24 @@ class ShopsController extends GetxController {
       }
     } finally {
       isLoading(false);
+    }
+  }
+
+  getStateId() async {
+    // isLoading(true);
+
+    try {
+      final response = await ApiProvider().getState();
+      if (response != null) {
+        if (response.status == true) {
+          stateList.addAll(
+              response.data.where((e) => e.name == shopDetailsResponse!.state));
+        } else {
+          isLoading(false);
+        }
+      }
+    } finally {
+      // isLoading(false);
     }
   }
 }
